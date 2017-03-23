@@ -15,9 +15,18 @@ var default_max_events = 50;
 var defaultFrequentDays = 30;
 var defaultRecentDays = 7;
 
+var defaultExtensions = [
+    '655',                      // taylor st
+    '667',                      // oskar indoors
+    '668',                      // oskar curbside
+    '669',                      // oskar office
+    '670',                      // r2d2
+    '680',                      // xnor
+];
+
 var badEvents = [
     "incoming-dialstatus-CHANUNAVAIL",
-    "outgoing-dialstatus-CONGESTION"]
+    "outgoing-dialstatus-CONGESTION"];
 
 var frequent_events = function(
     dbFileName, events_ignore, max_events, days, extension, callback) {
@@ -69,14 +78,14 @@ var frequent_events = function(
         .fail(function(err) { console.log(err) })
 }
 
-var all_extensions = function(dbconn) {
-    return Q.fcall(
-        db_all(dbconn),
-        "SELECT DISTINCT(channel_extension) FROM metrics",
-        [])
-        .then(function(rows) {
-            return rows.map(function(row) { return row.channel_extension; })});
-}
+// var allExtensions = function(dbconn) {
+//     return Q.fcall(
+//         db_all(dbconn),
+//         "SELECT DISTINCT(channel_extension) FROM metrics",
+//         [])
+//         .then(function(rows) {
+//             return rows.map(function(row) { return row.channel_extension; })});
+// }
 
 var get_latest_events = function(dbconn, extension, events, limit) {
     query = "SELECT channel_extension, name, timestamp FROM metrics";
@@ -89,7 +98,7 @@ var get_latest_events = function(dbconn, extension, events, limit) {
         var eventsSub = events.map(function (x) {return "?"});
         eventsSub = eventsSub.join();
         eventsSub = '(' + eventsSub + ')';
-        // XXX assums no extension clause, get a smarter join
+        // XXX assumes no extension clause, get a smarter join
         query = query + " WHERE name IN " + eventsSub;
         params.push.apply(params, events);        
     }
@@ -104,7 +113,7 @@ var latest_events = function(dbFileName, extension, callback) {
     if (extension !== null) {
         var get_extensions = get_promise([extension]);
     } else {
-        var get_extensions = all_extensions(db);
+        var get_extensions = get_promise(defaultExtensions);
     }
 
     get_extensions
@@ -118,6 +127,8 @@ var latest_events = function(dbFileName, extension, callback) {
         return rows;
     }).then(function(rows) {
         rows = rows.map(function(r) { return r.pop(); });
+        // we used a janky query per extension, ignore those with no results
+        rows = rows.filter(function(result) { return result != null; });
         var compare = function(a, b) {
             if (a.timestamp < b.timestamp) {
                 return -1;
