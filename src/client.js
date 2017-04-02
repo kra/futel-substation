@@ -93,7 +93,7 @@ Client.prototype.peerStatusBad = function(self, from, to, text, message) {
 };
 
 Client.prototype.confbridgeJoinAction = function() {
-    this.noisySay('Voice conference joined');
+    this.noisySay('Voice conference joined - 503 HOT 1337');
 };
 
 Client.prototype.confbridgeLeaveAction = function() {
