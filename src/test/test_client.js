@@ -258,6 +258,14 @@ describe('main', function() {
                 testOneSay(client, 'to', "No.", this.clock);
             });
         });
+        describe('error', function() {
+            it('should respond to error', function() {
+                client.channelMessage(
+                    'from', 'to', 'error', {args: ['noisyChannel']});
+                // just test that we get something
+                testOneSay(client, 'to', /.*/, this.clock);
+            });
+        });
         describe('morning', function() {
             it('should respond to a morning greeting if it is morning', function() {
                 client.date = sinon.stub().returns(new Date(2016, 1, 1, 1));
