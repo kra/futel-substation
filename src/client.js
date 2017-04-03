@@ -221,13 +221,20 @@ Client.prototype.simpleSubstrings = function(from, to, text, message) {
         'plate': "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation.",
         'shrimp': "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation.",
         'society': "Society made me what I am.",
+        'repo': "The life of a repo man is always intense.",        
         'intense': "The life of a repo man is always intense.",
         'tense': "A repo man spends his life getting into tense situations.",
+        'situation': "A repo man spends his life getting into tense situations.",
         'relationship': "What about our relationship?",
         'radiation': "You hear the most outrageous lies about it.",
         'code': "Not many people got a code to live by anymore.",
         'innocence': "No one is innocent.",
-        'innocent': "No one is innocent."
+        'innocent': "No one is innocent.",
+        'guide': "I am guided by my infallable logic.",
+        'guidance': "I am guided by my infallable logic.",
+        'logic': "I am guided by my infallable logic.",
+        'efficent': "The human race is inefficient. Therefore it must be destroyed.",
+        'efficency': "The human race is inefficient. Therefore it must be destroyed."
     }
     for (var key in responses) {
         if (stringIn(key, text)) {
