@@ -15,15 +15,6 @@ var default_max_events = 50;
 var defaultFrequentDays = 30;
 var defaultRecentDays = 7;
 
-var defaultExtensions = [
-    '655',                      // taylor st
-    '667',                      // oskar indoors
-    '668',                      // oskar curbside
-    '669',                      // oskar office
-    '670',                      // r2d2
-    '680',                      // xnor
-];
-
 var badEvents = [
     "incoming-dialstatus-CHANUNAVAIL",
     "outgoing-dialstatus-CONGESTION"];
@@ -108,15 +99,10 @@ var get_latest_events = function(dbconn, extension, events, limit) {
     return Q.fcall(db_all(dbconn), query, params)
 };
 
-var latest_events = function(dbFileName, extension, callback) {
+var latest_events = function(dbFileName, extensions, callback) {
     var db = new sqlite3.Database(dbFileName);
-    if (extension !== null) {
-        var get_extensions = get_promise([extension]);
-    } else {
-        var get_extensions = get_promise(defaultExtensions);
-    }
 
-    get_extensions
+    get_promise(extensions)
     .then(function(extensions) {
         return Q.all(
             extensions.map(

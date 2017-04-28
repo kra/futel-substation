@@ -3,6 +3,15 @@
 var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
+var defaultExtensions = [
+    '655',                      // taylor st
+    '667',                      // oskar indoors
+    '668',                      // oskar curbside
+    '669',                      // oskar office
+    '670',                      // r2d2
+    '680',                      // xnor
+];
+
 function Info(dbFileName) {
     this.dbFileName = dbFileName;
     this.peerStatuses = new Object();
@@ -83,9 +92,15 @@ Info.prototype.reportLatest = function(results) {
 
 Info.prototype.latest = function(extension, callback) {
     var self = this;
+    if (extension !== null) {
+        var extensions = [extension];
+    } else {
+        var extensions = defaultExtensions;
+    }
+
     metrics_util.latest_events(
         self.dbFileName,
-        extension,
+        extensions,
         function(results) {
             callback(self.reportLatest(results));
         });
