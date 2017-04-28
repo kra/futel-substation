@@ -34,16 +34,16 @@ describe('main', function() {
             it('should provide a populated peer status', function() {
                 info.peerStatusAction('SIP/668', 'Registered');
                 this.clock.tick(1000 * 60 * 2);                    
-                info.peerStatusAction('SIP/703', 'Registered');
+                info.peerStatusAction('SIP/669', 'Registered');
                 this.clock.tick(1000 * 60 * 2);                    
-                info.peerStatusAction('SIP/703', 'Unreachable');
+                info.peerStatusAction('SIP/669', 'Unreachable');
                 this.clock.tick(1000 * 60 * 2);                    
-                info.peerStatusAction('SIP/704', 'Registered');
+                info.peerStatusAction('SIP/670', 'Registered');
                 assert.ok(arrayCmp(
                     info.peerStatus(),
                     ['Peer statuses:',
-                     'SIP/704 Registered December 31, 1969 4:06 PM',                        
-                     'SIP/703 Unreachable December 31, 1969 4:04 PM',
+                     'SIP/670 Registered December 31, 1969 4:06 PM',                        
+                     'SIP/669 Unreachable December 31, 1969 4:04 PM',
                      'SIP/668 Registered December 31, 1969 4:00 PM'
                     ]));
             });

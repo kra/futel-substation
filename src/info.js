@@ -25,6 +25,12 @@ Info.prototype.peerStatusStrings = function(peerStatuses, filterStatuses) {
     if (filterStatuses === undefined) { filterStatuses = [] }
         
     return Object.keys(peerStatuses).filter(
+        function(key) {
+            // filter out keys not matchign defaultExtensions
+            return defaultExtensions.some(
+                function foo(element) { return key.includes(element); })
+        }
+    ).filter(
         function(key) { return !(filterStatuses.indexOf(peerStatuses[key].status) >= 0); }
     ).sort(
         function(x, y) { return peerStatuses[y].timestamp - peerStatuses[x].timestamp; }

@@ -129,17 +129,17 @@ describe('main', function() {
                     this.clock.tick(1000 * 60 * 2);
                     client.peerStatusAction('SIP/668', 'Registered');
                     this.clock.tick(1000 * 60 * 2);
-                    client.peerStatusAction('SIP/703', 'Registered');
+                    client.peerStatusAction('SIP/669', 'Registered');
                     this.clock.tick(1000 * 60 * 2);
-                    client.peerStatusAction('SIP/703', 'Unreachable');
+                    client.peerStatusAction('SIP/669', 'Unreachable');
                     this.clock.tick(1000 * 60 * 2);
-                    client.peerStatusAction('SIP/704', 'Unreachable');
+                    client.peerStatusAction('SIP/670', 'Unreachable');
                     client.channelMessage('from', 'to', '!peerstatusbad', 'message');
                 testSays(client,
                          'to',
                          ['Peer statuses:',
-                          'SIP/704 Unreachable December 31, 1969 4:08 PM',
-                          'SIP/703 Unreachable December 31, 1969 4:06 PM'], this.clock);
+                          'SIP/670 Unreachable December 31, 1969 4:08 PM',
+                          'SIP/669 Unreachable December 31, 1969 4:06 PM'], this.clock);
                 });
             });
         });            
