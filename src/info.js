@@ -4,6 +4,7 @@ var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
 var defaultExtensions = [
+    '640',                      // xhurch
     '655',                      // taylor st
     '667',                      // oskar indoors
     '668',                      // oskar curbside
