@@ -3,15 +3,15 @@
 var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
-var defaultExtensions = [
-    '640',                      // xhurch
-    '655',                      // taylor st
-    '667',                      // oskar indoors
-    '668',                      // oskar curbside
-    '669',                      // oskar office
-    '670',                      // r2d2
-    '680'                       // xnor
-];
+var defaultExtensions = {
+    '640': 'xhurch',
+    '655': 'taylor st',
+    '667': 'oskar indoors',
+    '668': 'oskar curbside',
+    '669': 'oskar office',
+    '670': 'r2d2',
+    '680': 'xnor',
+};
 
 function Info(dbFileName) {
     this.dbFileName = dbFileName;
@@ -27,8 +27,8 @@ Info.prototype.peerStatusStrings = function(peerStatuses, filterStatuses) {
         
     return Object.keys(peerStatuses).filter(
         function(key) {
-            // filter out keys not matchign defaultExtensions
-            return defaultExtensions.some(
+            // filter out keys not matching defaultExtensions
+            return Object.keys(defaultExtensions).some(
                 function foo(element) { return key.includes(element); })
         }
     ).filter(
@@ -79,11 +79,20 @@ Info.prototype.stats = function(days, extension, callback) {
         });
 }
 
+Info.prototype.prettyExtensionString = function(str) {
+    if (defaultExtensions[str] === undefined) {
+        return str;
+    } else {
+        return str + '(' + defaultExtensions[str] + ')';
+    }
+};
+
 Info.prototype.metricToString = function(metric) {
+    var self = this;
     formatTimestamp = function(dateString) {
         return moment(dateString).format('LLL');
     }
-    return metric.channel_extension + " " + formatTimestamp(metric.timestamp) + " " + metric.name;
+    return self.prettyExtensionString(metric.channel_extension) + " " + formatTimestamp(metric.timestamp) + " " + metric.name;
 }
 
 Info.prototype.reportLatest = function(results) {
@@ -102,7 +111,7 @@ Info.prototype.latest = function(extension, callback) {
     if (extension !== null) {
         var extensions = [extension];
     } else {
-        var extensions = defaultExtensions;
+        var extensions = Object.keys(defaultExtensions);
     }
 
     metrics_util.latest_events(

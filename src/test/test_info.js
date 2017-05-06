@@ -45,7 +45,7 @@ describe('main', function() {
                      'SIP/670 Registered December 31, 1969 4:06 PM',                        
                      'SIP/669 Unreachable December 31, 1969 4:04 PM',
                      'SIP/668 Registered December 31, 1969 4:00 PM'
-                    ]));
+                    ]), info.peerStatus());
             });
         });
     });
@@ -58,7 +58,7 @@ describe('main', function() {
                             result,
                             [ 'recent bad events',
                               'voipms November 16, 2016 3:18 PM incoming-dialstatus-CONGESTION',
-                              '668 November 16, 2016 10:15 AM outgoing-dialstatus-CONGESTION',
+                              '668(oskar curbside) November 16, 2016 10:15 AM outgoing-dialstatus-CONGESTION',
                               'voipms November 15, 2016 3:19 PM incoming-dialstatus-CONGESTION',
                               'voipms November 15, 2016 2:02 AM incoming-dialstatus-CONGESTION',
                               'voipms November 15, 2016 1:51 AM incoming-dialstatus-CONGESTION' ]));
@@ -76,11 +76,11 @@ describe('main', function() {
                             arrayCmp(
                                 result,
                                 [ 'latest channel events',
-                                  '655 November 16, 2016 9:41 PM 911-9',
-                                  '668 November 16, 2016 5:10 PM macro-dial',
-                                  '670 November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
-                                  '680 November 16, 2016 10:35 AM outgoing-ivr',
-                                  '667 November 15, 2016 11:34 PM outgoing-ivr' ]));
+                                  '655(taylor st) November 16, 2016 9:41 PM 911-9',
+                                  '668(oskar curbside) November 16, 2016 5:10 PM macro-dial',
+                                  '670(r2d2) November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
+                                  '680(xnor) November 16, 2016 10:35 AM outgoing-ivr',
+                                  '667(oskar indoors) November 15, 2016 11:34 PM outgoing-ivr' ]));
                         done();
                     });
             });
@@ -94,7 +94,7 @@ describe('main', function() {
                             arrayCmp(
                                 result,
                                 [ 'latest channel events',
-                                  '668 November 16, 2016 5:10 PM macro-dial' ]));
+                                  '668(oskar curbside) November 16, 2016 5:10 PM macro-dial' ]));
                         done();
                     });
             });
