@@ -16,7 +16,10 @@ var defaultFrequentDays = 30;
 var defaultRecentDays = 7;
 
 var badEvents = [
+    "outgoing-unavailable-message",
     "incoming-dialstatus-CHANUNAVAIL",
+    "incoming-dialstatus-CONGESTION",
+    "outgoing-dialstatus-CHANUNAVAIL",
     "outgoing-dialstatus-CONGESTION"];
 
 var frequent_events = function(
