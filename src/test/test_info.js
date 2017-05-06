@@ -57,11 +57,11 @@ describe('main', function() {
                         arrayCmp(
                             result,
                             [ 'recent bad events',
+                              'voipms November 16, 2016 3:18 PM incoming-dialstatus-CONGESTION',
                               '668 November 16, 2016 10:15 AM outgoing-dialstatus-CONGESTION',
-                              '667 November 13, 2016 9:36 PM outgoing-dialstatus-CONGESTION',
-                              '667 November 13, 2016 9:30 PM outgoing-dialstatus-CONGESTION',
-                              '667 November 13, 2016 9:29 PM outgoing-dialstatus-CONGESTION',
-                              '667 November 13, 2016 9:18 PM outgoing-dialstatus-CONGESTION' ]));
+                              'voipms November 15, 2016 3:19 PM incoming-dialstatus-CONGESTION',
+                              'voipms November 15, 2016 2:02 AM incoming-dialstatus-CONGESTION',
+                              'voipms November 15, 2016 1:51 AM incoming-dialstatus-CONGESTION' ]));
                     done();
                 });
         });

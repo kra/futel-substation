@@ -10,7 +10,7 @@ var defaultExtensions = [
     '668',                      // oskar curbside
     '669',                      // oskar office
     '670',                      // r2d2
-    '680',                      // xnor
+    '680'                       // xnor
 ];
 
 function Info(dbFileName) {
