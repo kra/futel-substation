@@ -19,6 +19,12 @@ write futel user's crontab
 Install irc bot:
 
 cd /opt/futel/src
+on ubuntu:
+  sudo apt install npm
+  sudo apt install nodejs-legacy
+  sudo apt install libicu-dev
+on centos:
+  ...
 npm install irc
 npm install async-polling
 npm install aws-sdk
@@ -36,7 +42,7 @@ Test irc bot from src directory:
 
 npm install mocha
 npm install sinon
-mocha test/test_info.js
+node_modules/.bin/mocha test/test_info.js
 mocha test/test_client.js
 # smoke tests to eyeball results of
 node test/manual_test_info.js
