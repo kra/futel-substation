@@ -19,8 +19,7 @@ var badEvents = [
     "outgoing-unavailable-message",
     "incoming-dialstatus-CHANUNAVAIL",
     "incoming-dialstatus-CONGESTION",
-    "outgoing-dialstatus-CHANUNAVAIL",
-    "outgoing-dialstatus-CONGESTION"];
+    "outgoing-dialstatus-CHANUNAVAIL"];
 
 var frequent_events = function(
     dbFileName, events_ignore, max_events, days, extension, callback) {
