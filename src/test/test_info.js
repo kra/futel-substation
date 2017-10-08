@@ -58,10 +58,10 @@ describe('main', function() {
                             result,
                             [ 'recent bad events',
                               'voipms November 16, 2016 3:18 PM incoming-dialstatus-CONGESTION',
-                              '668(oskar curbside) November 16, 2016 10:15 AM outgoing-dialstatus-CONGESTION',
                               'voipms November 15, 2016 3:19 PM incoming-dialstatus-CONGESTION',
                               'voipms November 15, 2016 2:02 AM incoming-dialstatus-CONGESTION',
-                              'voipms November 15, 2016 1:51 AM incoming-dialstatus-CONGESTION' ]));
+                              'voipms November 15, 2016 1:51 AM incoming-dialstatus-CONGESTION',
+                              'callcentric-r2d2 November 15, 2016 1:30 AM outgoing-dialstatus-CHANUNAVAIL']));
                     done();
                 });
         });
