@@ -262,10 +262,10 @@ Client.prototype.substrings = function(from, to, text, message) {
         }
     };
     // does message call me anything?    
-    responses[self.nick + ' is'] = function(text) {
+    responses['mechaoperator' + ' is'] = function(text) {
         text = text.trim();                           // strip whitespace
         text = text.replace(RegExp('[\.\!\?]+$'), '') // strip punct
-        var outString = text.replace(RegExp('.*' + self.nick + ' is '), '');
+        var outString = text.replace(RegExp('.*' + 'mechaoperator +is '), '');
         outString = "No, " + from + ", you're " + outString + '!';
         self.sayOrSay(from, to, outString);
     };
@@ -277,12 +277,6 @@ Client.prototype.substrings = function(from, to, text, message) {
         self.sayOrSay(from, to, sample(sayings));
     };
     // does message mention error?
-    responses[self.nick] = function(text) {    
-        var sayings = [
-            'Yo.', 'Hi.', 'Hello.', 'Hej.', 'Qapla!',
-            '?', '!', 'Yes.', 'No.', ''];
-        self.sayOrSay(from, to, sample(sayings));
-    };
     var sayError = function(text) {
         var sayings = [
             'ERROR', 'ERROR', 'ERROR', 'ERROR', 'ERROR',
