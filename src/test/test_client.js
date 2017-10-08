@@ -194,11 +194,21 @@ describe('main', function() {
                     'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're foo!", this.clock);
             });
+            it('should respond to mechy is', function() {
+                client.channelMessage(
+                    'from', 'to', 'mechy is foo', {args: ['noisyChannel']});
+                testOneSay(client, 'to', "No, from, you're foo!", this.clock);
+            });
         });
         describe('mechaoperator is', function() {
             it('should respond to mechaoperator is with surrounding text', function() {
                 client.channelMessage(
                     'from', 'to', 'foo mechaoperator is bar...', {args: ['noisyChannel']});
+                testOneSay(client, 'to', "No, from, you're bar!", this.clock);
+            });
+            it('should respond to mechy is with surrounding text', function() {
+                client.channelMessage(
+                    'from', 'to', 'foo mechy is bar...', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're bar!", this.clock);
             });
         });
@@ -208,11 +218,14 @@ describe('main', function() {
                     'from', 'to', 'Mechaoperator is bar', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're bar!", this.clock);
             });
-        });
-        describe('mechaoperator is', function() {
             it('should respond to mechaoperator is with capitalization', function() {
                 client.channelMessage(
                     'from', 'to', 'MECHAOPERATOR IS BAR', {args: ['noisyChannel']});
+                testOneSay(client, 'to', "No, from, you're bar!", this.clock);
+            });
+            it('should respond to mechy is with capitalization', function() {
+                client.channelMessage(
+                    'from', 'to', 'MECHY IS BAR', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're bar!", this.clock);
             });
         });

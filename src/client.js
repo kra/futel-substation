@@ -265,17 +265,26 @@ Client.prototype.substrings = function(from, to, text, message) {
     responses['mechaoperator' + ' is'] = function(text) {
         text = text.trim();                           // strip whitespace
         text = text.replace(RegExp('[\.\!\?]+$'), '') // strip punct
-        var outString = text.replace(RegExp('.*' + 'mechaoperator +is '), '');
+        var outString = text.replace(RegExp('.*' + 'mechaoperator is '), '');
+        outString = "No, " + from + ", you're " + outString + '!';
+        self.sayOrSay(from, to, outString);
+    };
+    responses['mechy' + ' is'] = function(text) {
+        text = text.trim();                           // strip whitespace
+        text = text.replace(RegExp('[\.\!\?]+$'), '') // strip punct
+        var outString = text.replace(RegExp('.*' + 'mechy is '), '');
         outString = "No, " + from + ", you're " + outString + '!';
         self.sayOrSay(from, to, outString);
     };
     // does message mention me?
-    responses['mechaoperator'] = function(text) {    
+    hello = function(text) {    
         var sayings = [
             'Yo.', 'Hi.', 'Hello.', 'Hej.', 'Qapla!',
             '?', '!', 'Yes.', 'No.', ''];
         self.sayOrSay(from, to, sample(sayings));
     };
+    responses['mechaoperator'] = hello;
+    responses['mechy'] = hello;    
     // does message mention error?
     var sayError = function(text) {
         var sayings = [
