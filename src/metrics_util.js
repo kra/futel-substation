@@ -7,7 +7,7 @@ var get_promise = function(value) {
     return Q.fcall(function() { return value; }) };
 
 var default_events_ignore = [
-    'outgoing-by-extension',
+    'outgoing-by-calling-extension',
     'default-incoming',
     'outgoing-dialstatus-ANSWER',
     'outgoing-dialstatus-BUSY'];
