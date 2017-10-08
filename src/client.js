@@ -270,7 +270,7 @@ Client.prototype.substrings = function(from, to, text, message) {
         self.sayOrSay(from, to, outString);
     };
     // does message mention me?
-    responses[self.nick] = function(text) {    
+    responses['mechaoperator'] = function(text) {    
         var sayings = [
             'Yo.', 'Hi.', 'Hello.', 'Hej.', 'Qapla!',
             '?', '!', 'Yes.', 'No.', ''];
