@@ -8,9 +8,9 @@ var fifthSecond = 500;
 var getClient = function() {
     var info = new info_mod.Info('dbFileName');    
     var client = new client_mod.Client(info, ['noisyChannel'], 'password');
-    client.start('server', 'nick', {});
+    client.start('server', 'mechaoperator', {});
     // we don't mock the server, which supplies the nick
-    client.nick = 'nick';
+    client.nick = 'mechaoperator';
     // disable first throttle
     client.throttleDate = new Date() - 1000 * 60 * 10;
     // patch for testing
@@ -147,19 +147,19 @@ describe('main', function() {
     describe('nick hails in channel', function() {
         describe('unknown', function() {
             it('should not respond to unknown hail', function() {
-                client.channelMessage('from', 'to', 'nick: xyzzy', 'message');
+                client.channelMessage('from', 'to', 'mechaoperator: xyzzy', 'message');
                 assert.equal(false, client.say.called);
             });
         });
         describe('hi', function() {
             it('should say hi response', function() {
-                client.channelMessage('from', 'to', 'nick: hi', 'message');
+                client.channelMessage('from', 'to', 'mechaoperator: hi', 'message');
                 testOneSay(client, 'to', 'Hi from!', this.clock);                
             });
         });
         describe('help', function() {
             it('should not respond to help command', function() {
-                client.channelMessage('from', 'to', 'nick: help', 'message');
+                client.channelMessage('from', 'to', 'mechaoperator: help', 'message');
                 assert.equal(false, client.say.called);
             });
         });
@@ -169,7 +169,7 @@ describe('main', function() {
         describe('unknown', function() {
             it('should not respond in non-noisy channel', function() {
                 client.channelMessage(
-                    'from', 'to', 'nick is foo', {args: []});
+                    'from', 'to', 'mechaoperator is foo', {args: []});
                 assert.equal(false, client.say.called);
             });
         });
@@ -188,31 +188,31 @@ describe('main', function() {
                    assert.equal(false, client.say.called);
                });
         });
-        describe('nick is', function() {
-            it('should respond to nick is', function() {
+        describe('mechaoperator is', function() {
+            it('should respond to mechaoperator is', function() {
                 client.channelMessage(
-                    'from', 'to', 'nick is foo', {args: ['noisyChannel']});
+                    'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're foo!", this.clock);
             });
         });
-        describe('nick is', function() {
-            it('should respond to nick is with surrounding text', function() {
+        describe('mechaoperator is', function() {
+            it('should respond to mechaoperator is with surrounding text', function() {
                 client.channelMessage(
-                    'from', 'to', 'foo nick is bar...', {args: ['noisyChannel']});
+                    'from', 'to', 'foo mechaoperator is bar...', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're bar!", this.clock);
             });
         });
-        describe('nick is', function() {
-            it('should respond to nick is with capitalization', function() {
+        describe('mechaoperator is', function() {
+            it('should respond to mechaoperator is with capitalization', function() {
                 client.channelMessage(
-                    'from', 'to', 'Nick is bar', {args: ['noisyChannel']});
+                    'from', 'to', 'Mechaoperator is bar', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're bar!", this.clock);
             });
         });
-        describe('nick is', function() {
-            it('should respond to nick is with capitalization', function() {
+        describe('mechaoperator is', function() {
+            it('should respond to mechaoperator is with capitalization', function() {
                 client.channelMessage(
-                    'from', 'to', 'NICK IS BAR', {args: ['noisyChannel']});
+                    'from', 'to', 'MECHAOPERATOR IS BAR', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're bar!", this.clock);
             });
         });
@@ -287,14 +287,14 @@ describe('main', function() {
             it('should not respond again before timeout', function() {
                 // talk to channel
                 client.channelMessage(
-                    'from', 'to', 'nick is foo', {args: ['noisyChannel']});
+                    'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
                 testOneSay(client, 'to', "No, from, you're foo!", this.clock);
 
                 // advance one second
                 this.clock.tick(1000);
                 // talk to channel                
                 client.channelMessage(
-                    'from', 'to', 'nick is bar', {args: ['noisyChannel']});
+                    'from', 'to', 'mechaoperator is bar', {args: ['noisyChannel']});
                 // still only one say
                 testOneSay(client, 'to', "No, from, you're foo!", this.clock);
 
@@ -302,7 +302,7 @@ describe('main', function() {
                 this.clock.tick(1000);
                 // talk to channel                
                 client.channelMessage(
-                    'from', 'to', 'nick is baz', {args: ['noisyChannel']});
+                    'from', 'to', 'mechaoperator is baz', {args: ['noisyChannel']});
                 // still only one say
                 testOneSay(client, 'to', "No, from, you're foo!", this.clock);
 
@@ -310,7 +310,7 @@ describe('main', function() {
                 this.clock.tick(1000 * 60 * 6);
                 // talk to channel
                 client.channelMessage(
-                    'from', 'to', 'nick is qux', {args: ['noisyChannel']});
+                    'from', 'to', 'mechaoperator is qux', {args: ['noisyChannel']});
                 // two says                
                 testSays(client, 'to', ["No, from, you're foo!", "No, from, you're qux!"], this.clock);
 
@@ -318,7 +318,7 @@ describe('main', function() {
                 this.clock.tick(1000);
                 // talk to channel
                 client.channelMessage(
-                    'from', 'to', 'nick is quux', {args: ['noisyChannel']});
+                    'from', 'to', 'mechaoperator is quux', {args: ['noisyChannel']});
                 // still two says                
                 testSays(client, 'to', ["No, from, you're foo!", "No, from, you're qux!"], this.clock);
                 // talk to channel for other responses
@@ -338,7 +338,7 @@ describe('main', function() {
             client.channelMessage('from', 'to', '!hi', 'message');
             client.pm('from', 'hi', 'message');
             client.channelMessage(
-                'from', 'to', 'nick is foo', {args: ['noisyChannel']});
+                'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
             assert.equal(false, client.say.called);            
             this.clock.tick(1);
             assert.equal(false, client.say.called);
@@ -361,7 +361,7 @@ describe('main', function() {
             client.channelMessage('from', 'to', '!hi', 'message');
             client.pm('from', 'hi', 'message');
             client.channelMessage(
-                'from', 'to', 'nick is foo', {args: ['noisyChannel']});
+                'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
             sayArgs = [['from', 'Use "help" for help.'],
                        ['to', 'Hi from!'],
                        ['from', 'Hi from!'],
