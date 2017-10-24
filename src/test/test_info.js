@@ -22,7 +22,19 @@ describe('main', function() {
     describe('peerStatus', function() {
         describe('empty', function() {            
             it('should provide an empty peer status', function() {
-                assert.ok(util.arrayCmp(info.peerStatus(), ['Peer statuses:']));
+                assert.ok(
+                    util.arrayCmp(
+                        info.peerStatus(),
+                        [ 'Peer statuses:',
+                          'SIP/630 null December 31, 1969 4:00 PM',
+                          'SIP/640 null December 31, 1969 4:00 PM',
+                          'SIP/655 null December 31, 1969 4:00 PM',
+                          'SIP/667 null December 31, 1969 4:00 PM',
+                          'SIP/668 null December 31, 1969 4:00 PM',
+                          'SIP/669 null December 31, 1969 4:00 PM',
+                          'SIP/670 null December 31, 1969 4:00 PM',
+                          'SIP/680 null December 31, 1969 4:00 PM' ]),
+                    info.peerStatus());
             });
         });
         describe('populated', function() {
@@ -34,13 +46,19 @@ describe('main', function() {
                 info.peerStatusAction('SIP/669', 'Unreachable');
                 this.clock.tick(1000 * 60 * 2);                    
                 info.peerStatusAction('SIP/670', 'Registered');
-                assert.ok(util.arrayCmp(
-                    info.peerStatus(),
-                    ['Peer statuses:',
-                     'SIP/670 Registered December 31, 1969 4:06 PM',                        
-                     'SIP/669 Unreachable December 31, 1969 4:04 PM',
-                     'SIP/668 Registered December 31, 1969 4:00 PM'
-                    ]), info.peerStatus());
+                assert.ok(
+                    util.arrayCmp(
+                        info.peerStatus(),
+                        ['Peer statuses:',
+                         'SIP/670 Registered December 31, 1969 4:06 PM',
+                         'SIP/669 Unreachable December 31, 1969 4:04 PM',
+                         'SIP/630 null December 31, 1969 4:00 PM',
+                         'SIP/640 null December 31, 1969 4:00 PM',
+                         'SIP/655 null December 31, 1969 4:00 PM',
+                         'SIP/667 null December 31, 1969 4:00 PM',
+                         'SIP/668 Registered December 31, 1969 4:00 PM',
+                         'SIP/680 null December 31, 1969 4:00 PM']),
+                    info.peerStatus());
             });
         });
     });

@@ -17,7 +17,18 @@ var defaultExtensions = {
 function Info(dbFileName) {
     this.dbFileName = dbFileName;
     this.peerStatuses = new Object();
+    var self = this;
+    Object.keys(defaultExtensions).forEach(
+        function foo(element) {
+            self.peerStatuses[self.extensionToPeerExtension(element)] = self.statusToPeerStatus(null);
+        })
 }
+
+// this is kind of bogus, we know we are getting SIP extensions in real life, but our defaults are just
+// the extensions without protocol parts, so fake them
+Info.prototype.extensionToPeerExtension = function(extension) { return 'SIP/' + extension }
+
+Info.prototype.statusToPeerStatus = function(status) { return {'status': status, 'timestamp': new Date()}; }
 
 Info.prototype.peerStatusAction = function(peer, status) {
     this.peerStatuses[peer] = {'status': status, 'timestamp': new Date()};

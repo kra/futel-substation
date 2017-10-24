@@ -121,11 +121,41 @@ describe('main', function() {
                 assert.equal(false, client.say.called);
             });
         });
+        describe('peerStatus', function() {
+            describe('empty', function() {            
+                it('should provide an empty peer status', function() {
+                    client.channelMessage('from', 'to', '!peerstatus', 'message');
+                    testSays(client,
+                             'to',
+                             ["Peer statuses:",
+                              "SIP/630 null December 31, 1969 4:00 PM",
+                              "SIP/640 null December 31, 1969 4:00 PM",
+                              "SIP/655 null December 31, 1969 4:00 PM",
+                              "SIP/667 null December 31, 1969 4:00 PM",
+                              "SIP/668 null December 31, 1969 4:00 PM",
+                              "SIP/669 null December 31, 1969 4:00 PM",
+                              "SIP/670 null December 31, 1969 4:00 PM",
+                              "SIP/680 null December 31, 1969 4:00 PM"],
+                             this.clock);
+                });
+            });
+        });
         describe('peerStatusBad', function() {
             describe('empty', function() {            
                 it('should provide an empty peer status', function() {
                     client.channelMessage('from', 'to', '!peerstatusbad', 'message');
-                    testSays(client, 'to', ['Peer statuses:'], this.clock);
+                    testSays(client,
+                             'to',
+                             ["Peer statuses:",
+                              "SIP/630 null December 31, 1969 4:00 PM",
+                              "SIP/640 null December 31, 1969 4:00 PM",
+                              "SIP/655 null December 31, 1969 4:00 PM",
+                              "SIP/667 null December 31, 1969 4:00 PM",
+                              "SIP/668 null December 31, 1969 4:00 PM",
+                              "SIP/669 null December 31, 1969 4:00 PM",
+                              "SIP/670 null December 31, 1969 4:00 PM",
+                              "SIP/680 null December 31, 1969 4:00 PM"],
+                             this.clock);
                 });
             });
             describe('populated', function() {
@@ -142,9 +172,15 @@ describe('main', function() {
                     client.channelMessage('from', 'to', '!peerstatusbad', 'message');
                 testSays(client,
                          'to',
-                         ['Peer statuses:',
-                          'SIP/670 Unreachable December 31, 1969 4:08 PM',
-                          'SIP/669 Unreachable December 31, 1969 4:06 PM'], this.clock);
+                         ["Peer statuses:",
+                          "SIP/670 Unreachable December 31, 1969 4:08 PM",
+                          "SIP/669 Unreachable December 31, 1969 4:06 PM",
+                          "SIP/630 null December 31, 1969 4:00 PM",
+                          "SIP/640 null December 31, 1969 4:00 PM",
+                          "SIP/655 null December 31, 1969 4:00 PM",
+                          "SIP/667 null December 31, 1969 4:00 PM",
+                          "SIP/680 null December 31, 1969 4:00 PM"],
+                         this.clock);
                 });
             });
         });            
