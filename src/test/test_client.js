@@ -1,3 +1,4 @@
+var util = require('./util');
 var assert = require('assert');
 var sinon = require('sinon');
 var info_mod = require('../info');
@@ -31,12 +32,16 @@ var testOneSay = function(client, to, message, clock) {
 }
 
 var testSays = function(client, to, messages, clock) {
-    clock.tick(fifthSecond * messages.length);    
+    clock.tick(fifthSecond * messages.length);
+    // every message should be to to
     client.say.args.forEach(function(arg) {
         assert.equal(arg[0], to);
-        assert.equal(arg[1], messages.shift());
     });
-    assert.equal(0, messages.length);
+    assert.ok(
+        util.arrayCmp(
+            client.say.args.map(function(l) { return l[1] }),
+            messages),
+        [JSON.stringify(client.say.args.map(function(l) { return l[1] })), JSON.stringify(messages)]);
 }
 
 describe('main', function() {

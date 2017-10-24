@@ -1,3 +1,4 @@
+var util = require('./util');
 var assert = require('assert');
 var sinon = require('sinon');
 var info_mod = require('../info');
@@ -6,12 +7,6 @@ var getInfo = function() {
     var info = new info_mod.Info('test/assets/metrics.db');    
     return info;
 }
-
-var arrayCmp = function(left, right) {
-    console.log(left);
-    return left.length == right.length && left.every(function(v, i) { return v === right[i] });
-}
-
 
 describe('main', function() {
     var info = null;
@@ -27,7 +22,7 @@ describe('main', function() {
     describe('peerStatus', function() {
         describe('empty', function() {            
             it('should provide an empty peer status', function() {
-                assert.ok(arrayCmp(info.peerStatus(), ['Peer statuses:']));
+                assert.ok(util.arrayCmp(info.peerStatus(), ['Peer statuses:']));
             });
         });
         describe('populated', function() {
@@ -39,7 +34,7 @@ describe('main', function() {
                 info.peerStatusAction('SIP/669', 'Unreachable');
                 this.clock.tick(1000 * 60 * 2);                    
                 info.peerStatusAction('SIP/670', 'Registered');
-                assert.ok(arrayCmp(
+                assert.ok(util.arrayCmp(
                     info.peerStatus(),
                     ['Peer statuses:',
                      'SIP/670 Registered December 31, 1969 4:06 PM',                        
@@ -54,7 +49,7 @@ describe('main', function() {
             info.recentBad(
                 function(result) {
                     assert.ok(
-                        arrayCmp(
+                        util.arrayCmp(
                             result,
                             [ 'recent bad events',
                               'voipms November 16, 2016 3:18 PM incoming-dialstatus-CONGESTION',
@@ -73,7 +68,7 @@ describe('main', function() {
                     null,
                     function(result) {
                         assert.ok(
-                            arrayCmp(
+                            util.arrayCmp(
                                 result,
                                 [ 'latest channel events',
                                   '655(taylor st) November 16, 2016 9:41 PM 911-9',
@@ -91,7 +86,7 @@ describe('main', function() {
                     '668',
                     function(result) {
                         assert.ok(
-                            arrayCmp(
+                            util.arrayCmp(
                                 result,
                                 [ 'latest channel events',
                                   '668(oskar curbside) November 16, 2016 5:10 PM macro-dial' ]));

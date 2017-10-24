@@ -9,3 +9,5 @@ info.stats(
     function(result) {
         result.map(function (line) { console.log(line); });
     });
+info.peerStatus().forEach(function(line) { console.log(line); });
+info.peerStatusBad().forEach(function(line) { console.log(line); });
