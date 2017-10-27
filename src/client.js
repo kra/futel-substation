@@ -318,18 +318,9 @@ Client.prototype.noYoureTalk = function(from, text) {
     }
     text = text.toLowerCase();
     var date = this.date();
-    message = this.simpleSubstrings(from, text, date);
-    if (message) {
-        return message;
-    }
-    message = this.substrings(from, text, date);
-    if (message) {
-        return message;
-    }
-    message = this.simpleStrings(from, text, date);
-    if (message) {
-        return message;
-    }
+    return [this.simpleSubstrings, this.substrings, this.simpleStrings].map(function (fn) {
+        return fn(from, text, date);
+    }).find(function (element) { return element; });
 };
 
 Client.prototype.wordToCommand = function(word) {
