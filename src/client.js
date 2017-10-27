@@ -191,9 +191,8 @@ Client.prototype.errorMessage = function(self, from, to, text, message) {
     self.sayOrSay(from, to, 'Use "help" for help.');
 };
 
-Client.prototype.simpleStrings = function(from, to, text, message) {
+Client.prototype.simpleStrings = function(_from, text, _date) {
     // simple string to string response
-    var self = this;
     var responses = {
         'yes': "No.",
         'no': "Yes.",
@@ -207,16 +206,14 @@ Client.prototype.simpleStrings = function(from, to, text, message) {
     text = text.replace(/[^\w]/g,'');
     for (var key in responses) {
         if (key == text) {
-            self.sayOrSay(from, to, responses[key]);
-            return true;
+            return responses[key];
         }
     }
     return null;
 };
 
-Client.prototype.simpleSubstrings = function(from, to, text, message) {
+Client.prototype.simpleSubstrings = function(_from, text, _date) {
     // simple substring to string response
-    var self = this;
     var responses = {
         'plate': "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation.",
         'shrimp': "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation.",
@@ -238,27 +235,25 @@ Client.prototype.simpleSubstrings = function(from, to, text, message) {
     }
     for (var key in responses) {
         if (stringIn(key, text)) {
-            self.sayOrSay(from, to, responses[key]);
-            return true;
+            return responses[key];
         }
     }
     return null;
 };
 
-Client.prototype.substrings = function(from, to, text, message) {
+Client.prototype.substrings = function(from, text, date) {
     // substring to response
-    var self = this;
     var responses = {};
     // is message greeting the morning?
     responses['morning'] = function(text) {
-        if (self.date().getHours() < 12) {
+        if (date.getHours() < 12) {
             var sayings = [
                 'MORNING', 'MORNING', 'MORNING', 'MORNING', 'MORNING',
                 'Morning.', 'Morning!',
                 'Good morning.', 'Good morning!', 'GOOD MORNING',
                 'Guten morgen.', 'GUTEN MORGEN',
                 'QAPLA'];
-            self.sayOrSay(from, to, sample(sayings));
+            return sample(sayings);
         }
     };
     // does message call me anything?    
@@ -267,21 +262,21 @@ Client.prototype.substrings = function(from, to, text, message) {
         text = text.replace(RegExp('[\.\!\?]+$'), '') // strip punct
         var outString = text.replace(RegExp('.*' + 'mechaoperator is '), '');
         outString = "No, " + from + ", you're " + outString + '!';
-        self.sayOrSay(from, to, outString);
+        return outString;
     };
     responses['mechy' + ' is'] = function(text) {
         text = text.trim();                           // strip whitespace
         text = text.replace(RegExp('[\.\!\?]+$'), '') // strip punct
         var outString = text.replace(RegExp('.*' + 'mechy is '), '');
         outString = "No, " + from + ", you're " + outString + '!';
-        self.sayOrSay(from, to, outString);
+        return outString;
     };
     // does message mention me?
     hello = function(text) {    
         var sayings = [
             'Yo.', 'Hi.', 'Hello.', 'Hej.', 'Qapla!',
             '?', '!', 'Yes.', 'No.', ''];
-        self.sayOrSay(from, to, sample(sayings));
+        return sample(sayings);
     };
     responses['mechaoperator'] = hello;
     responses['mechy'] = hello;    
@@ -291,14 +286,13 @@ Client.prototype.substrings = function(from, to, text, message) {
             'ERROR', 'ERROR', 'ERROR', 'ERROR', 'ERROR',
             'ERROR ERROR ERROR', 'ERROR ERROR ERROR', 'ERROR ERROR ERROR', 'ERROR ERROR ERROR',
             'ERROR ERROR ERROR ERROR ERROR ERROR ERROR'];
-        self.sayOrSay(from, to, sample(sayings));
+        return sample(sayings);
     };
     responses['error'] = sayError;
     responses['fail'] = sayError;
     for (var key in responses) {
         if (stringIn(key, text)) {
-            responses[key](text);
-            return true;
+            return responses[key](text);
         }
     }
     return null;
@@ -316,19 +310,25 @@ Client.prototype.resetThrottle = function() {
     this.throttleDate = new Date();
 };
 
-Client.prototype.noYoureTalk = function(from, to, text, message) {
+Client.prototype.noYoureTalk = function(from, text) {
     // respond to channel talking
     if (!this.sinceThrottle()) {
         this.log('throttling');        
         return;
     }
     text = text.toLowerCase();
-    if (this.simpleSubstrings(from, to, text, message) === true) {
-        return;
-    } else if (this.substrings(from, to, text, message) === true) {
-        return;
-    } else if (this.simpleStrings(from, to, text, message) === true) {
-        return;
+    var date = this.date();
+    message = this.simpleSubstrings(from, text, date);
+    if (message) {
+        return message;
+    }
+    message = this.substrings(from, text, date);
+    if (message) {
+        return message;
+    }
+    message = this.simpleStrings(from, text, date);
+    if (message) {
+        return message;
     }
 };
 
@@ -396,7 +396,10 @@ Client.prototype.channelMessage = function(from, to, text, message) {
         }
     } else if (this.noisyChannels.indexOf(message.args[0]) > -1) {
         // respond to talking in noisychannels
-        this.noYoureTalk(from, to, text, message);        
+        message = this.noYoureTalk(from, text);
+        if (message) {
+            this.sayOrSay(from, to, message);
+        }
     }
 };
 
