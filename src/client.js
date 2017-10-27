@@ -311,11 +311,6 @@ Client.prototype.resetThrottle = function() {
 };
 
 Client.prototype.noYoureTalk = function(from, text) {
-    // respond to channel talking
-    if (!this.sinceThrottle()) {
-        this.log('throttling');        
-        return;
-    }
     text = text.toLowerCase();
     var date = this.date();
     return [this.simpleSubstrings, this.substrings, this.simpleStrings].map(function (fn) {
@@ -389,7 +384,11 @@ Client.prototype.channelMessage = function(from, to, text, message) {
         // respond to talking in noisychannels
         message = this.noYoureTalk(from, text);
         if (message) {
-            this.sayOrSay(from, to, message);
+            if (!this.sinceThrottle()) {
+                this.log('throttling');        
+            } else {
+                this.sayOrSay(from, to, message);
+            }
         }
     }
 };
@@ -398,7 +397,7 @@ Client.prototype.start = function(server, nick, opt) {
     var fifthSecond = 200;
     
     var self = this;    
-    irc.Client.call(this, server, nick, opt);        
+    irc.Client.call(this, server, nick, opt);
     // respond to commands in pm
     this.addListener("pm", this.pm);
     // respond to talking in channels
