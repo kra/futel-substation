@@ -15,7 +15,7 @@ function Client(info, noisyChannels, botPassword) {
     this.noisyChannels = noisyChannels;
     this.botPassword = botPassword;
     this.says = new Map();
-    this.resetThrottle();
+    this.throttleDates = {};
 }
 
 util.inherits(Client, irc.Client);
@@ -298,16 +298,21 @@ Client.prototype.substrings = function(from, text, date) {
     return null;
 };
 
-Client.prototype.sinceThrottle = function() {
+Client.prototype.sinceThrottle = function(channel) {
+    if (this.throttleDates[channel] === undefined) {
+        this.resetThrottle(channel);
+        return true;
+    }
     var twoMinutes = 1000 * 60 * 2;
-    if ((new Date() - this.throttleDate) < twoMinutes) {
+    if ((new Date() - this.throttleDates[channel]) < twoMinutes) {
         return false;
     }
-    this.resetThrottle();
+    this.resetThrottle(channel);
     return true;
 };
-Client.prototype.resetThrottle = function() {
-    this.throttleDate = new Date();
+
+Client.prototype.resetThrottle = function(channel) {
+    this.throttleDates[channel] = new Date();
 };
 
 Client.prototype.noYoureTalk = function(from, text) {
@@ -384,7 +389,7 @@ Client.prototype.channelMessage = function(from, to, text, message) {
         // respond to talking in noisychannels
         message = this.noYoureTalk(from, text);
         if (message) {
-            if (!this.sinceThrottle()) {
+            if (!this.sinceThrottle(to)) {
                 this.log('throttling');        
             } else {
                 this.sayOrSay(from, to, message);

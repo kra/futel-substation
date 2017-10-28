@@ -12,8 +12,6 @@ var getClient = function() {
     client.start('server', 'mechaoperator', {});
     // we don't mock the server, which supplies the nick
     client.nick = 'mechaoperator';
-    // disable first throttle
-    client.throttleDate = new Date() - 1000 * 60 * 10;
     // patch for testing
     client.say = sinon.spy();
     return client;
