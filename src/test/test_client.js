@@ -46,7 +46,8 @@ describe('main', function() {
     var client = null;
 
     beforeEach(function() {
-        this.clock = sinon.useFakeTimers();
+        var date = new Date(0);
+        this.clock = sinon.useFakeTimers(date);
         client = getClient();
     });
     afterEach(function() {
@@ -320,7 +321,7 @@ describe('main', function() {
         });
         describe('morning', function() {
             it('should respond to a morning greeting if it is morning', function() {
-                client.date = sinon.stub().returns(new Date(2016, 1, 1, 1));
+                this.clock.setSystemTime(new Date(2016, 1, 1, 1));
                 client.channelMessage(
                     'from', 'to', 'foo morning bar', {args: ['noisyChannel']});
                 // just test that we get something
@@ -329,7 +330,7 @@ describe('main', function() {
         });
         describe('morning', function() {
             it('should not respond to a morning greeting if it is not morning', function() {
-                client.date = sinon.stub().returns(new Date(2016, 1, 1, 23));
+                this.clock.setSystemTime(new Date(2016, 1, 1, 23));                
                 client.channelMessage(
                     'from', 'to', 'foo morning bar', {args: ['noisyChannel']});
                 assert.equal(false, client.say.called);
@@ -378,9 +379,6 @@ describe('main', function() {
                     'from', 'to', 'foo plate bar', {args: ['noisyChannel']});
                 client.channelMessage(
                     'from', 'to', 'yes', {args: ['noisyChannel']});
-                client.date = sinon.stub().returns(new Date(2016, 1, 1, 1));
-                client.channelMessage(
-                    'from', 'to', 'foo morning bar', {args: ['noisyChannel']});
                 // still two says                
                 testSays(client, 'to', ["No, from, you're foo!", "No, from, you're qux!"], this.clock);
             });

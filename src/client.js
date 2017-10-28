@@ -25,10 +25,6 @@ Client.prototype.log = function() {
     console.log(args);
 };
 
-Client.prototype.date = function() {
-    return new Date();
-};
-
 Client.prototype.addSay = function(to, text) {
     if (this.says.get(to) === undefined) {
         this.says.set(to, [text]);
@@ -191,7 +187,7 @@ Client.prototype.errorMessage = function(self, from, to, text, message) {
     self.sayOrSay(from, to, 'Use "help" for help.');
 };
 
-Client.prototype.simpleStrings = function(_from, text, _date) {
+Client.prototype.simpleStrings = function(_from, text) {
     // simple string to string response
     var responses = {
         'yes': "No.",
@@ -212,7 +208,7 @@ Client.prototype.simpleStrings = function(_from, text, _date) {
     return null;
 };
 
-Client.prototype.simpleSubstrings = function(_from, text, _date) {
+Client.prototype.simpleSubstrings = function(_from, text) {
     // simple substring to string response
     var responses = {
         'plate': "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation.",
@@ -241,12 +237,12 @@ Client.prototype.simpleSubstrings = function(_from, text, _date) {
     return null;
 };
 
-Client.prototype.substrings = function(from, text, date) {
+Client.prototype.substrings = function(from, text) {
     // substring to response
     var responses = {};
     // is message greeting the morning?
     responses['morning'] = function(text) {
-        if (date.getHours() < 12) {
+        if (new Date().getHours() < 12) {
             var sayings = [
                 'MORNING', 'MORNING', 'MORNING', 'MORNING', 'MORNING',
                 'Morning.', 'Morning!',
@@ -317,9 +313,8 @@ Client.prototype.resetThrottle = function(channel) {
 
 Client.prototype.noYoureTalk = function(from, text) {
     text = text.toLowerCase();
-    var date = this.date();
     return [this.simpleSubstrings, this.substrings, this.simpleStrings].map(function (fn) {
-        return fn(from, text, date);
+        return fn(from, text);
     }).find(function (element) { return element; });
 };
 
