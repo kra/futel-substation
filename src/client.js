@@ -16,6 +16,7 @@ function Client(info, noisyChannels, botPassword) {
     this.botPassword = botPassword;
     this.says = new Map();
     this.throttleDates = {};
+    this.throttleContents = {};    
 }
 
 util.inherits(Client, irc.Client);
@@ -294,7 +295,8 @@ Client.prototype.substrings = function(from, text) {
     return null;
 };
 
-Client.prototype.sinceThrottle = function(channel) {
+Client.prototype.surviveSinceThrottle = function(channel) {
+    // Return true if we survive throttling based on time
     if (this.throttleDates[channel] === undefined) {
         this.resetThrottle(channel);
         return true;
@@ -307,12 +309,26 @@ Client.prototype.sinceThrottle = function(channel) {
     return true;
 };
 
+Client.prototype.surviveContentThrottle = function(channel, message) {
+    // Return true if we survive throttling based on content
+    if (this.throttleContents[channel] === undefined) {
+        this.throttleContents[channel] = message;
+        return true;
+    }
+    if (this.throttleContents[channel] != message) {
+        this.throttleContents[channel] = message;
+        return true;
+    }
+    return false;
+};
+
 Client.prototype.resetThrottle = function(channel) {
     this.throttleDates[channel] = new Date();
 };
 
 Client.prototype.noYoureTalk = function(from, text) {
     text = text.toLowerCase();
+    // return result of first function that has a result
     return [this.simpleSubstrings, this.substrings, this.simpleStrings].map(function (fn) {
         return fn(from, text);
     }).find(function (element) { return element; });
@@ -384,10 +400,10 @@ Client.prototype.channelMessage = function(from, to, text, message) {
         // respond to talking in noisychannels
         message = this.noYoureTalk(from, text);
         if (message) {
-            if (!this.sinceThrottle(to)) {
-                this.log('throttling');        
-            } else {
-                this.sayOrSay(from, to, message);
+            if (this.surviveSinceThrottle(to)) {
+                if (this.surviveContentThrottle(to, message)) {                
+                    this.sayOrSay(from, to, message);
+                }
             }
         }
     }
