@@ -28,7 +28,7 @@ var receiveMessage = function(sqs, sqsUrl, hostname, eventMap) {
                     var body = JSON.parse(message.Body);
                     var body = JSON.parse(body.Message);
                     if (body.hostname == hostname) {
-                        console.log(body.event);                        
+                        //console.log(body.event);                        
                         var fn = eventMap[body.event.Event];
                         if (fn) {
                             fn(body);
