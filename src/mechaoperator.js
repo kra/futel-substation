@@ -11,6 +11,13 @@ var client = new client_mod.Client(
     config.config.noisyChannels,
     config.config.botPassword);
 
+var poller = snspoller.Poller(
+    secrets.config.sqsUrl,
+    secrets.config.awsAkey,
+    secrets.config.awsSecret,
+    config.config.eventHostname,
+    client);
+
 client.start(
     config.config.server,
     config.config.botName,
@@ -18,10 +25,3 @@ client.start(
      userName: config.config.userName,
      realName: config.config.realName}
 );
-
-var poller = snspoller.Poller(
-    secrets.config.sqsUrl,
-    secrets.config.awsAkey,
-    secrets.config.awsSecret,
-    config.config.eventHostname,
-    client);
