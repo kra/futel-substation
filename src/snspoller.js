@@ -1,7 +1,7 @@
 var AsyncPolling = require('async-polling');
 var AWS = require('aws-sdk');
 
-var pollMilliSeconds = 10000;
+var pollMilliSeconds = 5000;
 
 var removeFromQueue = function(sqs, sqsUrl, message) {
     sqs.deleteMessage({
@@ -21,7 +21,7 @@ var receiveMessage = function(sqs, sqsUrl, hostname, eventMap) {
         VisibilityTimeout: 60 // seconds, how long to lock messages
     }, function(err, data) {
         if (err !== null) {
-            console.log(err);
+            console.error(err);
         } else {
             if (data.Messages !== undefined) {
                 data.Messages.forEach(function(message) {
@@ -50,10 +50,17 @@ var poll = function(sqsUrl, akey, secret, hostname, eventMap) {
     AWS.config.update({accessKeyId: akey, secretAccessKey: secret});
     AWS.config.update({region: 'us-west-2'})
     var sqs = new AWS.SQS();
-    AsyncPolling(function (end) {
-        var message = receiveMessage(sqs, sqsUrl, hostname, eventMap);
-        end();
-    }, pollMilliSeconds).run();
+    var polling = AsyncPolling(function (end) {
+        receiveMessage(sqs, sqsUrl, hostname, eventMap);
+        end(null, "result");
+    }, pollMilliSeconds);
+    polling.on('result', function (result) {
+        //
+    });
+    polling.on('error', function (error) {
+        console.error('polling error:', error);
+    });    
+    polling.run();
 };
 
 function Poller(sqsUrl, awsAkey, awsSecret, eventHostname, client) {
