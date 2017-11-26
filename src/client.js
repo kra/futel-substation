@@ -49,7 +49,7 @@ Client.prototype.doSays = function() {
 };
 
 Client.prototype.doSay = function(to, text) {
-    this.log('say', to, text);
+    //this.log('say', to, text);
     this.say(to, text);
 };
 
