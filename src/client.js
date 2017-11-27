@@ -65,16 +65,9 @@ Client.prototype.sayOrSay = function(from, to, text) {
 
 Client.prototype.noisySay = function(text) {
     var self = this;
-    try {
-        this.noisyChannels.forEach(function(channel) {
-            self.addSay(channel, text);
-        });
-    }
-    catch (e) {
-        // XXX this is just bad setup order? Replace with global catch to log and prevent death,
-        //     or a real job scheduler
-        console.log(e);
-    }
+    this.noisyChannels.forEach(function(channel) {
+        self.addSay(channel, text);
+    });
 };
 
 Client.prototype.peerStatusAction = function(peer, status) {
