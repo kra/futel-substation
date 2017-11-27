@@ -406,11 +406,16 @@ Client.prototype.start = function(server, nick, opt) {
     var fifthSecond = 200;
     
     var self = this;    
-    irc.Client.call(this, server, nick, opt);
     // respond to commands in pm
     this.addListener("pm", this.pm);
     // respond to talking in channels
     this.addListener("message#", this.channelMessage);
+    // deal with errors, necessary to avoid crash
+    this.addListener('error', function(message) {
+        this.log('error: ', message);
+    });
+
+    irc.Client.call(this, server, nick, opt);    
 
     setInterval(function() {
         self.doSays();
