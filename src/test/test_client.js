@@ -1,4 +1,3 @@
-var util = require('./util');
 var assert = require('assert');
 var sinon = require('sinon');
 var info_mod = require('../info');
@@ -35,11 +34,9 @@ var testSays = function(client, to, messages, clock) {
     client.say.args.forEach(function(arg) {
         assert.equal(arg[0], to);
     });
-    assert.ok(
-        util.arrayCmp(
-            client.say.args.map(function(l) { return l[1] }),
-            messages),
-        [JSON.stringify(client.say.args.map(function(l) { return l[1] })), JSON.stringify(messages)]);
+    assert.equal(
+        JSON.stringify(client.say.args.map(function(l) { return l[1] })),
+        JSON.stringify(messages));
 }
 
 describe('main', function() {
@@ -127,8 +124,8 @@ describe('main', function() {
                     testSays(client,
                              'to',
                              ["Peer statuses:",
+                              "SIP/610 null December 31, 1969 4:00 PM",
                               "SIP/630 null December 31, 1969 4:00 PM",
-                              "SIP/640 null December 31, 1969 4:00 PM",
                               "SIP/655 null December 31, 1969 4:00 PM",
                               "SIP/667 null December 31, 1969 4:00 PM",
                               "SIP/668 null December 31, 1969 4:00 PM",
@@ -146,8 +143,8 @@ describe('main', function() {
                     testSays(client,
                              'to',
                              ["Peer statuses:",
+                              "SIP/610 null December 31, 1969 4:00 PM",
                               "SIP/630 null December 31, 1969 4:00 PM",
-                              "SIP/640 null December 31, 1969 4:00 PM",
                               "SIP/655 null December 31, 1969 4:00 PM",
                               "SIP/667 null December 31, 1969 4:00 PM",
                               "SIP/668 null December 31, 1969 4:00 PM",
@@ -174,8 +171,8 @@ describe('main', function() {
                          ["Peer statuses:",
                           "SIP/670 Unreachable December 31, 1969 4:08 PM",
                           "SIP/669 Unreachable December 31, 1969 4:06 PM",
+                          "SIP/610 null December 31, 1969 4:00 PM",
                           "SIP/630 null December 31, 1969 4:00 PM",
-                          "SIP/640 null December 31, 1969 4:00 PM",
                           "SIP/655 null December 31, 1969 4:00 PM",
                           "SIP/667 null December 31, 1969 4:00 PM",
                           "SIP/680 null December 31, 1969 4:00 PM"],

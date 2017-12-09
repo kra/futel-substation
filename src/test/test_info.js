@@ -1,4 +1,3 @@
-var util = require('./util');
 var assert = require('assert');
 var sinon = require('sinon');
 var info_mod = require('../info');
@@ -22,19 +21,18 @@ describe('main', function() {
     describe('peerStatus', function() {
         describe('empty', function() {            
             it('should provide an empty peer status', function() {
-                assert.ok(
-                    util.arrayCmp(
-                        info.peerStatus(),
+                assert.equal(
+                    JSON.stringify(info.peerStatus()),
+                    JSON.stringify(
                         [ 'Peer statuses:',
+                          "SIP/610 null December 31, 1969 4:00 PM",                   
                           'SIP/630 null December 31, 1969 4:00 PM',
-                          'SIP/640 null December 31, 1969 4:00 PM',
                           'SIP/655 null December 31, 1969 4:00 PM',
                           'SIP/667 null December 31, 1969 4:00 PM',
                           'SIP/668 null December 31, 1969 4:00 PM',
                           'SIP/669 null December 31, 1969 4:00 PM',
                           'SIP/670 null December 31, 1969 4:00 PM',
-                          'SIP/680 null December 31, 1969 4:00 PM' ]),
-                    info.peerStatus());
+                          'SIP/680 null December 31, 1969 4:00 PM' ]));
             });
         });
         describe('populated', function() {
@@ -46,19 +44,22 @@ describe('main', function() {
                 info.peerStatusAction('SIP/669', 'Unreachable');
                 this.clock.tick(1000 * 60 * 2);                    
                 info.peerStatusAction('SIP/670', 'Registered');
-                assert.ok(
-                    util.arrayCmp(
-                        info.peerStatus(),
+                // ignored
+                this.clock.tick(1000 * 60 * 2);                    
+                info.peerStatusAction('SIP/640', 'Registered');
+
+                assert.equal(
+                    JSON.stringify(info.peerStatus()),
+                    JSON.stringify(
                         ['Peer statuses:',
                          'SIP/670 Registered December 31, 1969 4:06 PM',
                          'SIP/669 Unreachable December 31, 1969 4:04 PM',
+                         'SIP/610 null December 31, 1969 4:00 PM',
                          'SIP/630 null December 31, 1969 4:00 PM',
-                         'SIP/640 null December 31, 1969 4:00 PM',
                          'SIP/655 null December 31, 1969 4:00 PM',
                          'SIP/667 null December 31, 1969 4:00 PM',
                          'SIP/668 Registered December 31, 1969 4:00 PM',
-                         'SIP/680 null December 31, 1969 4:00 PM']),
-                    info.peerStatus());
+                         'SIP/680 null December 31, 1969 4:00 PM']));
             });
         });
     });
@@ -66,9 +67,9 @@ describe('main', function() {
         it('should match whatever was populated in the metrics db', function(done) {
             info.recentBad(
                 function(result) {
-                    assert.ok(
-                        util.arrayCmp(
-                            result,
+                    assert.equal(
+                        JSON.stringify(result),
+                        JSON.stringify(
                             [ 'recent bad events',
                               'voipms November 16, 2016 3:18 PM incoming-dialstatus-CONGESTION',
                               'voipms November 15, 2016 3:19 PM incoming-dialstatus-CONGESTION',
@@ -85,9 +86,9 @@ describe('main', function() {
                 info.latest(
                     null,
                     function(result) {
-                        assert.ok(
-                            util.arrayCmp(
-                                result,
+                        assert.equal(
+                            JSON.stringify(result),
+                            JSON.stringify(
                                 [ 'latest channel events',
                                   '655(taylor st) November 16, 2016 9:41 PM 911-9',
                                   '668(oskar curbside) November 16, 2016 5:10 PM macro-dial',
@@ -103,9 +104,9 @@ describe('main', function() {
                 info.latest(
                     '668',
                     function(result) {
-                        assert.ok(
-                            util.arrayCmp(
-                                result,
+                        assert.equal(
+                            JSON.stringify(result),
+                            JSON.stringify(
                                 [ 'latest channel events',
                                   '668(oskar curbside) November 16, 2016 5:10 PM macro-dial' ]));
                         done();
