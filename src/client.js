@@ -291,13 +291,16 @@ Client.prototype.substrings = function(from, text) {
 Client.prototype.surviveSinceThrottle = function(channel) {
     // Return true if we survive throttling based on time
     if (this.throttleDates[channel] === undefined) {
+        // no previous throttle, reset and survive
         this.resetThrottle(channel);
         return true;
     }
     var twoMinutes = 1000 * 60 * 2;
     if ((new Date() - this.throttleDates[channel]) < twoMinutes) {
+        // last entry is too recent, do not survive time throttle
         return false;
     }
+    // reset and survive
     this.resetThrottle(channel);
     return true;
 };
@@ -305,13 +308,16 @@ Client.prototype.surviveSinceThrottle = function(channel) {
 Client.prototype.surviveContentThrottle = function(channel, message) {
     // Return true if we survive throttling based on content
     if (this.throttleContents[channel] === undefined) {
+        // no previous throttle, reset and survive
         this.throttleContents[channel] = message;
         return true;
     }
     if (this.throttleContents[channel] != message) {
+        // last entry is different, reset and survive
         this.throttleContents[channel] = message;
         return true;
     }
+    // do not survive content throttle
     return false;
 };
 
