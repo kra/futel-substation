@@ -33,24 +33,28 @@ Info.prototype.peerStatusAction = function(peer, status) {
 };
 
 Info.prototype.peerStatusStrings = function(peerStatuses, filterStatuses) {
+    var self = this;
     if (filterStatuses === undefined) { filterStatuses = [] }
         
     return Object.keys(peerStatuses).filter(
+        // filter out keys not matching defaultExtensions
         function(key) {
-            // filter out keys not matching defaultExtensions
             return Object.keys(defaultExtensions).some(
                 function foo(element) { return key.includes(element); })
         }
     ).filter(
+        // filter out entries with statuses in filterStatuses
         function(key) { return !(filterStatuses.indexOf(peerStatuses[key].status) >= 0); }
     ).sort(
+        // sort by timestamp
         function(x, y) { return peerStatuses[y].timestamp - peerStatuses[x].timestamp; }
     ).map(
+        // format into pretty strings
         function(key) {
             formatTimestamp = function(dateString) {
                 return moment(dateString).format('LLL');
             }
-            return key + ' ' + peerStatuses[key].status + ' ' + formatTimestamp(peerStatuses[key].timestamp);
+            return self.prettyExtensionString(key) + ' ' + peerStatuses[key].status + ' ' + formatTimestamp(peerStatuses[key].timestamp);
         });
 };
 

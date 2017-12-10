@@ -25,14 +25,14 @@ describe('main', function() {
                     JSON.stringify(info.peerStatus()),
                     JSON.stringify(
                         [ 'Peer statuses:',
-                          "610 null December 31, 1969 4:00 PM",                   
-                          '630 null December 31, 1969 4:00 PM',
-                          '655 null December 31, 1969 4:00 PM',
-                          '667 null December 31, 1969 4:00 PM',
-                          '668 null December 31, 1969 4:00 PM',
-                          '669 null December 31, 1969 4:00 PM',
-                          '670 null December 31, 1969 4:00 PM',
-                          '680 null December 31, 1969 4:00 PM' ]));
+                          "610(crossclinton) null December 31, 1969 4:00 PM",                   
+                          '630(ypsi) null December 31, 1969 4:00 PM',
+                          '655(taylor st) null December 31, 1969 4:00 PM',
+                          '667(oskar indoors) null December 31, 1969 4:00 PM',
+                          '668(oskar curbside) null December 31, 1969 4:00 PM',
+                          '669(oskar office) null December 31, 1969 4:00 PM',
+                          '670(r2d2) null December 31, 1969 4:00 PM',
+                          '680(xnor) null December 31, 1969 4:00 PM' ]));
             });
         });
         describe('populated', function() {
@@ -52,14 +52,14 @@ describe('main', function() {
                     JSON.stringify(info.peerStatus()),
                     JSON.stringify(
                         ['Peer statuses:',
-                         '670 Registered December 31, 1969 4:06 PM',
-                         '669 Unreachable December 31, 1969 4:04 PM',
-                         '610 null December 31, 1969 4:00 PM',
-                         '630 null December 31, 1969 4:00 PM',
-                         '655 null December 31, 1969 4:00 PM',
-                         '667 null December 31, 1969 4:00 PM',
-                         '668 Registered December 31, 1969 4:00 PM',
-                         '680 null December 31, 1969 4:00 PM']));
+                         '670(r2d2) Registered December 31, 1969 4:06 PM',
+                         '669(oskar office) Unreachable December 31, 1969 4:04 PM',
+                         '610(crossclinton) null December 31, 1969 4:00 PM',
+                         '630(ypsi) null December 31, 1969 4:00 PM',
+                         '655(taylor st) null December 31, 1969 4:00 PM',
+                         '667(oskar indoors) null December 31, 1969 4:00 PM',
+                         '668(oskar curbside) Registered December 31, 1969 4:00 PM',
+                         '680(xnor) null December 31, 1969 4:00 PM']));
             });
         });
     });
