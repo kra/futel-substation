@@ -6,6 +6,7 @@ var moment = require('moment');
 var defaultExtensions = {
     '610': 'crossclinton',    
     '630': 'ypsi',
+    '640': 'killingsworth st',
     '655': 'taylor st',
     '667': 'oskar indoors',
     '668': 'oskar curbside',

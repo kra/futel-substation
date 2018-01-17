@@ -27,6 +27,7 @@ describe('main', function() {
                         [ 'Peer statuses:',
                           "610(crossclinton) null December 31, 1969 4:00 PM",                   
                           '630(ypsi) null December 31, 1969 4:00 PM',
+                          '640(killingsworth st) null December 31, 1969 4:00 PM',                          
                           '655(taylor st) null December 31, 1969 4:00 PM',
                           '667(oskar indoors) null December 31, 1969 4:00 PM',
                           '668(oskar curbside) null December 31, 1969 4:00 PM',
@@ -52,6 +53,7 @@ describe('main', function() {
                     JSON.stringify(info.peerStatus()),
                     JSON.stringify(
                         ['Peer statuses:',
+                         '640(killingsworth st) Registered December 31, 1969 4:08 PM',
                          '670(r2d2) Registered December 31, 1969 4:06 PM',
                          '669(oskar office) Unreachable December 31, 1969 4:04 PM',
                          '610(crossclinton) null December 31, 1969 4:00 PM',
