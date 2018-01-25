@@ -305,8 +305,8 @@ Client.prototype.surviveSinceThrottle = function(channel) {
         this.resetThrottle(channel);
         return true;
     }
-    var twoMinutes = 1000 * 60 * 2;
-    if ((new Date() - this.throttleDates[channel]) < twoMinutes) {
+    var fiveMinutes = 1000 * 60 * 5;
+    if ((new Date() - this.throttleDates[channel]) < fiveMinutes) {
         // last entry is too recent, do not survive time throttle
         return false;
     }
