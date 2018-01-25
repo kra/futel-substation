@@ -217,6 +217,7 @@ Client.prototype.simpleSubstrings = function(_from, text) {
         "innocence": "No one is innocent.",
         "innocent": "No one is innocent.",
         "intense": "The life of a repo man is always intense.",
+        // overused
         //"know": "For the sake of this and future generations you must tell us everything you know.",
         "logic": "I am guided by my infallable logic.",
         "plate": "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation.",
