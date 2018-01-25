@@ -320,12 +320,12 @@ Client.prototype.surviveContentThrottle = function(channel, message) {
     // Return true if we survive throttling based on content
     if (this.throttleContents[channel] === undefined) {
         // no previous throttle, reset and survive
-        this.throttleContents[channel] = message;
+        this.throttleContents[channel] = [message];
         return true;
     }
-    if (this.throttleContents[channel] != message) {
+    if (this.throttleContents[channel].indexOf(message)) {
         // last entry is different, reset and survive
-        this.throttleContents[channel] = message;
+        this.throttleContents[channel] = [message];
         return true;
     }
     // do not survive content throttle
