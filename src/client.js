@@ -328,7 +328,7 @@ Client.prototype.surviveContentThrottle = function(channel, message) {
         this.throttleContents[channel] = [message];
         return true;
     }
-    // do not survive content throttle
+    // do not update or survive content throttle
     return false;
 };
 
