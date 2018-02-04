@@ -2,6 +2,7 @@ var irc = require('irc');
 var util = require('util');
 
 var defaultStatsDays = 60;
+var contentThrottleLength = 1;
 
 var sample = function(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
@@ -303,7 +304,7 @@ Client.prototype.surviveSinceThrottle = function(channel) {
     // Return true if we survive throttling based on time
     if (this.throttleDates[channel] === undefined) {
         // no previous throttle, reset and survive
-        this.resetThrottle(channel);
+        this.resetSinceThrottle(channel);
         return true;
     }
     var fiveMinutes = 1000 * 60 * 5;
@@ -312,28 +313,30 @@ Client.prototype.surviveSinceThrottle = function(channel) {
         return false;
     }
     // reset and survive
-    this.resetThrottle(channel);
+    this.resetSinceThrottle(channel);
     return true;
+};
+
+Client.prototype.resetSinceThrottle = function(channel) {
+    this.throttleDates[channel] = new Date();
 };
 
 Client.prototype.surviveContentThrottle = function(channel, message) {
     // Return true if we survive throttling based on content
     if (this.throttleContents[channel] === undefined) {
         // no previous throttle, reset and survive
-        this.throttleContents[channel] = [message];
-        return true;
+        this.throttleContents[channel] = [];
     }
-    if (this.throttleContents[channel].indexOf(message)) {
-        // last entry is different, reset and survive
-        this.throttleContents[channel] = [message];
+    if (this.throttleContents[channel].indexOf(message) < 0) {
+        // entry is not in contents, reset and survive
+        this.throttleContents[channel].push(message);
+        if (this.throttleContents[channel].length > contentThrottleLength) {
+            this.throttleContents[channel].shift();
+        }
         return true;
     }
     // do not update or survive content throttle
     return false;
-};
-
-Client.prototype.resetThrottle = function(channel) {
-    this.throttleDates[channel] = new Date();
 };
 
 Client.prototype.noYoureTalk = function(from, text) {
