@@ -383,58 +383,101 @@ describe('main', function() {
                 testSays(client, 'to', ["No, from, you're foo!", "No, from, you're qux!"], this.clock);
             });
             it('should not repeat responses', function() {
-                // talk to channel to get first response
+                // advance clock and talk to channel to get first 5 responses
+                this.clock.tick(1000 * 60 * 6);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
-                testOneSay(client, 'to', "No, from, you're foo!", this.clock);
-
-                // advance 6 minutes
-                this.clock.tick(1000 * 60 * 6);
-                // talk to channel to get first response
+                this.clock.tick(1000 * 60 * 6);                
                 client.channelMessage(
-                    'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
-                // still one say
-                testOneSay(client, 'to', "No, from, you're foo!", this.clock);
-
-                // advance 6 minutes
-                this.clock.tick(1000 * 60 * 6);
-                // talk to channel to get second response                
+                    'from', 'to', 'mechaoperator is bar', {args: ['noisyChannel']});
+                this.clock.tick(1000 * 60 * 6);                
                 client.channelMessage(
-                    'from', 'to', 'foo plate bar', {args: ['noisyChannel']});
-                // two says
+                    'from', 'to', 'mechaoperator is baz', {args: ['noisyChannel']});
+                this.clock.tick(1000 * 60 * 6);                
+                client.channelMessage(
+                    'from', 'to', 'mechaoperator is qux', {args: ['noisyChannel']});
+                this.clock.tick(1000 * 60 * 6);                
+                client.channelMessage(
+                    'from', 'to', 'mechaoperator is quux', {args: ['noisyChannel']});
+
+                // five says
                 testSays(
                     client,
                     'to',
                     ["No, from, you're foo!",
-                     "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation."],
+                     "No, from, you're bar!",
+                     "No, from, you're baz!",
+                     "No, from, you're qux!",
+                     "No, from, you're quux!",
+                    ],
                     this.clock);
 
-                // advance 6 minutes
-                this.clock.tick(1000 * 60 * 6);
-                // talk to channel to get second response                
-                client.channelMessage(
-                    'from', 'to', 'foo plate bar', {args: ['noisyChannel']});
-                // still two says
-                testSays(
-                    client,
-                    'to',
-                    ["No, from, you're foo!",
-                     "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation."],
-                    this.clock);
-
-                // advance 6 minutes
-                this.clock.tick(1000 * 60 * 6);
-                // talk to channel to get first response
+                // advance clock and talk to channel to get no responses
+                this.clock.tick(1000 * 60 * 6);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
-                // three says
+                this.clock.tick(1000 * 60 * 6);                
+                client.channelMessage(
+                    'from', 'to', 'mechaoperator is bar', {args: ['noisyChannel']});
+                this.clock.tick(1000 * 60 * 6);                
+                client.channelMessage(
+                    'from', 'to', 'mechaoperator is baz', {args: ['noisyChannel']});
+                this.clock.tick(1000 * 60 * 6);                
+                client.channelMessage(
+                    'from', 'to', 'mechaoperator is qux', {args: ['noisyChannel']});
+                this.clock.tick(1000 * 60 * 6);                
+                client.channelMessage(
+                    'from', 'to', 'mechaoperator is quux', {args: ['noisyChannel']});
+
+                // still five says
                 testSays(
                     client,
                     'to',
                     ["No, from, you're foo!",
-                     "Suddenly someone'll say, like, plate, or shrimp, or plate o' shrimp out of the blue, no explanation.",
-                    "No, from, you're foo!"],
+                     "No, from, you're bar!",
+                     "No, from, you're baz!",
+                     "No, from, you're qux!",
+                     "No, from, you're quux!",
+                    ],
                     this.clock);
+
+                // advance clock and talk to channel to get sixth response
+                this.clock.tick(1000 * 60 * 6);                
+                client.channelMessage(
+                    'from', 'to', 'mechaoperator is xyzzy', {args: ['noisyChannel']});
+
+                // six says
+                testSays(
+                    client,
+                    'to',
+                    ["No, from, you're foo!",
+                     "No, from, you're bar!",
+                     "No, from, you're baz!",
+                     "No, from, you're qux!",
+                     "No, from, you're quux!",
+                     "No, from, you're xyzzy!",                     
+                    ],
+                    this.clock);
+
+                // advance clock and talk to channel to get seventh response
+                this.clock.tick(1000 * 60 * 6);                
+                client.channelMessage(
+                    'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
+
+                // seven says
+                testSays(
+                    client,
+                    'to',
+                    ["No, from, you're foo!",
+                     "No, from, you're bar!",
+                     "No, from, you're baz!",
+                     "No, from, you're qux!",
+                     "No, from, you're quux!",
+                     "No, from, you're xyzzy!",
+                     "No, from, you're foo!",                     
+                    ],
+                    this.clock);
+
             });
         });
         it('should rate limit', function() {

@@ -2,7 +2,7 @@ var irc = require('irc');
 var util = require('util');
 
 var defaultStatsDays = 60;
-var contentThrottleLength = 1;
+var contentThrottleLength = 5;
 
 var sample = function(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
