@@ -260,15 +260,13 @@ Client.prototype.substrings = function(from, text) {
     };
     // does message call me anything?    
     responses['mechaoperator' + ' is'] = function(text) {
-        text = text.trim();                           // strip whitespace
-        text = text.replace(RegExp('[\.\!\?]+$'), '') // strip punct
+        text = text.replace(RegExp('[\.\!\?]+$'), '') // strip terminal punct
         var outString = text.replace(RegExp('.*' + 'mechaoperator is '), '');
         outString = "No, " + from + ", you're " + outString + '!';
         return outString;
     };
     responses['mechy' + ' is'] = function(text) {
-        text = text.trim();                           // strip whitespace
-        text = text.replace(RegExp('[\.\!\?]+$'), '') // strip punct
+        text = text.replace(RegExp('[\.\!\?]+$'), '') // strip terminal punct
         var outString = text.replace(RegExp('.*' + 'mechy is '), '');
         outString = "No, " + from + ", you're " + outString + '!';
         return outString;
@@ -292,6 +290,7 @@ Client.prototype.substrings = function(from, text) {
     };
     responses['error'] = sayError;
     responses['fail'] = sayError;
+
     for (var key in responses) {
         if (stringIn(key, text)) {
             return responses[key](text);
@@ -340,7 +339,7 @@ Client.prototype.surviveContentThrottle = function(channel, message) {
 };
 
 Client.prototype.noYoureTalk = function(from, text) {
-    text = text.toLowerCase();
+    text = text.toLowerCase().trim();
     // return result of first function that has a result
     return [this.simpleSubstrings, this.substrings, this.simpleStrings].map(function (fn) {
         return fn(from, text);
