@@ -523,5 +523,21 @@ describe('main', function() {
             assert.equal(client.say.args.length, 0);
         });
     });
+    describe('exps', function() {
+        it('should match sequences', function() {
+            assert.equal(client.exps('from', ''), null);
+            assert.equal(client.exps('from', 'haheho'), 'HAHEHO');
+            assert.equal(client.exps('from', 'ha heho'), 'HAHEHO');
+            assert.equal(client.exps('from', 'foo ha heho bar'), 'HAHEHO');
+            assert.equal(client.exps('from', 'foo ha bar hoho baz'), 'HOHO');
+            // would be preferable to match longest sequence instead of 1st
+            assert.equal(client.exps('from', 'foo ha bar hoho baz hehehe'),
+                         'HOHO');
+        });
+        it('should be triggered by channel message', function() { 
+            client.channelMessage('from', 'to', 'haha', {args: ['noisyChannel']});
+            testOneSay(client, 'to', 'HAHA', this.clock);                
+        });
+    });
 });
 

@@ -299,6 +299,14 @@ Client.prototype.substrings = function(from, text) {
     return null;
 };
 
+Client.prototype.exps = function(from, text) {
+    // expressions to response
+    var text = text.replace(/\s+/g, '');
+    var match = text.match(/(ha|hah|har|haw|he|hee|heh|ho){2,}/);
+    if (match) { return match[0].toUpperCase(); }
+    return null;
+};
+
 Client.prototype.surviveSinceThrottle = function(channel) {
     // Return true if we survive throttling based on time
     if (this.throttleDates[channel] === undefined) {
@@ -341,7 +349,7 @@ Client.prototype.surviveContentThrottle = function(channel, message) {
 Client.prototype.noYoureTalk = function(from, text) {
     text = text.toLowerCase().trim();
     // return result of first function that has a result
-    return [this.simpleSubstrings, this.substrings, this.simpleStrings].map(function (fn) {
+    return [this.simpleSubstrings, this.substrings, this.simpleStrings, this.exps].map(function (fn) {
         return fn(from, text);
     }).find(function (element) { return element; });
 };
