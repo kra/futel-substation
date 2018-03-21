@@ -186,12 +186,13 @@ Client.prototype.simpleStrings = function(_from, text) {
     // simple string to string response
     var responses = {
         'yes': "No.",
+        'yeah': "No.",        
         'no': "Yes.",
         'maybe': "MAYBE?",
         'false': "True.",
         'true': "False.",
         'hi': "Hi!",
-        'hello': "Hi!",        
+        'hello': "Hi!",
     }
     text = text.toLowerCase();
     text = text.replace(/[^\w]/g,'');
@@ -215,6 +216,7 @@ Client.prototype.simpleSubstrings = function(_from, text) {
         "frank": "And please try to be frank.",
         "guidance": "I am guided by my infallable logic.",
         "guide": "I am guided by my infallable logic.",
+        "hail": "Scientists are at a loss to explain the freak showers of tiny cubes of ice.",
         "innocence": "No one is innocent.",
         "innocent": "No one is innocent.",
         "intense": "The life of a repo man is always intense.",
