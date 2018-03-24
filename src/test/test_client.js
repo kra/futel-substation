@@ -526,7 +526,12 @@ describe('main', function() {
     describe('exps', function() {
         it('should match sequences', function() {
             assert.equal(client.exps('from', ''), null);
+            assert.equal(client.exps('from', 'ha'), 'HA');
+            assert.equal(client.exps('from', 'heh'), 'HEH');
             assert.equal(client.exps('from', 'haheho'), 'HAHEHO');
+            assert.equal(client.exps('from', 'huehue'), 'HUEHUE');
+            assert.equal(client.exps('from', 'lol'), 'LOL');           
+            //assert.equal(client.exps('from', 'lololol'), 'LOLOLOL');
             assert.equal(client.exps('from', 'ha heho'), 'HAHEHO');
             assert.equal(client.exps('from', 'foo ha heho bar'), 'HAHEHO');
             assert.equal(client.exps('from', 'foo ha bar hoho baz'), 'HOHO');

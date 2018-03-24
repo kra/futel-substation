@@ -304,9 +304,19 @@ Client.prototype.substrings = function(from, text) {
 Client.prototype.exps = function(from, text) {
     // expressions to response
     var text = text.replace(/\s+/g, '');
-    var match = text.match(/(ha|hah|har|haw|he|hee|heh|ho){2,}/);
-    if (match) { return match[0].toUpperCase(); }
-    return null;
+    var regexps = [
+            /(ha|hah|har|haw|he|hee|heh|ho|hue){2,}/,
+            /^(ha|hah|har|haw|he|hee|heh|ho)$/,
+            ///(lo|lol){2,}/,
+            /^lol$/
+            ]
+    return regexps.map(function (regexp) {
+         var match = text.match(regexp);
+         if (match) {
+             return match[0].toUpperCase();
+         }
+         return null;
+     }).find(function (element) { return element; });
 };
 
 Client.prototype.surviveSinceThrottle = function(channel) {
