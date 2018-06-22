@@ -39,8 +39,10 @@ Client.prototype.addSay = function(to, text) {
 
 Client.prototype.doSays = function() {
     // doSay up to once for each key in says.
+    // floodProtection in client config can probably do this for us instead?
     var self = this;
     self.says.forEach(function(value, key) {
+        // Shift the first say and say it, if it exists
         if (value.length) {
             text = value.shift();
             self.says.set(key, value);

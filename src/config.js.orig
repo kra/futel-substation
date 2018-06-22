@@ -6,7 +6,7 @@ var config = {
     userName: "mechaoperator",
     realName: "Futel Mechanical Operator",
     dbFileName: '/opt/futel/stats/prod/metrics.db',
-    eventHostname: 'futel-prod'
+    eventHostname: 'futel-prod.phu73l.net'
 };
 
-module.exports = { config: config};
+module.exports = { config: config };
