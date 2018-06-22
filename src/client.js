@@ -2,7 +2,8 @@ var irc = require('irc');
 var util = require('util');
 
 var defaultStatsDays = 60;
-var contentThrottleLength = 5;
+var contentThrottleLength = 10;
+var timeThrottleMilliseconds = 1000 * 60 * 10;
 
 var sample = function(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
@@ -209,7 +210,8 @@ Client.prototype.simpleStrings = function(_from, text) {
 Client.prototype.simpleSubstrings = function(_from, text) {
     // simple substring to string response
     var responses = {
-        "car": "You find one in every car. You'll see.",
+        // overused
+        //"car": "You find one in every car. You'll see.",
         "code": "Not many people got a code to live by anymore.",
         "die": "The lights are growing dim.",
         "efficency": "The human race is inefficient. Therefore it must be destroyed.",
@@ -328,8 +330,7 @@ Client.prototype.surviveSinceThrottle = function(channel) {
         this.resetSinceThrottle(channel);
         return true;
     }
-    var fiveMinutes = 1000 * 60 * 5;
-    if ((new Date() - this.throttleDates[channel]) < fiveMinutes) {
+    if ((new Date() - this.throttleDates[channel]) < timeThrottleMilliseconds) {
         // last entry is too recent, do not survive time throttle
         return false;
     }
@@ -349,14 +350,16 @@ Client.prototype.surviveContentThrottle = function(channel, message) {
         this.throttleContents[channel] = [];
     }
     if (this.throttleContents[channel].indexOf(message) < 0) {
-        // entry is not in contents, reset and survive
+        // entry is not in queue
+        // enqueue entry
         this.throttleContents[channel].push(message);
+        // dequeue to make fixed length queue if necessary
         if (this.throttleContents[channel].length > contentThrottleLength) {
             this.throttleContents[channel].shift();
         }
         return true;
     }
-    // do not update or survive content throttle
+    // entry is in queue, do not update or survive content throttle
     return false;
 };
 

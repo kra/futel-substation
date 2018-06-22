@@ -4,6 +4,7 @@ var info_mod = require('../info');
 var client_mod = require('../client');
 
 var fifthSecond = 500;
+var elevenMinutes = 1000 * 60 * 11;
 
 var getClient = function() {
     var info = new info_mod.Info('dbFileName');    
@@ -359,8 +360,7 @@ describe('main', function() {
                 // still one say
                 testOneSay(client, 'to', "No, from, you're foo!", this.clock);
 
-                // advance 6 minutes
-                this.clock.tick(1000 * 60 * 6);
+                this.clock.tick(elevenMinutes);
                 // talk to channel
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is qux', {args: ['noisyChannel']});
@@ -384,19 +384,19 @@ describe('main', function() {
             });
             it('should not repeat responses', function() {
                 // advance clock and talk to channel to get first 5 responses
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is bar', {args: ['noisyChannel']});
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is baz', {args: ['noisyChannel']});
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is qux', {args: ['noisyChannel']});
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is quux', {args: ['noisyChannel']});
 
@@ -413,19 +413,19 @@ describe('main', function() {
                     this.clock);
 
                 // advance clock and talk to channel to get no responses
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is bar', {args: ['noisyChannel']});
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is baz', {args: ['noisyChannel']});
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is qux', {args: ['noisyChannel']});
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
                     'from', 'to', 'mechaoperator is quux', {args: ['noisyChannel']});
 
@@ -442,9 +442,9 @@ describe('main', function() {
                     this.clock);
 
                 // advance clock and talk to channel to get sixth response
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
-                    'from', 'to', 'mechaoperator is xyzzy', {args: ['noisyChannel']});
+                    'from', 'to', 'mechaoperator is quuux', {args: ['noisyChannel']});
 
                 // six says
                 testSays(
@@ -455,14 +455,14 @@ describe('main', function() {
                      "No, from, you're baz!",
                      "No, from, you're qux!",
                      "No, from, you're quux!",
-                     "No, from, you're xyzzy!",                     
+                     "No, from, you're quuux!",                     
                     ],
                     this.clock);
 
                 // advance clock and talk to channel to get seventh response
-                this.clock.tick(1000 * 60 * 6);                
+                this.clock.tick(elevenMinutes);                
                 client.channelMessage(
-                    'from', 'to', 'mechaoperator is foo', {args: ['noisyChannel']});
+                    'from', 'to', 'mechaoperator is quuuux', {args: ['noisyChannel']});
 
                 // seven says
                 testSays(
@@ -473,8 +473,8 @@ describe('main', function() {
                      "No, from, you're baz!",
                      "No, from, you're qux!",
                      "No, from, you're quux!",
-                     "No, from, you're xyzzy!",
-                     "No, from, you're foo!",                     
+                     "No, from, you're quuux!",
+                     "No, from, you're quuuux!",
                     ],
                     this.clock);
 
