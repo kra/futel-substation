@@ -5,6 +5,11 @@ var snspoller = require('./snspoller');
 var config = require('./config');
 var secrets = require('./secrets');
 
+// irc client config
+// ms to wait between irc connect retries
+var retryDelay = 5 * 60 * 1000;
+var millisecondsOfSilenceBeforePingSent = 5 * 1000;
+
 var info = new info_mod.Info(config.config.dbFileName);
 var client = new client_mod.Client(
     info,
@@ -23,5 +28,7 @@ client.start(
     config.config.botName,
     {channels: config.config.channels,
      userName: config.config.userName,
-     realName: config.config.realName}
+     realName: config.config.realName,
+     retryDelay: retryDelay,
+     millisecondsOfSilenceBeforePingSent: millisecondsOfSilenceBeforePingSent}
 );
