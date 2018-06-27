@@ -23,7 +23,7 @@ events_ignore = [
 # CREATE TABLE metrics
 # (timestamp, callerid, uniqueid, channel, channel_extension, name)
 def line_to_metric(line):
-    """Return normalized dict from metric line."""
+    """Return normalized dict from CSV line."""
     # convert line of csv to list
     # sigh, the first field is not quoted eg '2010-09-06 22:38:15,292', and
     # uses the old logging datetime format
@@ -53,10 +53,17 @@ def line_to_metric(line):
     return metric
 
 def read_write_metrics(metrics_paths, db_path):
+    """
+    Read metrics from CSV files in metrics_paths and overwrite sqlite3 DB
+    at db_path.
+    """
     write_metrics(read_metrics(metrics_paths), db_path)
 
 def write_metrics(metrics, db_path):
-    """Replace all metrics at db_path database with given metrics."""
+    """
+    Open sqlite3 file at db_path, clear metrics db there, insert records
+    created from metric dicts in metrics.
+    """
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
     c.execute('DELETE FROM metrics')
@@ -75,6 +82,10 @@ def write_metrics(metrics, db_path):
     conn.close()
 
 def read_metrics(metrics_paths):
+    """
+    Yield metric dict for each metric line in each metrics file in
+    metrics_paths.
+    """
     for path in metrics_paths:
         with open(path) as metricfile:
             for line in metricfile:
