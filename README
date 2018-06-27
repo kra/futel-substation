@@ -7,7 +7,7 @@ add local futel user and group: useradd -r futel
 copy bin contents to /opt/futel/bin
 copy src contents to /opt/futel/src
 copy conf contents to /opt/futel/src
-have keys in /opt/futel/ssh/id_rsa, owned by futel:futel
+have private key for backup user in /opt/futel/ssh/id_rsa, owned by futel:futel
 mkdir /opt/futel/stats/prod, owed by futel:futel
 mkdir /opt/futel/backups/prod, owned by futel:futel
 
