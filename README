@@ -5,7 +5,7 @@ General:
 add local futel user and group: useradd -r futel
 
 copy bin contents to /opt/futel/bin
-copy src contents to /opt/futel/src
+copy src/mechaoperator contents to /opt/futel/src
 copy conf contents to /opt/futel/src
 have private key for backup user in /opt/futel/ssh/id_rsa, owned by futel:futel
 mkdir /opt/futel/stats/prod, owed by futel:futel
@@ -39,7 +39,7 @@ Run irc bot:
 cd /opt/futel/src
 node mechaoperator.js | tee mechaoperator.out
 
-Test irc bot from src directory:
+Test irc bot from src/mechaoperator directory:
 
 npm install mocha
 npm install sinon
