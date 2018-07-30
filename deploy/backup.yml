@@ -1,0 +1,33 @@
+---
+- name: load secrets
+  include_vars: "deploy/backup_secrets.yml"
+  no_log: true
+- name: copy ssh private key
+  template:
+    src: src/etc/ssh/backup_id_rsa.j2
+    dest: /opt/futel/etc/ssh/backup_id_rsa
+- name: update ssh private key perms
+  file:
+    path: /opt/futel/etc/ssh/backup_id_rsa
+    mode: "go-r"
+- name: copy backup src
+  copy:
+    src: src/bin
+    dest: /opt/futel
+- name: make backup script executable
+  file:
+    path: "{{ item }}"
+    mode: "u+x"
+  with_items:
+    - /opt/futel/bin/backup.sh
+    - /opt/futel/bin/stats-futel-prod.sh
+    - /opt/futel/bin/write_stats.py
+- name: set up sqlite schema
+  command: sqlite3 /opt/futel/var/spool/stats/prod/metrics.db "CREATE TABLE metrics (timestamp, callerid, uniqueid, channel, channel_extension, name)"
+  args:
+    creates: /opt/futel/var/spool/stats/prod/metrics.db
+- name: create cron job
+  cron:
+    name: "prod backup"
+    minute: "*/5"
+    job: /opt/futel/bin/backup.sh

@@ -1,0 +1,9 @@
+---
+- name: set up supervisord conf
+  copy:
+    src: src/mechaoperator/supervisord.conf
+    dest: /opt/futel/etc/supervisord.conf
+- name: start supervisord if not already running
+  command: supervisord --configuration /opt/futel/etc/supervisord.conf
+  args:
+    chdir: /opt/futel/etc

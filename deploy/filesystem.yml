@@ -1,0 +1,19 @@
+---
+- name: set up filesystem
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt/futel/src
+    - /opt/futel/bin
+    - /opt/futel/etc
+    - /opt/futel/etc/ssh
+    - /opt/futel/var
+    - /opt/futel/var/log    
+    - /opt/futel/var/spool
+    - /opt/futel/var/spool/backups
+    - /opt/futel/var/spool/backups/prod
+    - /opt/futel/var/spool/stats    
+    - /opt/futel/var/spool/stats/prod
+    - /opt/futel/var/tmp
+    
