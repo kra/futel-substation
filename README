@@ -1,45 +1,4 @@
-Install on eurydice:
-
-General:
-
-add local futel user and group: useradd -r futel
-
-copy bin contents to /opt/futel/bin
-copy src contents to /opt/futel/src
-copy conf contents to /opt/futel/src
-have private key for backup user in /opt/futel/ssh/id_rsa, owned by futel:futel
-mkdir /opt/futel/stats/prod, owed by futel:futel
-mkdir /opt/futel/backups/prod, owned by futel:futel
-
-Setup backups, metrics:
-
-write futel user's crontab
-0,5,10,15,20,25,30,35,40,45,50,55 * * * * /opt/futel/bin/backup.sh
-
-Install irc bot:
-
-cd /opt/futel/src
-on ubuntu:
-  sudo apt install npm
-  sudo apt install nodejs-legacy
-  sudo apt install libicu-dev
-on centos:
-  ...
-npm install irc
-npm install async-polling
-npm install aws-sdk
-npm install q
-npm install sqlite3
-(npm install sqlite3@4.0.0 --build-from-source)
-npm install moment
-
-Run irc bot:
-
-# in screen session
-cd /opt/futel/src
-node mechaoperator.js | tee mechaoperator.out
-
-Test irc bot from src directory:
+## Test mechaoperator from src/mechaoperator directory:
 
 npm install mocha
 npm install sinon
@@ -49,3 +8,22 @@ node_modules/.bin/mocha test/test_client.js
 node test/manual_test_info.js
 cp ../conf/secrets.js secrets.js
 node test/manual_test_snspoller.js
+
+## Deploy mechaoperator on eurydice:
+
+Set up virtualbox
+execute README.virtualbox
+
+## Deploy backups on eurydice:
+
+add local futel user and group: useradd -r futel
+
+copy bin contents to /opt/futel/bin
+have private key for backup user in /opt/futel/ssh/id_rsa, owned by futel:futel
+mkdir /opt/futel/stats/prod, owed by futel:futel
+mkdir /opt/futel/backups/prod, owned by futel:futel
+
+Setup backups, metrics:
+
+write futel user's crontab
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * /opt/futel/bin/backup.sh

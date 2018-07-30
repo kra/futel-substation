@@ -2,8 +2,8 @@
 # make stats from backed up metrics
 
 BINDIR=/opt/futel/bin
-BACKUPSDIR=/opt/futel/backups/prod
-METRICSFILE=/opt/futel/stats/prod/metrics.db
+BACKUPSDIR=/opt/futel/var/spool/backups/prod
+METRICSFILE=/opt/futel/var/spool/stats/prod/metrics.db
 
 # get latest metrics directory
 for lastdir in $BACKUPSDIR/*; do

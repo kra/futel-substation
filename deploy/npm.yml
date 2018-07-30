@@ -1,0 +1,13 @@
+---
+- name: install npm packages
+  npm:
+    name: "{{ item }}"
+    state: present
+    path: /opt/futel/src/mechaoperator
+  with_items:
+    - irc
+    - async-polling
+    - aws-sdk
+    - q
+    - sqlite3
+    - moment
