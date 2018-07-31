@@ -1,0 +1,12 @@
+---
+- name: load secrets
+  include_vars: "mechaoperator_secrets.yml"
+  no_log: true
+- name: copy mechaoperator src
+  copy:
+    src: src/mechaoperator
+    dest: /opt/futel/src
+- name: copy mechaoperator conf with secrets
+  template:
+    src: src/mechaoperator/secrets.js.j2
+    dest: /opt/futel/src/mechaoperator/secrets.js

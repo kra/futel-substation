@@ -1,0 +1,8 @@
+---
+- hosts: baseinstall
+  become: true
+  tasks:
+    - include: deploy/packages.yml
+    - include: deploy/npm.yml    
+    - include: deploy/mechaoperator.yml
+
