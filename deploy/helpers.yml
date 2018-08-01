@@ -3,3 +3,7 @@
   copy:
     src: src/mechaoperator/supervisord.conf
     dest: /opt/futel/etc/supervisord.conf
+- name: start supervisord
+  command: supervisord --configuration /opt/futel/etc/supervisord.conf
+  args:
+    chdir: /opt/futel/etc

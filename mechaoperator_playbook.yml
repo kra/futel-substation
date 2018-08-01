@@ -5,6 +5,6 @@
     - include: deploy/packages.yml
     - include: deploy/filesystem.yml
     - include: deploy/npm.yml
-    - include: deploy/helpers.yml    
     - include: deploy/mechaoperator.yml
+    - include: deploy/helpers.yml
 
