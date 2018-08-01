@@ -10,3 +10,7 @@
   template:
     src: src/mechaoperator/secrets.js.j2
     dest: /opt/futel/src/mechaoperator/secrets.js
+- name: make mechaoperator script executable
+  file:
+    path: /opt/futel/src/mechaoperator/mechaoperator.sh
+    mode: "u+x"

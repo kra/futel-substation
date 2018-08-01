@@ -1,0 +1,8 @@
+---
+- name: set up filesystem
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt/futel/src
+    - /opt/futel/etc
