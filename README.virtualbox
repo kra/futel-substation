@@ -7,4 +7,4 @@ vagrant plugin install vagrant-vbguest
 
 ## Deploy to virtualbox with vagrant:
 
-vagrant up
+vagrant up mechaoperator
