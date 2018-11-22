@@ -7,6 +7,7 @@ var defaultExtensions = {
     '610': 'crossclinton',    
     '630': 'ypsi',
     '640': 'killingsworth st',
+    '645': 'paz',    
     '655': 'taylor st',
     '667': 'oskar indoors',
     '668': 'oskar curbside',
