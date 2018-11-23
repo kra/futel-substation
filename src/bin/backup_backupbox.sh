@@ -16,5 +16,3 @@ LOCALDIR=/opt/futel/var/spool/backups/$DIRNAME/$DATE
 
 # sync backups
 rsync -avcR --delete -e "$SSHCMD" $USER@$HOST:$REMOTEDIR $LOCALDIR
-# write stats from backups
-$BINDIR/stats-futel-prod.sh

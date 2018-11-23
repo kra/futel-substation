@@ -20,12 +20,6 @@
     mode: "u+x"
   with_items:
     - /opt/futel/bin/backup_backupbox.sh
-    - /opt/futel/bin/stats-futel-prod.sh
-    - /opt/futel/bin/write_stats.py
-- name: set up sqlite schema
-  command: sqlite3 /opt/futel/var/spool/stats/prod/metrics.db "CREATE TABLE metrics (timestamp, callerid, uniqueid, channel, channel_extension, name)"
-  args:
-    creates: /opt/futel/var/spool/stats/prod/metrics.db
 - name: create cron job
   cron:
     name: "prod backup"
