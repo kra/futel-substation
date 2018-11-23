@@ -19,7 +19,7 @@
     path: "{{ item }}"
     mode: "u+x"
   with_items:
-    - /opt/futel/bin/backup.sh
+    - /opt/futel/bin/backup_mechaoperator.sh
     - /opt/futel/bin/stats-futel-prod.sh
     - /opt/futel/bin/write_stats.py
 - name: set up sqlite schema
@@ -30,4 +30,4 @@
   cron:
     name: "prod backup"
     minute: "*/5"
-    job: /opt/futel/bin/backup.sh
+    job: /opt/futel/bin/backup_mechaoperator.sh
