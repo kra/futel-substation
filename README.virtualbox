@@ -1,10 +1,12 @@
-## Deploy mechaoperator on virtualbox guest
-
-## Set up vagrant:
+# Set up vagrant:
 
 have vagrant, virtualbox, ansible
 vagrant plugin install vagrant-vbguest
 
-## Deploy to virtualbox with vagrant:
+# Deploy mechaoperator to virtualbox with vagrant:
 
 vagrant up mechaoperator
+
+# Deploy backupbox to virtualbox with vagrant:
+
+vagrant up backupbox

@@ -14,16 +14,6 @@ node test/manual_test_snspoller.js
 Set up virtualbox
 execute README.virtualbox
 
-## Deploy backups on eurydice:
+## Deploy backupbox on eurydice:
 
-add local futel user and group: useradd -r futel
-
-copy bin contents to /opt/futel/bin
-have private key for backup user in /opt/futel/ssh/id_rsa, owned by futel:futel
-mkdir /opt/futel/stats/prod, owed by futel:futel
-mkdir /opt/futel/backups/prod, owned by futel:futel
-
-Setup backups, metrics:
-
-write futel user's crontab
-0,5,10,15,20,25,30,35,40,45,50,55 * * * * /opt/futel/bin/backup.sh
+ansible-playbook -i hosts mechaoperator_playbook.yml --vault-password-file=conf/vault_pass.txt

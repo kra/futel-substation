@@ -12,11 +12,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.playbook = "mechaoperator_playbook.yml"
       ansible.vault_password_file = "conf/vault_pass.txt"    
       
-      # default vm gets baseinstall ansible inventory group
+      # vm gets baseinstall ansible inventory group
       ansible.groups = {
         "baseinstall" => ["mechaoperator"]
       }
-    end    
+    end
+  end
+
+  config.vm.define "backupbox" do |backupbox|
+    backupbox.vm.provision "baseinstall", type: "ansible" do |ansible|
+      ansible.playbook = "backupbox_playbook.yml"
+      ansible.vault_password_file = "conf/vault_pass.txt"    
+      
+      # vm gets backupbox ansible inventory group
+      ansible.groups = {
+        "backupbox" => ["backupbox"]
+      }
+    end
   end
   
   config.vm.provider :virtualbox do |vb|

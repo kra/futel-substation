@@ -1,0 +1,6 @@
+---
+- hosts: backupbox
+  become: true
+  tasks:
+    - include: deploy/filesystem.yml
+    - include: deploy/backup.yml    
