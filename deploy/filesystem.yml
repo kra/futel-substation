@@ -1,19 +1,19 @@
 ---
 - name: set up filesystem
   file:
-    path: "{{ item }}"
+    path: "{{ basedir }}/{{ item }}"
     state: directory
   with_items:
-    - /opt/futel/src
-    - /opt/futel/bin
-    - /opt/futel/etc
-    - /opt/futel/etc/ssh
-    - /opt/futel/var
-    - /opt/futel/var/log    
-    - /opt/futel/var/spool
-    - /opt/futel/var/spool/backups
-    - /opt/futel/var/spool/backups/prod
-    - /opt/futel/var/spool/stats    
-    - /opt/futel/var/spool/stats/prod
-    - /opt/futel/var/tmp
+    - futel/src
+    - futel/bin
+    - futel/etc
+    - futel/etc/ssh
+    - futel/var
+    - futel/var/log    
+    - futel/var/spool
+    - futel/var/spool/backups
+    - futel/var/spool/backups/prod
+    - futel/var/spool/stats    
+    - futel/var/spool/stats/prod
+    - futel/var/tmp
     

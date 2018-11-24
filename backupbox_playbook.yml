@@ -2,5 +2,5 @@
 - hosts: backupbox
   become: true
   tasks:
-    - include: deploy/filesystem.yml
+    - include: deploy/filesystem.yml basedir={{ /opt }}
     - include: deploy/backup_backupbox.yml    

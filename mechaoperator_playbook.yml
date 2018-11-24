@@ -3,9 +3,9 @@
   become: true
   tasks:
     - include: deploy/packages.yml
-    - include: deploy/filesystem.yml
-    - include: deploy/npm.yml
-    - include: deploy/backup_mechaoperator.yml    
-    - include: deploy/mechaoperator.yml
-    - include: deploy/helpers.yml
+    - include: deploy/filesystem.yml basedir={{ "/opt" }}
+    - include: deploy/npm.yml basedir={{ "/opt" }}
+    - include: deploy/backup_mechaoperator.yml basedir={{ "/opt" }}
+    - include: deploy/mechaoperator.yml basedir={{ "/opt" }}
+    - include: deploy/helpers.yml basedir={{ "/opt" }}
 

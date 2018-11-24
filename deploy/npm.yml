@@ -3,7 +3,7 @@
   npm:
     name: "{{ item }}"
     state: present
-    path: /opt/futel/src/mechaoperator
+    path: "{{ basedir }}/futel/src/mechaoperator"
   with_items:
     - irc
     - async-polling
