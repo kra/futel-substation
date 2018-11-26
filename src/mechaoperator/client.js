@@ -75,6 +75,8 @@ Client.prototype.noisySay = function(text) {
 };
 
 Client.prototype.peerStatusAction = function(peer, status) {
+    // Tell info to update status for peer.
+    // To be called for incoming peer status message.
     this.info.peerStatusAction(peer, status);
 };
 

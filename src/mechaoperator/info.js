@@ -31,6 +31,8 @@ Info.prototype.peerExtensionToExtension = function(extension) { return extension
 Info.prototype.statusToPeerStatus = function(status) { return {'status': status, 'timestamp': new Date()}; }
 
 Info.prototype.peerStatusAction = function(peer, status) {
+    // Update status for peer in peerStatuses.
+    // To be called for incoming peer status message.
     this.peerStatuses[this.peerExtensionToExtension(peer)] = this.statusToPeerStatus(status);
 };
 

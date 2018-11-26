@@ -47,6 +47,7 @@ var receiveMessage = function(sqs, sqsUrl, hostname, eventMap) {
 };
 
 var poll = function(sqsUrl, akey, secret, hostname, eventMap) {
+    // Set up and run AsyncPolling event loop.
     AWS.config.update({accessKeyId: akey, secretAccessKey: secret});
     AWS.config.update({region: 'us-west-2'})
     var sqs = new AWS.SQS();
@@ -64,6 +65,8 @@ var poll = function(sqsUrl, akey, secret, hostname, eventMap) {
 };
 
 function Poller(sqsUrl, awsAkey, awsSecret, eventHostname, client) {
+    // Container for event actions and map from event strings to actions.
+    // Instantiate to begin poller event loop.
     var defaultEventAction = function(body) {
     };
     var confbridgeJoinAction = function(body) {
@@ -73,6 +76,7 @@ function Poller(sqsUrl, awsAkey, awsSecret, eventHostname, client) {
         client.confbridgeLeaveAction();
     };
     var peerStatusAction = function(body) {
+        // Tell info to update status for peer in given message body.
         client.peerStatusAction(body.event.Peer, body.event.PeerStatus);
     };
     
