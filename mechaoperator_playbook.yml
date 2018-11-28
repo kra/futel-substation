@@ -1,5 +1,5 @@
 ---
-- hosts: baseinstall
+- hosts: mechaoperator
   become: true
   tasks:
     - name: foo

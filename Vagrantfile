@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       
       # vm gets baseinstall ansible inventory group
       ansible.groups = {
-        "baseinstall" => ["mechaoperator"]
+        "mechaoperator" => ["mechaoperator"]
       }
     end
   end
