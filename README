@@ -9,11 +9,15 @@ node test/manual_test_info.js
 cp ../conf/secrets.js secrets.js
 node test/manual_test_snspoller.js
 
-## Deploy mechaoperator on eurydice:
+## Deploy mechaoperator to eurydice:
 
 Set up virtualbox
 execute README.virtualbox
 
-## Deploy backupbox on eurydice:
+## Deploy mechaoperator to ceres:
 
-ansible-playbook -i hosts mechaoperator_playbook.yml --vault-password-file=conf/vault_pass.txt
+ansible-playbook -i hosts mechaoperator_playbook_ceres.yml --vault-password-file=conf/vault_pass.txt
+
+## Deploy backupbox to eurydice:
+
+ansible-playbook -i hosts backupbox_playbook.yml --vault-password-file=conf/vault_pass.txt
