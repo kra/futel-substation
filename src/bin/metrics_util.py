@@ -19,9 +19,19 @@ events_ignore = [
     'default-incoming']
 
 
-# schema:
-# CREATE TABLE metrics
-# (timestamp, callerid, uniqueid, channel, channel_extension, name)
+def create_table(db_path):
+    """
+    Open sqlite3 file at db_path, clear metrics db there, insert records
+    created from metric dicts in metrics.
+    """
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+    c.execute(
+        'CREATE TABLE metrics '
+        '(timestamp, callerid, uniqueid, channel, channel_extension, name)')
+    conn.commit()
+    conn.close()
+
 def line_to_metric(line):
     """Return normalized dict from CSV line."""
     # convert line of csv to list

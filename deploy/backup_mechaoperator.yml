@@ -14,7 +14,7 @@
   copy:
     src: src/bin
     dest: "{{ basedir }}/futel"
-- name: make backup script executable
+- name: make backup scripts executable
   file:
     path: "{{ item }}"
     mode: "u+x"
@@ -22,8 +22,9 @@
     - "{{ basedir }}/futel/bin/backup_mechaoperator.sh"
     - "{{ basedir }}/futel/bin/stats-futel-prod.sh"
     - "{{ basedir }}/futel/bin/write_stats.py"
+    - "{{ basedir }}/futel/bin/create_stats_table.py"    
 - name: set up sqlite schema
-  command: sqlite3 "{{ basedir }}/futel/var/spool/stats/prod/metrics.db" "CREATE TABLE metrics (timestamp, callerid, uniqueid, channel, channel_extension, name)"
+  command: "{{ basedir }}/futel/bin/create_stats_table.py {{ basedir }}/futel/var/spool/stats/prod/metrics.db"
   args:
     creates: "{{ basedir }}/futel/var/spool/stats/prod/metrics.db"
 - name: create cron job
