@@ -1,6 +1,6 @@
 var config = {
-    channels: ["#xjpwo"],
-    noisyChannels: ['#xjpwo'],
+    channels: ["#cor", "#pdxbots", "#futel"],
+    noisyChannels: ['#cor', '#pdxbots', "#futel"],
     server: "irc.freenode.net",
     botName: "mechaoperator",
     userName: "mechaoperator",
