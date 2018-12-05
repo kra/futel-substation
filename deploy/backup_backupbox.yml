@@ -9,7 +9,7 @@
 - name: update ssh private key perms
   file:
     path: /opt/futel/etc/ssh/backup_id_rsa
-    mode: "go-r"
+    mode: "go-rwx"
 - name: copy backup src
   copy:
     src: src/bin
