@@ -21,20 +21,20 @@ describe('main', function() {
     describe('peerStatus', function() {
         describe('empty', function() {            
             it('should provide an empty peer status', function() {
-                assert.equal(
-                    JSON.stringify(info.peerStatus()),
-                    JSON.stringify(
-                        [ 'Peer statuses:',
-                          "610(crossclinton) null January 1, 1970 12:00 AM",                   
-                          '630(ypsi) null January 1, 1970 12:00 AM',
-                          '640(killingsworth st) null January 1, 1970 12:00 AM',
-                          "645(paz) null January 1, 1970 12:00 AM",                          
-                          '655(taylor st) null January 1, 1970 12:00 AM',
-                          '667(oskar indoors) null January 1, 1970 12:00 AM',
-                          '668(oskar curbside) null January 1, 1970 12:00 AM',
-                          '669(oskar office) null January 1, 1970 12:00 AM',
-                          '670(r2d2) null January 1, 1970 12:00 AM',
-                          '680(xnor) null January 1, 1970 12:00 AM' ]));
+                assert.deepEqual(
+                    info.peerStatus(),
+                    [ 'Peer statuses:',
+                      "655(taylor st) null January 1, 1970 12:00 AM",
+                      "610(crossclinton) null January 1, 1970 12:00 AM",
+                      '630(ypsi) null January 1, 1970 12:00 AM',
+                      '640(killingsworth st) null January 1, 1970 12:00 AM',
+                      "645(paz) null January 1, 1970 12:00 AM",
+                      "615(robotron) null January 1, 1970 12:00 AM",
+                      '667(oskar indoors) null January 1, 1970 12:00 AM',
+                      '668(oskar curbside) null January 1, 1970 12:00 AM',
+                      '669(oskar office) null January 1, 1970 12:00 AM',
+                      '670(r2d2) null January 1, 1970 12:00 AM',
+                      '680(xnor) null January 1, 1970 12:00 AM' ]);
             });
         });
         describe('populated', function() {
@@ -49,21 +49,20 @@ describe('main', function() {
                 // ignored
                 this.clock.tick(1000 * 60 * 2);                    
                 info.peerStatusAction('SIP/640', 'Registered');
-
-                assert.equal(
-                    JSON.stringify(info.peerStatus()),
-                    JSON.stringify(
-                        ['Peer statuses:',
-                         '640(killingsworth st) Registered January 1, 1970 12:08 AM',
-                         '670(r2d2) Registered January 1, 1970 12:06 AM',
-                         '669(oskar office) Unreachable January 1, 1970 12:04 AM',
-                         '610(crossclinton) null January 1, 1970 12:00 AM',
-                         '630(ypsi) null January 1, 1970 12:00 AM',
-                          "645(paz) null January 1, 1970 12:00 AM",
-                         '655(taylor st) null January 1, 1970 12:00 AM',
-                         '667(oskar indoors) null January 1, 1970 12:00 AM',
-                         '668(oskar curbside) Registered January 1, 1970 12:00 AM',
-                         '680(xnor) null January 1, 1970 12:00 AM']));
+                assert.deepEqual(
+                    info.peerStatus(),
+                    ['Peer statuses:',
+                     '640(killingsworth st) Registered January 1, 1970 12:08 AM',
+                     '670(r2d2) Registered January 1, 1970 12:06 AM',
+                     '669(oskar office) Unreachable January 1, 1970 12:04 AM',
+                     '655(taylor st) null January 1, 1970 12:00 AM',
+                     '645(paz) null January 1, 1970 12:00 AM',
+                     '615(robotron) null January 1, 1970 12:00 AM',
+                     '667(oskar indoors) null January 1, 1970 12:00 AM',
+                     '668(oskar curbside) Registered January 1, 1970 12:00 AM',
+                     '630(ypsi) null January 1, 1970 12:00 AM',
+                     '610(crossclinton) null January 1, 1970 12:00 AM',
+                     '680(xnor) null January 1, 1970 12:00 AM']);
             });
         });
     });

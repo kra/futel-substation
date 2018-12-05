@@ -35,9 +35,9 @@ var testSays = function(client, to, messages, clock) {
     client.say.args.forEach(function(arg) {
         assert.equal(arg[0], to);
     });
-    assert.equal(
-        JSON.stringify(client.say.args.map(function(l) { return l[1] })),
-        JSON.stringify(messages));
+    assert.deepEqual(
+        client.say.args.map(function(l) { return l[1] }),
+        messages);
 }
 
 describe('main', function() {
@@ -122,20 +122,22 @@ describe('main', function() {
             describe('empty', function() {            
                 it('should provide an empty peer status', function() {
                     client.channelMessage('from', 'to', '!peerstatus', 'message');
-                    testSays(client,
-                             'to',
-                             ["Peer statuses:",
-                              "610(crossclinton) null January 1, 1970 12:00 AM",
-                              "630(ypsi) null January 1, 1970 12:00 AM",
-                              "640(killingsworth st) null January 1, 1970 12:00 AM",
-                              "645(paz) null January 1, 1970 12:00 AM",
-                              "655(taylor st) null January 1, 1970 12:00 AM",
-                              "667(oskar indoors) null January 1, 1970 12:00 AM",
-                              "668(oskar curbside) null January 1, 1970 12:00 AM",
-                              "669(oskar office) null January 1, 1970 12:00 AM",
-                              "670(r2d2) null January 1, 1970 12:00 AM",
-                              "680(xnor) null January 1, 1970 12:00 AM"],
-                             this.clock);
+                    testSays(
+                        client,
+                        'to',
+                        ["Peer statuses:",
+                         "655(taylor st) null January 1, 1970 12:00 AM",
+                         "610(crossclinton) null January 1, 1970 12:00 AM",
+                         "630(ypsi) null January 1, 1970 12:00 AM",
+                         "640(killingsworth st) null January 1, 1970 12:00 AM",
+                         "645(paz) null January 1, 1970 12:00 AM",
+                         "615(robotron) null January 1, 1970 12:00 AM",
+                         "667(oskar indoors) null January 1, 1970 12:00 AM",
+                         "668(oskar curbside) null January 1, 1970 12:00 AM",
+                         "669(oskar office) null January 1, 1970 12:00 AM",
+                         "670(r2d2) null January 1, 1970 12:00 AM",
+                         "680(xnor) null January 1, 1970 12:00 AM"],
+                        this.clock);
                 });
             });
         });
@@ -143,20 +145,22 @@ describe('main', function() {
             describe('empty', function() {            
                 it('should provide an empty peer status', function() {
                     client.channelMessage('from', 'to', '!peerstatusbad', 'message');
-                    testSays(client,
-                             'to',
-                             ["Peer statuses:",
-                              "610(crossclinton) null January 1, 1970 12:00 AM",
-                              "630(ypsi) null January 1, 1970 12:00 AM",
-                              "640(killingsworth st) null January 1, 1970 12:00 AM",
-                              "645(paz) null January 1, 1970 12:00 AM",                              
-                              "655(taylor st) null January 1, 1970 12:00 AM",
-                              "667(oskar indoors) null January 1, 1970 12:00 AM",
-                              "668(oskar curbside) null January 1, 1970 12:00 AM",
-                              "669(oskar office) null January 1, 1970 12:00 AM",
-                              "670(r2d2) null January 1, 1970 12:00 AM",
-                              "680(xnor) null January 1, 1970 12:00 AM"],
-                             this.clock);
+                    testSays(
+                        client,
+                        'to',
+                        ["Peer statuses:",
+                         "655(taylor st) null January 1, 1970 12:00 AM",
+                         "610(crossclinton) null January 1, 1970 12:00 AM",
+                         "630(ypsi) null January 1, 1970 12:00 AM",
+                         "640(killingsworth st) null January 1, 1970 12:00 AM",
+                         "645(paz) null January 1, 1970 12:00 AM",
+                         "615(robotron) null January 1, 1970 12:00 AM",
+                         "667(oskar indoors) null January 1, 1970 12:00 AM",
+                         "668(oskar curbside) null January 1, 1970 12:00 AM",
+                         "669(oskar office) null January 1, 1970 12:00 AM",
+                         "670(r2d2) null January 1, 1970 12:00 AM",
+                         "680(xnor) null January 1, 1970 12:00 AM"],
+                        this.clock);
                 });
             });
             describe('populated', function() {
@@ -171,19 +175,21 @@ describe('main', function() {
                     this.clock.tick(1000 * 60 * 2);
                     client.peerStatusAction('SIP/670', 'Unreachable');
                     client.channelMessage('from', 'to', '!peerstatusbad', 'message');
-                testSays(client,
-                         'to',
-                         ["Peer statuses:",
-                          "670(r2d2) Unreachable January 1, 1970 12:08 AM",
-                          "669(oskar office) Unreachable January 1, 1970 12:06 AM",
-                          "610(crossclinton) null January 1, 1970 12:00 AM",
-                          "630(ypsi) null January 1, 1970 12:00 AM",
-                          "640(killingsworth st) null January 1, 1970 12:00 AM",
-                          "645(paz) null January 1, 1970 12:00 AM",                          
-                          "655(taylor st) null January 1, 1970 12:00 AM",
-                          "667(oskar indoors) null January 1, 1970 12:00 AM",
-                          "680(xnor) null January 1, 1970 12:00 AM"],
-                         this.clock);
+                    testSays(
+                        client,
+                        'to',
+                        ["Peer statuses:",
+                         "670(r2d2) Unreachable January 1, 1970 12:08 AM",
+                         "669(oskar office) Unreachable January 1, 1970 12:06 AM",
+                         "610(crossclinton) null January 1, 1970 12:00 AM",
+                         "615(robotron) null January 1, 1970 12:00 AM",
+                         "630(ypsi) null January 1, 1970 12:00 AM",
+                         "640(killingsworth st) null January 1, 1970 12:00 AM",
+                         "645(paz) null January 1, 1970 12:00 AM",                          
+                         "655(taylor st) null January 1, 1970 12:00 AM",
+                         "667(oskar indoors) null January 1, 1970 12:00 AM",
+                         "680(xnor) null January 1, 1970 12:00 AM"],
+                        this.clock);
                 });
             });
         });            
