@@ -4,7 +4,8 @@ var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
 var defaultExtensions = {
-    '610': 'crossclinton',    
+    '610': 'crossclinton',
+    '615': 'robotron',
     '630': 'ypsi',
     '640': 'killingsworth st',
     '645': 'paz',    
