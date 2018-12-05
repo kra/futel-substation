@@ -26,6 +26,7 @@ describe('main', function() {
                     [ 'Peer statuses:',
                       "655(taylor st) null January 1, 1970 12:00 AM",
                       "610(crossclinton) null January 1, 1970 12:00 AM",
+                      "620(souwester) null January 1, 1970 12:00 AM",
                       '630(ypsi) null January 1, 1970 12:00 AM',
                       '640(killingsworth st) null January 1, 1970 12:00 AM',
                       "645(paz) null January 1, 1970 12:00 AM",
@@ -56,12 +57,13 @@ describe('main', function() {
                      '670(r2d2) Registered January 1, 1970 12:06 AM',
                      '669(oskar office) Unreachable January 1, 1970 12:04 AM',
                      '655(taylor st) null January 1, 1970 12:00 AM',
+                     '610(crossclinton) null January 1, 1970 12:00 AM',
                      '645(paz) null January 1, 1970 12:00 AM',
                      '615(robotron) null January 1, 1970 12:00 AM',
                      '667(oskar indoors) null January 1, 1970 12:00 AM',
                      '668(oskar curbside) Registered January 1, 1970 12:00 AM',
+                     '620(souwester) null January 1, 1970 12:00 AM',
                      '630(ypsi) null January 1, 1970 12:00 AM',
-                     '610(crossclinton) null January 1, 1970 12:00 AM',
                      '680(xnor) null January 1, 1970 12:00 AM']);
             });
         });
