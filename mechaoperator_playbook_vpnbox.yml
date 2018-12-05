@@ -1,0 +1,18 @@
+---
+- hosts: mechaoperator
+  become: "{{ become|default(false) }}"
+  vars:
+    ansible_user: futel
+    ansible_port: 42422
+    ansible_ssh_private_key_file: conf/id_rsa_vpnbox
+  tasks:
+    - name: foo
+      set_fact:
+        basedir: "{{ basedir|default(\"/opt\", true) }}"
+    # assume packages.yml is done
+    # - include: deploy/packages.yml
+    - include: deploy/filesystem.yml basedir={{ basedir }}
+    - include: deploy/npm.yml basedir={{ basedir }}
+    - include: deploy/backup_mechaoperator.yml basedir={{ basedir }}
+    - include: deploy/mechaoperator.yml basedir={{ basedir }}
+    - include: deploy/helpers.yml basedir={{ basedir }}
