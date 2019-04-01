@@ -1,7 +1,7 @@
 ## Test mechaoperator from src/mechaoperator directory:
 
-npm install mocha
-npm install sinon
+npm install mocha sinon
+npm install q sqlite3 moment irc
 node_modules/.bin/mocha test/test_info.js
 node_modules/.bin/mocha test/test_client.js
 # smoke tests to eyeball results of
