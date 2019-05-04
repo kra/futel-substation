@@ -24,18 +24,18 @@ describe('main', function() {
                 assert.deepEqual(
                     info.peerStatus(),
                     [ 'Peer statuses:',
-                      "655(taylor st) null January 1, 1970 12:00 AM",
-                      "610(crossclinton) null January 1, 1970 12:00 AM",
-                      "620(souwester) null January 1, 1970 12:00 AM",
-                      '630(ypsi) null January 1, 1970 12:00 AM',
-                      '640(killingsworth st) null January 1, 1970 12:00 AM',
-                      "645(paz) null January 1, 1970 12:00 AM",
-                      "615(robotron) null January 1, 1970 12:00 AM",
-                      '667(oskar indoors) null January 1, 1970 12:00 AM',
-                      '668(oskar curbside) null January 1, 1970 12:00 AM',
-                      '669(oskar office) null January 1, 1970 12:00 AM',
-                      '670(r2d2) null January 1, 1970 12:00 AM',
-                      '680(xnor) null January 1, 1970 12:00 AM' ]);
+                      "655(taylor st) null December 31, 1969 4:00 PM",
+                      "610(crossclinton) null December 31, 1969 4:00 PM",
+                      "620(souwester) null December 31, 1969 4:00 PM",
+                      '630(ypsi) null December 31, 1969 4:00 PM',
+                      '640(killingsworth st) null December 31, 1969 4:00 PM',
+                      "645(paz) null December 31, 1969 4:00 PM",
+                      "615(robotron) null December 31, 1969 4:00 PM",
+                      '667(oskar indoors) null December 31, 1969 4:00 PM',
+                      '668(oskar curbside) null December 31, 1969 4:00 PM',
+                      '669(oskar office) null December 31, 1969 4:00 PM',
+                      '670(r2d2) null December 31, 1969 4:00 PM',
+                      '680(xnor) null December 31, 1969 4:00 PM' ]);
             });
         });
         describe('populated', function() {
@@ -53,18 +53,18 @@ describe('main', function() {
                 assert.deepEqual(
                     info.peerStatus(),
                     ['Peer statuses:',
-                     '640(killingsworth st) Registered January 1, 1970 12:08 AM',
-                     '670(r2d2) Registered January 1, 1970 12:06 AM',
-                     '669(oskar office) Unreachable January 1, 1970 12:04 AM',
-                     '655(taylor st) null January 1, 1970 12:00 AM',
-                     '610(crossclinton) null January 1, 1970 12:00 AM',
-                     '645(paz) null January 1, 1970 12:00 AM',
-                     '615(robotron) null January 1, 1970 12:00 AM',
-                     '667(oskar indoors) null January 1, 1970 12:00 AM',
-                     '668(oskar curbside) Registered January 1, 1970 12:00 AM',
-                     '620(souwester) null January 1, 1970 12:00 AM',
-                     '630(ypsi) null January 1, 1970 12:00 AM',
-                     '680(xnor) null January 1, 1970 12:00 AM']);
+                     '640(killingsworth st) Registered December 31, 1969 4:08 PM',
+                     '670(r2d2) Registered December 31, 1969 4:06 PM',
+                     '669(oskar office) Unreachable December 31, 1969 4:04 PM',
+                     '655(taylor st) null December 31, 1969 4:00 PM',
+                     '610(crossclinton) null December 31, 1969 4:00 PM',
+                     '645(paz) null December 31, 1969 4:00 PM',
+                     '615(robotron) null December 31, 1969 4:00 PM',
+                     '667(oskar indoors) null December 31, 1969 4:00 PM',
+                     '668(oskar curbside) Registered December 31, 1969 4:00 PM',
+                     '620(souwester) null December 31, 1969 4:00 PM',
+                     '630(ypsi) null December 31, 1969 4:00 PM',
+                     '680(xnor) null December 31, 1969 4:00 PM']);
             });
         });
     });
