@@ -13,9 +13,9 @@ var defaultExtensions = {
     '655': 'taylor st',
     '667': 'oskar indoors',
     '668': 'oskar curbside',
-    '669': 'oskar office',
     '670': 'r2d2',
     '680': 'xnor',
+    '695': 'hoyt'
 };
 
 function Info(dbFileName) {

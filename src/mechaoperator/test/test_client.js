@@ -135,9 +135,9 @@ describe('main', function() {
                          "615(robotron) null December 31, 1969 4:00 PM",
                          "667(oskar indoors) null December 31, 1969 4:00 PM",
                          "668(oskar curbside) null December 31, 1969 4:00 PM",
-                         "669(oskar office) null December 31, 1969 4:00 PM",
                          "670(r2d2) null December 31, 1969 4:00 PM",
-                         "680(xnor) null December 31, 1969 4:00 PM"],
+                         "680(xnor) null December 31, 1969 4:00 PM",
+                         "695(hoyt) null December 31, 1969 4:00 PM"],
                         this.clock);
                 });
             });
@@ -159,9 +159,9 @@ describe('main', function() {
                          "615(robotron) null December 31, 1969 4:00 PM",
                          "667(oskar indoors) null December 31, 1969 4:00 PM",
                          "668(oskar curbside) null December 31, 1969 4:00 PM",
-                         "669(oskar office) null December 31, 1969 4:00 PM",
                          "670(r2d2) null December 31, 1969 4:00 PM",
-                         "680(xnor) null December 31, 1969 4:00 PM"],
+                         "680(xnor) null December 31, 1969 4:00 PM",
+                         "695(hoyt) null December 31, 1969 4:00 PM"],
                         this.clock);
                 });
             });
@@ -182,16 +182,16 @@ describe('main', function() {
                         'to',
                         ["Peer statuses:",
                          "670(r2d2) Unreachable December 31, 1969 4:08 PM",
-                         "669(oskar office) Unreachable December 31, 1969 4:06 PM",
                          "645(paz) null December 31, 1969 4:00 PM",
+                         "620(souwester) null December 31, 1969 4:00 PM",
                          "630(ypsi) null December 31, 1969 4:00 PM",
                          "640(killingsworth st) null December 31, 1969 4:00 PM",
                          "615(robotron) null December 31, 1969 4:00 PM",
                          "655(taylor st) null December 31, 1969 4:00 PM",
                          "667(oskar indoors) null December 31, 1969 4:00 PM",
                          "610(crossclinton) null December 31, 1969 4:00 PM",
-                         "620(souwester) null December 31, 1969 4:00 PM",
-                         "680(xnor) null December 31, 1969 4:00 PM"],
+                         "680(xnor) null December 31, 1969 4:00 PM",
+                         "695(hoyt) null December 31, 1969 4:00 PM"],
                         this.clock);
                 });
             });
