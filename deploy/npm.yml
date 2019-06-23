@@ -1,13 +1,14 @@
 ---
 - name: install npm packages
   npm:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
+    version: "{{ item.version }}"
     state: present
     path: "{{ basedir }}/futel/src/mechaoperator"
   with_items:
-    - irc
-    - async-polling
-    - aws-sdk
-    - q
-    - sqlite3
-    - moment
+    - { name: 'irc', version: '0.5.2' }
+    - { name: 'async-polling', version: '0.2.1' }
+    - { name: 'aws-sdk', version: '2.432.0' }
+    - { name: 'q', version: '1.5.1' }
+    - { name: 'sqlite3', version: '4.0.6' }
+    - { name: 'moment', version: '2.24.0' }
