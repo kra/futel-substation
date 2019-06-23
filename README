@@ -14,10 +14,10 @@ node test/manual_test_snspoller.js
 Set up virtualbox
 execute README.virtualbox
 
-## Deploy mechaoperator to vpnbox-prod-bar
+## Deploy mechaoperator to vpnbox-prod-foo
 
 # have /opt/futel owned by futel:futel
-# have packages.yml installed
+# have deploy/packages.yml installed
 ansible-playbook -i deploy/hosts mechaoperator_playbook_vpnbox.yml --vault-password-file=conf/vault_pass.txt
 
 ## Deploy backupbox to eurydice:
