@@ -288,7 +288,6 @@ Client.prototype.substrings = function(from, text) {
     };
     responses['mechaoperator'] = hello;
     responses['mechy'] = hello;    
-    // does message mention error?
     var sayError = function(text) {
         var sayings = [
             'ERROR', 'ERROR', 'ERROR', 'ERROR', 'ERROR',
@@ -298,6 +297,14 @@ Client.prototype.substrings = function(from, text) {
     };
     responses['error'] = sayError;
     responses['fail'] = sayError;
+    var sayNice = function(text) {
+        var sayings = [
+            'nice', 'nice!', 'niiice!', 'niiiiiice!',
+            'NICE', 'NIIICE', 'NIIIIIICE'];
+        return sample(sayings);
+    };
+    responses['error'] = sayError;
+    
 
     for (var key in responses) {
         if (stringIn(key, text)) {
