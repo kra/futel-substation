@@ -1,13 +1,15 @@
 var assert = require('assert');
 var sinon = require('sinon');
-var info_mod = require('../info');
 var client_mod = require('../client');
 
 var fifthSecond = 500;
 var elevenMinutes = 1000 * 60 * 11;
 
-var getClient = function() {
-    var info = new info_mod.Info('dbFileName');    
+var getInfo = function() {
+    return sinon.fake();
+}
+
+var getClient = function(info) {
     var client = new client_mod.Client(info, ['noisyChannel'], 'password');
     client.start('server', 'mechaoperator', {});
     // we don't mock the server, which supplies the nick
@@ -42,11 +44,13 @@ var testSays = function(client, to, messages, clock) {
 
 describe('main', function() {
     var client = null;
+    var info = null;
 
     beforeEach(function() {
         var date = new Date(0);
         this.clock = sinon.useFakeTimers(date);
-        client = getClient();
+        info = getInfo();
+        client = getClient(info);
     });
     afterEach(function() {
         this.clock.restore();
@@ -119,83 +123,27 @@ describe('main', function() {
             });
         });
         describe('peerStatus', function() {
-            describe('empty', function() {            
-                it('should provide an empty peer status', function() {
-                    client.channelMessage('from', 'to', '!peerstatus', 'message');
-                    testSays(
-                        client,
-                        'to',
-                        ["Peer statuses:",
-                         "655(taylor st) null December 31, 1969 4:00 PM",
-                         "610(crossclinton) null December 31, 1969 4:00 PM",
-                         "620(souwester) null December 31, 1969 4:00 PM",
-                         "630(ypsi) null December 31, 1969 4:00 PM",
-                         "640(killingsworth st) null December 31, 1969 4:00 PM",
-                         "645(paz) null December 31, 1969 4:00 PM",
-                         "615(robotron) null December 31, 1969 4:00 PM",
-                         "667(oskar indoors) null December 31, 1969 4:00 PM",
-                         "668(oskar curbside) null December 31, 1969 4:00 PM",
-                         "670(r2d2) null December 31, 1969 4:00 PM",
-                         "680(xnor) null December 31, 1969 4:00 PM",
-                         "695(hoyt) null December 31, 1969 4:00 PM"],
-                        this.clock);
-                });
+            it('should say peer status lines', function() {
+                info.peerStatus = sinon.fake.returns(["foo", "bar"]);
+                client.channelMessage('from', 'to', '!peerstatus', 'message');
+                testSays(
+                    client,
+                    'to',
+                    ["foo", "bar"],
+                    this.clock);
             });
         });
         describe('peerStatusBad', function() {
-            describe('empty', function() {            
-                it('should provide an empty peer status', function() {
-                    client.channelMessage('from', 'to', '!peerstatusbad', 'message');
-                    testSays(
-                        client,
-                        'to',
-                        ["Peer statuses:",
-                         "655(taylor st) null December 31, 1969 4:00 PM",
-                         "610(crossclinton) null December 31, 1969 4:00 PM",
-                         "620(souwester) null December 31, 1969 4:00 PM",
-                         "630(ypsi) null December 31, 1969 4:00 PM",
-                         "640(killingsworth st) null December 31, 1969 4:00 PM",
-                         "645(paz) null December 31, 1969 4:00 PM",
-                         "615(robotron) null December 31, 1969 4:00 PM",
-                         "667(oskar indoors) null December 31, 1969 4:00 PM",
-                         "668(oskar curbside) null December 31, 1969 4:00 PM",
-                         "670(r2d2) null December 31, 1969 4:00 PM",
-                         "680(xnor) null December 31, 1969 4:00 PM",
-                         "695(hoyt) null December 31, 1969 4:00 PM"],
-                        this.clock);
-                });
+            it('should say peer status lines', function() {
+                info.peerStatusBad = sinon.fake.returns(["foo", "bar"]);
+                client.channelMessage('from', 'to', '!peerstatusbad', 'message');
+                testSays(
+                    client,
+                    'to',
+                    ["foo", "bar"],
+                    this.clock);
             });
-            describe('populated', function() {
-                it('should provide a populated peer status', function() {
-                    client.peerStatusAction('SIP/668', 'Unreachable');
-                    this.clock.tick(1000 * 60 * 2);
-                    client.peerStatusAction('SIP/668', 'Registered');
-                    this.clock.tick(1000 * 60 * 2);
-                    client.peerStatusAction('SIP/669', 'Registered');
-                    this.clock.tick(1000 * 60 * 2);
-                    client.peerStatusAction('SIP/669', 'Unreachable');
-                    this.clock.tick(1000 * 60 * 2);
-                    client.peerStatusAction('SIP/670', 'Unreachable');
-                    client.channelMessage('from', 'to', '!peerstatusbad', 'message');
-                    testSays(
-                        client,
-                        'to',
-                        ["Peer statuses:",
-                         "670(r2d2) Unreachable December 31, 1969 4:08 PM",
-                         "645(paz) null December 31, 1969 4:00 PM",
-                         "620(souwester) null December 31, 1969 4:00 PM",
-                         "630(ypsi) null December 31, 1969 4:00 PM",
-                         "640(killingsworth st) null December 31, 1969 4:00 PM",
-                         "615(robotron) null December 31, 1969 4:00 PM",
-                         "655(taylor st) null December 31, 1969 4:00 PM",
-                         "667(oskar indoors) null December 31, 1969 4:00 PM",
-                         "610(crossclinton) null December 31, 1969 4:00 PM",
-                         "680(xnor) null December 31, 1969 4:00 PM",
-                         "695(hoyt) null December 31, 1969 4:00 PM"],
-                        this.clock);
-                });
-            });
-        });            
+        });
     });
     describe('nick hails in channel', function() {
         describe('unknown', function() {
