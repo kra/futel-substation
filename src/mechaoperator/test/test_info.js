@@ -103,7 +103,15 @@ describe('main', function() {
                               '670(r2d2) November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
                               '680(xnor) November 16, 2016 10:35 AM outgoing-ivr',
                               '667(oskar indoors) November 15, 2016 11:34 PM outgoing-ivr',
-                              '690(detroit bus co) November 14, 2016 4:20 PM wildcard-line'
+                              '690(detroit bus co) November 14, 2016 4:20 PM wildcard-line',
+                              '695(hoyt) null undefined',
+                              '615(robotron) null undefined',
+                              '645(paz) null undefined',
+                              '640(killingsworth st) null undefined',
+                              '630(ypsi) null undefined',
+                              '625(upright) null undefined',
+                              '620(souwester) null undefined',
+                              '610(crossclinton) null undefined'
                             ]);
                         done();
                     });

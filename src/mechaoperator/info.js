@@ -112,7 +112,11 @@ Info.prototype.prettyExtensionString = function(str) {
 Info.prototype.metricToString = function(metric) {
     var self = this;
     formatTimestamp = function(dateString) {
-        return moment(dateString).format('LLL');
+        if (dateString) {
+            return moment(dateString).format('LLL');
+        } else {
+            return dateString;
+        }
     }
     return self.prettyExtensionString(metric.channel_extension) + " " + formatTimestamp(metric.timestamp) + " " + metric.name;
 }

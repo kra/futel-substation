@@ -98,8 +98,17 @@ var get_latest_events = function(dbconn, extension, events, limit) {
     
     query = query + " ORDER BY timestamp DESC LIMIT ?";
     params.push(limit);
-    return Q.fcall(db_all(dbconn), query, params)
+    return Q.fcall(db_all(dbconn), query, params);
 };
+
+var wrapped_get_latest_events = function(dbconn, extension, events, limit) {
+    // a clumsy way to return a list of one fake row if there are no results
+    return get_latest_events(dbconn, extension, events, limit).then(function(row) {
+        if (!row.length) {
+            return [{channel_extension: extension, timestamp: null }];
+        } else { return row };
+    });
+}
 
 var latest_events = function(dbFileName, extensions, callback) {
     var db = new sqlite3.Database(dbFileName);
@@ -109,17 +118,19 @@ var latest_events = function(dbFileName, extensions, callback) {
         return Q.all(
             extensions.map(
                 function(extension) {
-                    return get_latest_events(db, extension, null, 1); }));
+                    return wrapped_get_latest_events(db, extension, null, 1); }));
     }).then(function(rows) {
         db.close();
         return rows;
     }).then(function(rows) {
         rows = rows.map(function(r) { return r.pop(); });
-        // we used a janky query per extension, ignore those with no results
-        rows = rows.filter(function(result) { return result != null; });
         var compare = function(a, b) {
-            if (a.timestamp < b.timestamp) {
+            if (a.timestamp == null) {
                 return -1;
+            } else if (a.timestamp < b.timestamp) {
+                return -1;
+            } else if (b.timestamp == null) {
+                return 1;
             } else if (a.timestamp > b.timestamp) {
                 return 1;
             } else {
