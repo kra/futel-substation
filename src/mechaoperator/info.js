@@ -12,7 +12,6 @@ var defaultExtensions = {
     '640': 'killingsworth st',
     '645': 'paz',
     '655': 'taylor st',
-    '667': 'oskar indoors',
     '668': 'oskar curbside',
     '670': 'r2d2',
     '680': 'xnor',
