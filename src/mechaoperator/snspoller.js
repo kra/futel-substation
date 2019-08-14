@@ -72,9 +72,9 @@ function Poller(sqsUrl, awsAkey, awsSecret, eventHostname, client) {
     var confbridgeJoinAction = function(body) {
         client.confbridgeJoinAction();
     };
-    var confbridgeLeaveAction = function(body) {
-        client.confbridgeLeaveAction();
-    };
+    //var confbridgeLeaveAction = function(body) {
+    //    client.confbridgeLeaveAction();
+    //};
     var peerStatusAction = function(body) {
         // Tell info to update status for peer in given message body.
         client.peerStatusAction(body.event.Peer, body.event.PeerStatus);
@@ -82,7 +82,7 @@ function Poller(sqsUrl, awsAkey, awsSecret, eventHostname, client) {
     
     var pollerEventMap = {
         'ConfbridgeJoin': confbridgeJoinAction,
-        'ConfbridgeLeave': confbridgeLeaveAction,
+        //'ConfbridgeLeave': confbridgeLeaveAction,
         'PeerStatus': peerStatusAction,
         'defaultEventAction': defaultEventAction,
     };

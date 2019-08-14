@@ -92,9 +92,9 @@ Client.prototype.confbridgeJoinAction = function() {
     this.noisySay('Voice conference joined - 503 HOT 1337');
 };
 
-Client.prototype.confbridgeLeaveAction = function() {
-    this.noisySay('Voice conference left');
-};
+//Client.prototype.confbridgeLeaveAction = function() {
+//    this.noisySay('Voice conference left');
+//};
 
 Client.prototype.hi = function(self, from, to, text, message) {
     self.sayOrSay(from, to, 'Hi ' + from + '!');    
