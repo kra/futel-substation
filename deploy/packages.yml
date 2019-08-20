@@ -1,4 +1,8 @@
 ---
+- name: update yum
+  yum:
+    name: "*"
+    state: latest
 - name: copy epel rpm
   copy:
     src: src/epel-release-latest-7.noarch.rpm 
@@ -9,8 +13,7 @@
     state: present
 - name: install yum packages
   yum:
-    name: "{{ item }}"
+    name:
+      - supervisor  
+      - nodejs
     state: present
-  with_items:
-    - supervisor  
-    - nodejs
