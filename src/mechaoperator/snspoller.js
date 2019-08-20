@@ -70,7 +70,8 @@ function Poller(sqsUrl, awsAkey, awsSecret, eventHostname, client) {
     var defaultEventAction = function(body) {
     };
     var confbridgeJoinAction = function(body) {
-        client.confbridgeJoinAction();
+        //client.confbridgeJoinAction();
+        client.confbridgeJoinAction(body.event.BridgeNumChannels);
     };
     //var confbridgeLeaveAction = function(body) {
     //    client.confbridgeLeaveAction();

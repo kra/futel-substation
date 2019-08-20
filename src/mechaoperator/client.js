@@ -88,8 +88,8 @@ Client.prototype.peerStatusBad = function(self, from, to, text, message) {
     self.info.peerStatusBad().forEach(function(line) {self.sayOrSay(from, to, line);});    
 };
 
-Client.prototype.confbridgeJoinAction = function() {
-    this.noisySay('Voice conference joined - 503 HOT 1337');
+Client.prototype.confbridgeJoinAction = function(num_channels) {
+    this.noisySay(`Voice conference joined ${num_channels} - 503 HOT 1337`);
 };
 
 //Client.prototype.confbridgeLeaveAction = function() {
