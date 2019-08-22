@@ -89,7 +89,9 @@ Client.prototype.peerStatusBad = function(self, from, to, text, message) {
 };
 
 Client.prototype.confbridgeJoinAction = function(num_channels) {
-    this.noisySay(`Voice conference joined ${num_channels} - 503 HOT 1337`);
+    if (num_channels > 1) {
+        this.noisySay(`Voice conference population ${num_channels} - 503 HOT 1337`);
+    }
 };
 
 //Client.prototype.confbridgeLeaveAction = function() {
