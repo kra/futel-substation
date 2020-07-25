@@ -305,8 +305,7 @@ Client.prototype.substrings = function(from, text) {
             'NICE', 'NIIICE', 'NIIIIIICE'];
         return sample(sayings);
     };
-    responses['error'] = sayError;
-    
+    responses['nice'] = sayNice;
 
     for (var key in responses) {
         if (stringIn(key, text)) {
