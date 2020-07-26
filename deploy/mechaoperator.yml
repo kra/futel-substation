@@ -5,8 +5,8 @@
 - name: copy mechaoperator src
   copy:
     src: src/mechaoperator
-    dest: "{{ basedir }}/futel/src"
+    dest: "/opt/futel/src"
 - name: copy mechaoperator conf with secrets
   template:
     src: src/mechaoperator/secrets.js.j2
-    dest: "{{ basedir }}/futel/src/mechaoperator/secrets.js"
+    dest: "/opt/futel/src/mechaoperator/secrets.js"

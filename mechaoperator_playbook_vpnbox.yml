@@ -6,13 +6,10 @@
     ansible_port: 42422
     ansible_ssh_private_key_file: conf/id_rsa_vpnbox
   tasks:
-    - name: foo
-      set_fact:
-        basedir: "{{ basedir|default(\"/opt\", true) }}"
-    # assume packages.yml is done
+    # assume packages is done - we aren't root
     # - include: deploy/packages.yml
-    - include: deploy/filesystem.yml basedir={{ basedir }}
-    - include: deploy/npm.yml basedir={{ basedir }}
-    - include: deploy/backup_mechaoperator.yml basedir={{ basedir }}
-    - include: deploy/mechaoperator.yml basedir={{ basedir }}
-    - include: deploy/helpers.yml basedir={{ basedir }}
+    - include: deploy/filesystem.yml
+    - include: deploy/npm.yml
+    - include: deploy/backup_mechaoperator.yml
+    - include: deploy/mechaoperator.yml
+    - include: deploy/helpers.yml

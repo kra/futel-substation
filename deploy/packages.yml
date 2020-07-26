@@ -1,20 +1,19 @@
 ---
+# distro package setup and installation
 - name: update yum
   yum:
     name: "*"
     state: latest
-- name: copy epel rpm
-  copy:
-    src: src/epel-release-latest-7.noarch.rpm 
-    dest: /tmp/epel-release-latest-7.noarch.rpm 
-- name: install epel rpm
+- name: install epel-release yum package
   yum:
-    name: /tmp/epel-release-latest-7.noarch.rpm
+    name: epel-release
     state: present
 - name: install yum packages
   yum:
-    name:
-      - gcc-c++
-      - supervisor  
-      - nodejs
+    name: "{{ item }}"
     state: present
+  with_items:    
+    - gcc-c++
+    - supervisor  
+    - nodejs
+

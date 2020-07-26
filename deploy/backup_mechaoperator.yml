@@ -5,30 +5,30 @@
 - name: copy ssh private key
   template:
     src: src/etc/ssh/backup_id_rsa.j2
-    dest: "{{ basedir }}/futel/etc/ssh/backup_id_rsa"
+    dest: "/opt/futel/etc/ssh/backup_id_rsa"
 - name: update ssh private key perms
   file:
-    path: "{{ basedir }}/futel/etc/ssh/backup_id_rsa"
+    path: "/opt/futel/etc/ssh/backup_id_rsa"
     mode: "go-rwx"
 - name: copy backup src
   copy:
     src: src/bin
-    dest: "{{ basedir }}/futel"
+    dest: "/opt/futel"
 - name: make backup scripts executable
   file:
     path: "{{ item }}"
     mode: "u+x"
   with_items:
-    - "{{ basedir }}/futel/bin/backup_mechaoperator.sh"
-    - "{{ basedir }}/futel/bin/stats-futel-prod.sh"
-    - "{{ basedir }}/futel/bin/write_stats.py"
-    - "{{ basedir }}/futel/bin/create_stats_table.py"    
+    - "/opt/futel/bin/backup_mechaoperator.sh"
+    - "/opt/futel/bin/stats-futel-prod.sh"
+    - "/opt/futel/bin/write_stats.py"
+    - "/opt/futel/bin/create_stats_table.py"    
 - name: set up sqlite schema
-  command: "{{ basedir }}/futel/bin/create_stats_table.py {{ basedir }}/futel/var/spool/stats/prod/metrics.db"
+  command: "/opt/futel/bin/create_stats_table.py /opt/futel/var/spool/stats/prod/metrics.db"
   args:
-    creates: "{{ basedir }}/futel/var/spool/stats/prod/metrics.db"
+    creates: "/opt/futel/var/spool/stats/prod/metrics.db"
 - name: create cron job
   cron:
     name: "prod backup"
     minute: "*/5"
-    job: "{{ basedir }}/futel/bin/backup_mechaoperator.sh"
+    job: "/opt/futel/bin/backup_mechaoperator.sh"

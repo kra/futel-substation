@@ -4,7 +4,7 @@
     name: "{{ item.name }}"
     version: "{{ item.version }}"
     state: present
-    path: "{{ basedir }}/futel/src/mechaoperator"
+    path: "/opt/futel/src/mechaoperator"
     # XXX we should not be installing as root
     unsafe_perm: yes
   with_items:
