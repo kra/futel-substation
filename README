@@ -15,6 +15,7 @@ Set up virtualbox
 execute README.virtualbox
 
 ## Deploy mechaoperator to vpnbox-prod-foo
+note: update deploy/hosts if deploying to vpnbox-prod-bar
 
 # have /opt/futel owned by futel:futel
 # have deploy/packages.yml installed
