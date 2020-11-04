@@ -337,7 +337,7 @@ Client.prototype.surviveSinceThrottle = function(channel) {
     // Return true if we survive throttling based on time
     if (this.throttleDates[channel] === undefined) {
         // no previous throttle, reset and survive
-        this.resetSinceThrottle(channel);
+        this.throttleDates[channel] = new Date();
         return true;
     }
     if ((new Date() - this.throttleDates[channel]) < timeThrottleMilliseconds) {
@@ -345,12 +345,8 @@ Client.prototype.surviveSinceThrottle = function(channel) {
         return false;
     }
     // reset and survive
-    this.resetSinceThrottle(channel);
-    return true;
-};
-
-Client.prototype.resetSinceThrottle = function(channel) {
     this.throttleDates[channel] = new Date();
+    return true;
 };
 
 Client.prototype.surviveContentThrottle = function(channel, message) {
