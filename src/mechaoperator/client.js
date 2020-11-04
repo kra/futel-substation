@@ -17,6 +17,8 @@ function Client(info, noisyChannels, botPassword) {
     this.noisyChannels = noisyChannels;
     this.botPassword = botPassword;
     this.says = new Map();
+    this.throttleConferenceDate = null;
+    this.throttleConferenceNum = 0;
     this.throttleDates = {};
     this.throttleContents = {};    
 }
@@ -331,6 +333,25 @@ Client.prototype.exps = function(from, text) {
          }
          return null;
      }).find(function (element) { return element; });
+};
+
+Client.prototype.surviveConferenceThrottle = function(num) {
+    // Return true if we survive throttling based on time
+    if (this.throttleConferenceDate === null) {
+        // no previous throttle, reset and survive
+        this.throttleConferenceDate = new Date();
+        return true;
+    }
+    if ((new Date() - this.throttleConferenceDate) < timeThrottleMilliseconds) {
+        if (num <= this.surviveConferenceNum) {
+            // last entry is too recent, do not survive time throttle
+            return false;
+        }
+    }
+    // reset and survive
+    this.throttleConferenceDate = new Date();
+    this.throttleConferenceNum = num;
+    return true;
 };
 
 Client.prototype.surviveSinceThrottle = function(channel) {
