@@ -4,6 +4,8 @@ var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
 var defaultExtensions = {
+    '515': 'central st',
+    '515': 'breckenridge st',    
     '610': 'crossclinton',
     '615': 'robotron',
     '620': 'souwester',
@@ -16,7 +18,6 @@ var defaultExtensions = {
     '668': 'oskar curbside',
     '670': 'r2d2',
     '680': 'xnor',
-    '685': 'breckenridge st',    
     '690': 'detroit bus co',    
     '695': 'hoyt'
 };

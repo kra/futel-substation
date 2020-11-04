@@ -24,6 +24,7 @@ describe('main', function() {
                 assert.deepStrictEqual(
                     info.peerStatus(),
                     [ 'Peer statuses:',
+                      '515(breckenridge st) null December 31, 1969 4:00 PM',
                       "610(crossclinton) null December 31, 1969 4:00 PM",
                       "615(robotron) null December 31, 1969 4:00 PM",
                       "620(souwester) null December 31, 1969 4:00 PM",
@@ -36,7 +37,6 @@ describe('main', function() {
                       '668(oskar curbside) null December 31, 1969 4:00 PM',
                       '670(r2d2) null December 31, 1969 4:00 PM',
                       '680(xnor) null December 31, 1969 4:00 PM',
-                      '685(breckenridge st) null December 31, 1969 4:00 PM',
                       "690(detroit bus co) null December 31, 1969 4:00 PM",
                       '695(hoyt) null December 31, 1969 4:00 PM']);
             });
@@ -58,6 +58,7 @@ describe('main', function() {
                     ['Peer statuses:',
                      '640(killingsworth st) Registered December 31, 1969 4:08 PM',
                      '670(r2d2) Registered December 31, 1969 4:06 PM',
+                     '515(breckenridge st) null December 31, 1969 4:00 PM',
                      '610(crossclinton) null December 31, 1969 4:00 PM',
                      '615(robotron) null December 31, 1969 4:00 PM',
                      '620(souwester) null December 31, 1969 4:00 PM',
@@ -68,7 +69,6 @@ describe('main', function() {
                      "660(open signal) null December 31, 1969 4:00 PM",
                      '668(oskar curbside) Registered December 31, 1969 4:00 PM',
                      '680(xnor) null December 31, 1969 4:00 PM',
-                     '685(breckenridge st) null December 31, 1969 4:00 PM',
                      "690(detroit bus co) null December 31, 1969 4:00 PM",
                      '695(hoyt) null December 31, 1969 4:00 PM']);
             });
@@ -105,6 +105,7 @@ describe('main', function() {
                               '670(r2d2) November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
                               '680(xnor) November 16, 2016 10:35 AM outgoing-ivr',
                               '690(detroit bus co) November 14, 2016 4:20 PM wildcard-line',
+                              '515(breckenridge st) null undefined',
                               '610(crossclinton) null undefined',
                               '615(robotron) null undefined',
                               '620(souwester) null undefined',
@@ -113,7 +114,6 @@ describe('main', function() {
                               '640(killingsworth st) null undefined',
                               '645(paz) null undefined',
                               '660(open signal) null undefined',
-                              '685(breckenridge st) null undefined',
                               '695(hoyt) null undefined'
                             ]);
                         done();
