@@ -70,14 +70,12 @@ Info.prototype.peerStatusStrings = function(peerStatuses, filterStatuses) {
 
 Info.prototype.peerStatus = function() {
     out = [];    
-    out.push('Peer statuses:');
     this.peerStatusStrings(this.peerStatuses).forEach(function(line) {out.push(line);});
     return out;
 };
 
 Info.prototype.peerStatusBad = function() {
     out = []
-    out.push('Peer statuses:');
     this.peerStatusStrings(this.peerStatuses, ['Registered', 'Reachable']).forEach(function(line) {out.push(line);});
     return out;
 };
@@ -85,7 +83,6 @@ Info.prototype.peerStatusBad = function() {
 Info.prototype.reportStats = function(days, rows) {
     rows = rows.map(function (row) { return row.name + ":" + row.count; });
     out = [];
-    out.push('most frequent events last ' + days + ' days');
     out.push(rows.join(' '));
     return out;
 }
@@ -129,7 +126,6 @@ Info.prototype.reportLatest = function(results) {
         return self.metricToString(result);
     });
     out = [];
-    out.push("latest channel events");
     out = out.concat(results);    
     return out;
 };
@@ -156,7 +152,6 @@ Info.prototype.reportRecentBad = function(results) {
         return self.metricToString(result);
     });
     out = [];
-    out.push("recent bad events");
     out = out.concat(results);
     return out;
 };

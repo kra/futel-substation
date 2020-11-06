@@ -129,7 +129,7 @@ describe('main', function() {
                 testSays(
                     client,
                     'to',
-                    ["foo", "bar"],
+                    ["Peer statuses:", "foo", "bar"],
                     this.clock);
             });
         });
@@ -140,7 +140,7 @@ describe('main', function() {
                 testSays(
                     client,
                     'to',
-                    ["foo", "bar"],
+                    ["Peer statuses:", "foo", "bar"],
                     this.clock);
             });
         });

@@ -83,10 +83,12 @@ Client.prototype.peerStatusAction = function(peer, status) {
 };
 
 Client.prototype.peerStatus = function(self, from, to, text, message) {
+    self.sayOrSay(from, to, 'Peer statuses:');
     self.info.peerStatus().forEach(function(line) {self.sayOrSay(from, to, line);});
 };
 
 Client.prototype.peerStatusBad = function(self, from, to, text, message) {
+    self.sayOrSay(from, to, 'Peer statuses:');    
     self.info.peerStatusBad().forEach(function(line) {self.sayOrSay(from, to, line);});    
 };
 
@@ -163,6 +165,7 @@ Client.prototype.stats = function(self, from, to, text, message) {
     var args = self.textToArgs(self, text);
     var days = args[0];
     var extension = args[1];
+    self.sayOrSay(from, to, 'most frequent events last ' + days + ' days');  
     self.info.stats(
         days,
         extension,
@@ -175,6 +178,7 @@ Client.prototype.latest = function(self, from, to, text, message) {
     var args = self.textToArgs(self, text);
     var days = args[0];         // XXX ignored
     var extension = args[1];
+    self.sayOrSay(from, to, "latest channel events");
     self.info.latest(
         extension,
         function(result) {
@@ -183,6 +187,7 @@ Client.prototype.latest = function(self, from, to, text, message) {
 };
 
 Client.prototype.recentBad = function(self, from, to, text, message) {
+    self.sayOrSay(from, to, "recent bad events");
     self.info.recentBad(
         function(result) {
             result.map(function (line) { self.sayOrSay(from, to, line); });

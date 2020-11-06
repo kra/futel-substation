@@ -23,8 +23,7 @@ describe('main', function() {
             it('should provide an empty peer status', function() {
                 assert.deepStrictEqual(
                     info.peerStatus(),
-                    [ 'Peer statuses:',
-                      '515(breckenridge st) null December 31, 1969 4:00 PM',
+                    [ '515(breckenridge st) null December 31, 1969 4:00 PM',
                       "610(crossclinton) null December 31, 1969 4:00 PM",
                       "615(robotron) null December 31, 1969 4:00 PM",
                       "620(souwester) null December 31, 1969 4:00 PM",
@@ -55,8 +54,7 @@ describe('main', function() {
                 info.peerStatusAction('SIP/640', 'Registered');
                 assert.deepStrictEqual(
                     info.peerStatus(),
-                    ['Peer statuses:',
-                     '640(killingsworth st) Registered December 31, 1969 4:08 PM',
+                    ['640(killingsworth st) Registered December 31, 1969 4:08 PM',
                      '670(r2d2) Registered December 31, 1969 4:06 PM',
                      '515(breckenridge st) null December 31, 1969 4:00 PM',
                      '610(crossclinton) null December 31, 1969 4:00 PM',
@@ -81,8 +79,7 @@ describe('main', function() {
                     assert.equal(
                         JSON.stringify(result),
                         JSON.stringify(
-                            [ 'recent bad events',
-                              'voipms November 16, 2016 3:18 PM incoming-dialstatus-CONGESTION',
+                            [ 'voipms November 16, 2016 3:18 PM incoming-dialstatus-CONGESTION',
                               'voipms November 15, 2016 3:19 PM incoming-dialstatus-CONGESTION',
                               'voipms November 15, 2016 2:02 AM incoming-dialstatus-CONGESTION',
                               'voipms November 15, 2016 1:51 AM incoming-dialstatus-CONGESTION',
@@ -99,8 +96,7 @@ describe('main', function() {
                     function(result) {
                         assert.deepStrictEqual(
                             result,
-                            [ 'latest channel events',
-                              '655(taylor st) November 16, 2016 9:41 PM 911-9',
+                            [ '655(taylor st) November 16, 2016 9:41 PM 911-9',
                               '668(oskar curbside) November 16, 2016 5:10 PM macro-dial',
                               '670(r2d2) November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
                               '680(xnor) November 16, 2016 10:35 AM outgoing-ivr',
@@ -128,8 +124,7 @@ describe('main', function() {
                         assert.equal(
                             JSON.stringify(result),
                             JSON.stringify(
-                                [ 'latest channel events',
-                                  '668(oskar curbside) November 16, 2016 5:10 PM macro-dial' ]));
+                                [ '668(oskar curbside) November 16, 2016 5:10 PM macro-dial' ]));
                         done();
                     });
             });
