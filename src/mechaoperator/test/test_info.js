@@ -94,7 +94,7 @@ describe('main', function() {
                 info.latest(
                     null,
                     function(result) {
-                        assert.deepStrictEqual(
+                        assert.deepEqual(
                             result,
                             [ '655(taylor st) November 16, 2016 9:41 PM 911-9',
                               '668(oskar curbside) November 16, 2016 5:10 PM macro-dial',
@@ -121,10 +121,9 @@ describe('main', function() {
                 info.latest(
                     '668',
                     function(result) {
-                        assert.equal(
-                            JSON.stringify(result),
-                            JSON.stringify(
-                                [ '668(oskar curbside) November 16, 2016 5:10 PM macro-dial' ]));
+                        assert.deepEqual(
+                            result,
+                            ['668(oskar curbside) November 16, 2016 5:10 PM macro-dial']);
                         done();
                     });
             });
