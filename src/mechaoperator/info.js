@@ -169,7 +169,7 @@ Info.prototype.recentBad = function(callback) {
         });
 };
 
-// return true if date is older than yesterday
+// return true if timestamp of result is older than yesterday
 Info.prototype.filterDate = function(result) {
     result = new Date(result.timestamp);
     yesterday = new Date();
@@ -177,8 +177,8 @@ Info.prototype.filterDate = function(result) {
     return yesterday > result
 };
 
-Info.prototype.health = function(extension, callback) {
-
+// output most recent bad event from extension
+Info.prototype.recentBadHealth = function(extension, callback) {
     var self = this;
     if (extension !== null) {
         var extensions = [extension];

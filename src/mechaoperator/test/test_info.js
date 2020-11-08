@@ -129,12 +129,12 @@ describe('main', function() {
             });
         });
     });
-    describe('health', function() {
+    describe('recentBadHealth', function() {
         describe('all extensions', function() {
             it('should match db population for all extensions when timestamps are old', function(done) {
                 // set clock to more than one day younger than db population timestamps
                 this.clock = sinon.useFakeTimers(new Date("2016-11-19T00:00:00.0000"));
-                info.health(
+                info.recentBadHealth(
                     null,
                     function(result) {
                         assert.deepEqual(
@@ -161,7 +161,7 @@ describe('main', function() {
             it('should match db population for all extensions when timestamps are young', function(done) {
                 // set clock to less than one day older than db population timestamps
                 this.clock = sinon.useFakeTimers(new Date("2016-11-16T17:10:27.637000"));
-                info.health(
+                info.recentBadHealth(
                     null,
                     function(result) {
                         assert.deepEqual(
@@ -186,7 +186,7 @@ describe('main', function() {
             it('should match db population for given extensions when timestamps are old', function(done) {
                 // set clock to more than one day younger than db population timestamps
                 this.clock = sinon.useFakeTimers(new Date("2016-11-19T00:00:00.0000"));
-                info.health(
+                info.recentBadHealth(
                     '668',
                     function(result) {
                         assert.deepEqual(
@@ -198,7 +198,7 @@ describe('main', function() {
             it('should not match db population for given extensions when timestamps are young', function(done) {
                 // set clock to less than one day older than db population timestamps
                 this.clock = sinon.useFakeTimers(new Date("2016-11-16T17:10:27.637000"));
-                info.health(
+                info.recentBadHealth(
                     '668',
                     function(result) {
                         assert.deepEqual(
