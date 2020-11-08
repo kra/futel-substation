@@ -27,7 +27,6 @@ describe('main', function() {
                       "610(crossclinton) null December 31, 1969 4:00 PM",
                       "615(robotron) null December 31, 1969 4:00 PM",
                       "620(souwester) null December 31, 1969 4:00 PM",
-                      "625(upright) null December 31, 1969 4:00 PM",
                       '630(ypsi) null December 31, 1969 4:00 PM',
                       '640(killingsworth st) null December 31, 1969 4:00 PM',
                       "645(paz) null December 31, 1969 4:00 PM",
@@ -36,7 +35,6 @@ describe('main', function() {
                       '668(oskar curbside) null December 31, 1969 4:00 PM',
                       '670(r2d2) null December 31, 1969 4:00 PM',
                       '680(xnor) null December 31, 1969 4:00 PM',
-                      "690(detroit bus co) null December 31, 1969 4:00 PM",
                       '695(hoyt) null December 31, 1969 4:00 PM']);
             });
         });
@@ -60,14 +58,12 @@ describe('main', function() {
                      '610(crossclinton) null December 31, 1969 4:00 PM',
                      '615(robotron) null December 31, 1969 4:00 PM',
                      '620(souwester) null December 31, 1969 4:00 PM',
-                     "625(upright) null December 31, 1969 4:00 PM",
                      '630(ypsi) null December 31, 1969 4:00 PM',
                      "645(paz) null December 31, 1969 4:00 PM",
                      '655(taylor st) null December 31, 1969 4:00 PM',
                      "660(open signal) null December 31, 1969 4:00 PM",
                      '668(oskar curbside) Registered December 31, 1969 4:00 PM',
                      '680(xnor) null December 31, 1969 4:00 PM',
-                     "690(detroit bus co) null December 31, 1969 4:00 PM",
                      '695(hoyt) null December 31, 1969 4:00 PM']);
             });
         });
@@ -100,12 +96,10 @@ describe('main', function() {
                               '668(oskar curbside) November 16, 2016 5:10 PM macro-dial',
                               '670(r2d2) November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
                               '680(xnor) November 16, 2016 10:35 AM outgoing-ivr',
-                              '690(detroit bus co) November 14, 2016 4:20 PM wildcard-line',
                               '515(breckenridge st) null undefined',
                               '610(crossclinton) null undefined',
                               '615(robotron) null undefined',
                               '620(souwester) null undefined',
-                              '625(upright) null undefined',
                               '630(ypsi) null undefined',
                               '640(killingsworth st) null undefined',
                               '645(paz) null undefined',
@@ -143,12 +137,10 @@ describe('main', function() {
                               '668(oskar curbside) November 16, 2016 5:10 PM macro-dial',
                               '670(r2d2) November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
                               '680(xnor) November 16, 2016 10:35 AM outgoing-ivr',
-                              '690(detroit bus co) November 14, 2016 4:20 PM wildcard-line',
                               '515(breckenridge st) null undefined',
                               '610(crossclinton) null undefined',
                               '615(robotron) null undefined',
                               '620(souwester) null undefined',
-                              '625(upright) null undefined',
                               '630(ypsi) null undefined',
                               '640(killingsworth st) null undefined',
                               '645(paz) null undefined',
@@ -166,12 +158,10 @@ describe('main', function() {
                     function(result) {
                         assert.deepEqual(
                             result,
-                            ['690(detroit bus co) November 14, 2016 4:20 PM wildcard-line',
-                             '515(breckenridge st) null undefined',
+                            ['515(breckenridge st) null undefined',
                              '610(crossclinton) null undefined',
                              '615(robotron) null undefined',
                              '620(souwester) null undefined',
-                             '625(upright) null undefined',
                              '630(ypsi) null undefined',
                              '640(killingsworth st) null undefined',
                              '645(paz) null undefined',
