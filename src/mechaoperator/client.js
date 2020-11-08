@@ -186,9 +186,10 @@ Client.prototype.latest = function(self, from, to, text, message) {
         });
 };
 
-Client.prototype.recentBad = function(self, from, to, text, message) {
-    self.sayOrSay(from, to, "recent bad events");
-    self.info.recentBad(
+Client.prototype.recentBadHealth = function(self, from, to, text, message) {
+    self.sayOrSay(from, to, "recent bad health events");
+    self.info.recentBadHealth(
+        null,
         function(result) {
             result.map(function (line) { self.sayOrSay(from, to, line); });
         });
@@ -410,7 +411,7 @@ Client.prototype.wordToCommand = function(word) {
         'hi': this.hi,
         'stats': this.stats,
         'latest': this.latest,
-        'recentbad': this.recentBad,
+        'recentbad': this.recentBadHealth,
         'peerstatus': this.peerStatus,
         'peerstatusbad': this.peerStatusBad        
     };
