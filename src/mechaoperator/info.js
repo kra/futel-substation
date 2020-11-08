@@ -4,22 +4,22 @@ var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
 var defaultExtensions = {
-    '515': 'central st',
-    '515': 'breckenridge st',    
-    '610': 'crossclinton',
-    '615': 'robotron',
-    '620': 'souwester',
-    //'625': 'upright',
-    '630': 'ypsi',
-    '640': 'killingsworth st',
-    '645': 'paz',
-    '655': 'taylor st',
-    '660': 'open signal',
-    '668': 'oskar curbside',
-    '670': 'r2d2',
-    '680': 'xnor',
-    //'690': 'detroit bus co',    
-    '695': 'hoyt'
+    '515': {'name': 'central st'},
+    '515': {'name': 'breckenridge st'},
+    '610': {'name': 'crossclinton'},
+    '615': {'name': 'robotron'},
+    '620': {'name': 'souwester'},
+    //'625': {'name': 'upright'},
+    '630': {'name': 'ypsi'},
+    '640': {'name': 'killingsworth st'},
+    '645': {'name': 'paz'},
+    '655': {'name': 'taylor st'},
+    '660': {'name': 'open signal'},
+    '668': {'name': 'oskar curbside'},
+    '670': {'name': 'r2d2'},
+    '680': {'name': 'xnor'},
+    //'690': {'name': 'detroit bus co'},
+    '695': {'name': 'hoyt'}
 };
 
 function Info(dbFileName) {
@@ -104,7 +104,7 @@ Info.prototype.prettyExtensionString = function(str) {
     if (defaultExtensions[str] === undefined) {
         return str;
     } else {
-        return str + '(' + defaultExtensions[str] + ')';
+        return str + '(' + defaultExtensions[str]['name'] + ')';
     }
 };
 
