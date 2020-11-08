@@ -108,16 +108,17 @@ Info.prototype.prettyExtensionString = function(str) {
     }
 };
 
+Info.prototype.formatTimestamp = function(timestampString) {
+    if (timestampString) {
+        return moment(timestampString).format('LLL');
+    } else {
+        return timestampString;
+    }
+}
+
 Info.prototype.metricToString = function(metric) {
     var self = this;
-    formatTimestamp = function(dateString) {
-        if (dateString) {
-            return moment(dateString).format('LLL');
-        } else {
-            return dateString;
-        }
-    }
-    return self.prettyExtensionString(metric.channel_extension) + " " + formatTimestamp(metric.timestamp) + " " + metric.name;
+    return self.prettyExtensionString(metric.channel_extension) + " " + self.formatTimestamp(metric.timestamp) + " " + metric.name;
 }
 
 Info.prototype.reportLatest = function(results) {
@@ -165,6 +166,40 @@ Info.prototype.recentBad = function(callback) {
         null,
         function(results) {
             callback(self.reportRecentBad(results));
+        });
+};
+
+// return true if date is older than yesterday
+Info.prototype.filterDate = function(result) {
+    result = new Date(result.timestamp);
+    yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return yesterday > result
+};
+
+Info.prototype.health = function(extension, callback) {
+
+    var self = this;
+    if (extension !== null) {
+        var extensions = [extension];
+    } else {
+        var extensions = Object.keys(defaultExtensions);
+    }
+
+    metrics_util.latest_events(
+        self.dbFileName,
+        extensions,
+        function(results) {
+            results = results.filter(function (result) {
+                return (
+                    metrics_util.badEvents.includes(result.name) ||
+                    self.filterDate(result)
+                )
+            });
+            results = results.map(function (result) {
+                return self.metricToString(result);
+            });
+            callback(results);
         });
 };
 

@@ -174,5 +174,6 @@ var recentEvents = function(
 module.exports = {
     frequent_events: frequent_events,
     latest_events: latest_events,
-    recentEvents: recentEvents
+    recentEvents: recentEvents,
+    badEvents: badEvents
 };
