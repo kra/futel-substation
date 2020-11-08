@@ -4,22 +4,22 @@ var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
 var defaultExtensions = {
-    '515': {'name': 'central st'},
-    '515': {'name': 'breckenridge st'},
-    '610': {'name': 'crossclinton'},
-    '615': {'name': 'robotron'},
-    '620': {'name': 'souwester'},
-    //'625': {'name': 'upright'},
-    '630': {'name': 'ypsi'},
-    '640': {'name': 'killingsworth st'},
-    '645': {'name': 'paz'},
-    '655': {'name': 'taylor st'},
-    '660': {'name': 'open signal'},
-    '668': {'name': 'oskar curbside'},
-    '670': {'name': 'r2d2'},
-    '680': {'name': 'xnor'},
-    //'690': {'name': 'detroit bus co'},
-    '695': {'name': 'hoyt'}
+    '515': {'name': 'central st', 'activityAge': 1},
+    '515': {'name': 'breckenridge st', 'activityAge': 1},
+    '610': {'name': 'crossclinton', 'activityAge': 1},
+    '615': {'name': 'robotron', 'activityAge': 1},
+    '620': {'name': 'souwester', 'activityAge': 7},
+    //'625': {'name': 'upright', 'activityAge': 1},
+    '630': {'name': 'ypsi', 'activityAge': 1},
+    '640': {'name': 'killingsworth st', 'activityAge': 1},
+    '645': {'name': 'paz', 'activityAge': 1},
+    '655': {'name': 'taylor st', 'activityAge': 1},
+    '660': {'name': 'open signal', 'activityAge': 1},
+    '668': {'name': 'oskar curbside', 'activityAge': 1},
+    '670': {'name': 'r2d2', 'activityAge': 1},
+    '680': {'name': 'xnor', 'activityAge': 3},
+    //'690': {'name': 'detroit bus co', 'activityAge': 1},
+    '695': {'name': 'hoyt', 'activityAge': 1}
 };
 
 function Info(dbFileName) {
@@ -170,10 +170,10 @@ Info.prototype.recentBad = function(callback) {
 };
 
 // return true if timestamp of result is older than yesterday
-Info.prototype.filterDate = function(result) {
+Info.prototype.filterDate = function(result, days) {
     result = new Date(result.timestamp);
     yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
+    yesterday.setDate(yesterday.getDate() - days);
     return yesterday > result
 };
 
@@ -191,10 +191,11 @@ Info.prototype.recentBadHealth = function(extension, callback) {
         extensions,
         function(results) {
             results = results.filter(function (result) {
+                activityAge = defaultExtensions[result.channel_extension].activityAge
+                activityAge = 1
                 return (
                     metrics_util.badEvents.includes(result.name) ||
-                    self.filterDate(result)
-                )
+                        self.filterDate(result, activityAge))
             });
             results = results.map(function (result) {
                 return self.metricToString(result);
