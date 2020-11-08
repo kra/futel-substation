@@ -9,7 +9,7 @@ var defaultExtensions = {
     '610': 'crossclinton',
     '615': 'robotron',
     '620': 'souwester',
-    '625': 'upright',
+    //'625': 'upright',
     '630': 'ypsi',
     '640': 'killingsworth st',
     '645': 'paz',
@@ -18,7 +18,7 @@ var defaultExtensions = {
     '668': 'oskar curbside',
     '670': 'r2d2',
     '680': 'xnor',
-    '690': 'detroit bus co',    
+    //'690': 'detroit bus co',    
     '695': 'hoyt'
 };
 
