@@ -4,22 +4,22 @@ var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
 var defaultExtensions = {
-    '515': {'name': 'central st', 'activityAge': 1},
-    '515': {'name': 'breckenridge st', 'activityAge': 1},
-    '610': {'name': 'crossclinton', 'activityAge': 1},
-    '615': {'name': 'robotron', 'activityAge': 1},
+    '515': {'name': 'central st', 'activityAge': 2},
+    '515': {'name': 'breckenridge st', 'activityAge': 2},
+    //'610': {'name': 'crossclinton', 'activityAge': 2},
+    '615': {'name': 'robotron', 'activityAge': 2},
     '620': {'name': 'souwester', 'activityAge': 7},
-    //'625': {'name': 'upright', 'activityAge': 1},
-    '630': {'name': 'ypsi', 'activityAge': 1},
-    '640': {'name': 'killingsworth st', 'activityAge': 1},
-    '645': {'name': 'paz', 'activityAge': 1},
-    '655': {'name': 'taylor st', 'activityAge': 1},
-    '660': {'name': 'open signal', 'activityAge': 1},
-    '668': {'name': 'oskar curbside', 'activityAge': 1},
-    '670': {'name': 'r2d2', 'activityAge': 1},
+    //'625': {'name': 'upright', 'activityAge': 2},
+    '630': {'name': 'ypsi', 'activityAge': 2},
+    '640': {'name': 'killingsworth st', 'activityAge': 7},
+    '645': {'name': 'paz', 'activityAge': 2},
+    '655': {'name': 'taylor st', 'activityAge': 2},
+    '660': {'name': 'open signal', 'activityAge': 2},
+    '668': {'name': 'oskar curbside', 'activityAge': 2},
+    '670': {'name': 'r2d2', 'activityAge': 2},
     '680': {'name': 'xnor', 'activityAge': 3},
-    //'690': {'name': 'detroit bus co', 'activityAge': 1},
-    '695': {'name': 'hoyt', 'activityAge': 1}
+    //'690': {'name': 'detroit bus co', 'activityAge': 2},
+    '695': {'name': 'hoyt', 'activityAge': 2}
 };
 
 function Info(dbFileName) {
@@ -192,7 +192,6 @@ Info.prototype.recentBadHealth = function(extension, callback) {
         function(results) {
             results = results.filter(function (result) {
                 activityAge = defaultExtensions[result.channel_extension].activityAge
-                activityAge = 1
                 return (
                     metrics_util.badEvents.includes(result.name) ||
                         self.filterDate(result, activityAge))
