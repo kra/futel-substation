@@ -24,7 +24,6 @@ describe('main', function() {
                 assert.deepStrictEqual(
                     info.peerStatus(),
                     [ '515(breckenridge st) null December 31, 1969 4:00 PM',
-                      "610(crossclinton) null December 31, 1969 4:00 PM",
                       "615(robotron) null December 31, 1969 4:00 PM",
                       "620(souwester) null December 31, 1969 4:00 PM",
                       '630(ypsi) null December 31, 1969 4:00 PM',
@@ -55,7 +54,6 @@ describe('main', function() {
                     ['640(killingsworth st) Registered December 31, 1969 4:08 PM',
                      '670(r2d2) Registered December 31, 1969 4:06 PM',
                      '515(breckenridge st) null December 31, 1969 4:00 PM',
-                     '610(crossclinton) null December 31, 1969 4:00 PM',
                      '615(robotron) null December 31, 1969 4:00 PM',
                      '620(souwester) null December 31, 1969 4:00 PM',
                      '630(ypsi) null December 31, 1969 4:00 PM',
@@ -159,7 +157,6 @@ describe('main', function() {
                         assert.deepEqual(
                             result,
                             ['515(breckenridge st) null undefined',
-                             '610(crossclinton) null undefined',
                              '615(robotron) null undefined',
                              '620(souwester) null undefined',
                              '630(ypsi) null undefined',
