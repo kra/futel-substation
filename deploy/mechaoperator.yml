@@ -2,10 +2,22 @@
 - name: load secrets
   include_vars: "deploy/mechaoperator_secrets.yml"
   no_log: true
+- name: make mechaoperator src directory
+  file:
+    path: /opt/futel/src/mechaoperator
+    state: directory
 - name: copy mechaoperator src
   copy:
-    src: src/mechaoperator
-    dest: "/opt/futel/src"
+    src: "src/mechaoperator/{{ item }}"
+    dest: "/opt/futel/src/mechaoperator"
+  with_items: 
+    - client.js
+    - config.js
+    - info.js
+    - mechaoperator.js
+    - metrics_util.js
+    - monitor.js
+    - snspoller.js
 - name: copy mechaoperator conf with secrets
   template:
     src: src/mechaoperator/secrets.js.j2
