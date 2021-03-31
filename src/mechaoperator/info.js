@@ -4,18 +4,17 @@ var metrics_util = require('./metrics_util');
 var moment = require('moment');
 
 var defaultExtensions = {
-    '515': {'name': 'central st', 'activityAge': 2},
+    '510': {'name': 'central st', 'activityAge': 2},
     '515': {'name': 'breckenridge st', 'activityAge': 2},
+    '530': {'name': 'oskar curbside', 'activityAge': 2},
     //'610': {'name': 'crossclinton', 'activityAge': 2},
     '615': {'name': 'robotron', 'activityAge': 2},
     '620': {'name': 'souwester', 'activityAge': 7},
     //'625': {'name': 'upright', 'activityAge': 2},
     '630': {'name': 'ypsi', 'activityAge': 2},
     '640': {'name': 'killingsworth st', 'activityAge': 7},
-    '645': {'name': 'paz', 'activityAge': 2},
     '655': {'name': 'taylor st', 'activityAge': 2},
     '660': {'name': 'open signal', 'activityAge': 2},
-    '668': {'name': 'oskar curbside', 'activityAge': 2},
     '670': {'name': 'r2d2', 'activityAge': 2},
     '680': {'name': 'xnor', 'activityAge': 3},
     //'690': {'name': 'detroit bus co', 'activityAge': 2},
