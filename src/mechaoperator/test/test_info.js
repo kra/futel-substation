@@ -225,5 +225,43 @@ describe('main', function() {
             });
         });
     });
-
+    describe('health', function() {
+        describe('all extensions', function() {
+            it('should match db population for all extensions', function(done) {
+                info.health(
+                    many_days,
+                    null,
+                    function(result) {
+                        assert.deepEqual(
+                            result,
+                            ['510(central st) 0 0 0',
+                             '515(breckenridge st) 0 0 0',
+                             '530(oskar curbside) 0 0 0',
+                             '615(robotron) 0 0 0',
+                             '620(souwester) 0 0 0',
+                             '630(ypsi) 0 0 0',
+                             '640(killingsworth st) 0 0 0',
+                             '655(taylor st) 274 274 74',
+                             '660(open signal) 0 0 0',
+                             '670(r2d2) 204 204 101',
+                             '680(xnor) 711 710 588',
+                             '695(hoyt) 0 0 0']);
+                        done();
+                    });
+            });
+        });
+        describe('given extension', function() {
+            it('should match db population for given extension', function(done) {
+                info.health(
+                    many_days,                    
+                    '655',
+                    function(result) {
+                        assert.deepEqual(
+                            result,
+                            ['655(taylor st) 274 274 74']);
+                        done();
+                    });
+            });
+        });
+    });
 });

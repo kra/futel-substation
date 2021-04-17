@@ -189,6 +189,7 @@ Info.prototype.recentBadHealth = function(extension, callback) {
         self.dbFileName,
         extensions,
         function(results) {
+            // filter to include only results which are bad or old
             results = results.filter(function (result) {
                 activityAge = defaultExtensions[result.channel_extension] ? defaultExtensions[result.channel_extension].activityAge : null;
                 return (
@@ -199,6 +200,69 @@ Info.prototype.recentBadHealth = function(extension, callback) {
                 return self.metricToString(result);
             });
             callback(results);
+        });
+};
+
+Info.prototype.reportHealth = function(results) {
+    // return array of human readable strings from array of result structures
+    var self = this;
+    results = results.map(
+        function (result) {
+            [extension, rows] = result;
+            return self.prettyExtensionString(extension) + " " + rows.join(' ');
+        });
+    return results;
+}
+
+Info.prototype.health = function(days, extension, callback) {
+    var self = this;
+
+    if (extension !== null) {
+        var extensions = [extension];
+    } else {
+        var extensions = Object.keys(defaultExtensions);
+    }
+
+    rowsToResults = function(results) {
+        // replace arrays of elements with 3-length arrays of counts,
+        results = results.map(
+            function([result, extension]) {
+                result = result.slice(0, 3);
+                result = result.map(function(elt) {return elt.count});
+                // pad with 0
+                result = result.concat([0, 0, 0]);
+                result = result.slice(0, 3);
+                result = [extension, result];
+                return result;
+            });
+        // return arrays with human strings
+        results = self.reportHealth(results);
+        return results;
+    }
+
+    const wait_lines = function(extension) {
+        // curry appropriate metrics_util function for extension into a promise
+        return new Promise(
+            function(resolve) {
+                var callback = function(result) {
+                    // curry extension into the result
+                    resolve([result, extension]);
+                };
+                // days = 2                    // XXX activityAge for ext
+                return metrics_util.frequent_events(
+                    self.dbFileName,
+                    null,
+                    null,
+                    days,
+                    extension,
+                    callback);
+            });
+    }
+    promises = extensions.map(
+        function(extension) { return wait_lines(extension) });
+    Promise.all(promises).then(
+        function(results) {
+            callback(rowsToResults(results));
         });
 };
 
