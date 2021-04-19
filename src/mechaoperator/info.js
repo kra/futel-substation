@@ -190,7 +190,7 @@ Info.prototype.recentBadHealth = function(extension, callback) {
         extensions,
         function(results) {
             results = results.filter(function (result) {
-                activityAge = defaultExtensions[result.channel_extension].activityAge
+                activityAge = defaultExtensions[result.channel_extension] ? defaultExtensions[result.channel_extension].activityAge : null;
                 return (
                     metrics_util.badEvents.includes(result.name) ||
                         self.filterDate(result, activityAge))
