@@ -23,15 +23,15 @@ describe('main', function() {
             it('should provide an empty peer status', function() {
                 assert.deepStrictEqual(
                     info.peerStatus(),
-                    [ '515(breckenridge st) null December 31, 1969 4:00 PM',
-                      "615(robotron) null December 31, 1969 4:00 PM",
-                      "620(souwester) null December 31, 1969 4:00 PM",
+                    [ '510(central st) null December 31, 1969 4:00 PM',
+                      '515(breckenridge st) null December 31, 1969 4:00 PM',
+                      '530(oskar curbside) null December 31, 1969 4:00 PM',
+                      '615(robotron) null December 31, 1969 4:00 PM',
+                      '620(souwester) null December 31, 1969 4:00 PM',
                       '630(ypsi) null December 31, 1969 4:00 PM',
                       '640(killingsworth st) null December 31, 1969 4:00 PM',
-                      "645(paz) null December 31, 1969 4:00 PM",
-                      "655(taylor st) null December 31, 1969 4:00 PM",
-                      "660(open signal) null December 31, 1969 4:00 PM",
-                      '668(oskar curbside) null December 31, 1969 4:00 PM',
+                      '655(taylor st) null December 31, 1969 4:00 PM',
+                      '660(open signal) null December 31, 1969 4:00 PM',
                       '670(r2d2) null December 31, 1969 4:00 PM',
                       '680(xnor) null December 31, 1969 4:00 PM',
                       '695(hoyt) null December 31, 1969 4:00 PM']);
@@ -53,14 +53,14 @@ describe('main', function() {
                     info.peerStatus(),
                     ['640(killingsworth st) Registered December 31, 1969 4:08 PM',
                      '670(r2d2) Registered December 31, 1969 4:06 PM',
+                     '510(central st) null December 31, 1969 4:00 PM',
                      '515(breckenridge st) null December 31, 1969 4:00 PM',
+                     '530(oskar curbside) null December 31, 1969 4:00 PM',
                      '615(robotron) null December 31, 1969 4:00 PM',
                      '620(souwester) null December 31, 1969 4:00 PM',
                      '630(ypsi) null December 31, 1969 4:00 PM',
-                     "645(paz) null December 31, 1969 4:00 PM",
                      '655(taylor st) null December 31, 1969 4:00 PM',
-                     "660(open signal) null December 31, 1969 4:00 PM",
-                     '668(oskar curbside) Registered December 31, 1969 4:00 PM',
+                     '660(open signal) null December 31, 1969 4:00 PM',
                      '680(xnor) null December 31, 1969 4:00 PM',
                      '695(hoyt) null December 31, 1969 4:00 PM']);
             });
@@ -91,15 +91,15 @@ describe('main', function() {
                         assert.deepEqual(
                             result,
                             [ '655(taylor st) November 16, 2016 9:41 PM 911-9',
-                              '668(oskar curbside) November 16, 2016 5:10 PM macro-dial',
                               '670(r2d2) November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
                               '680(xnor) November 16, 2016 10:35 AM outgoing-ivr',
+                              '510(central st) null undefined',
                               '515(breckenridge st) null undefined',
+                              '530(oskar curbside) null undefined',
                               '615(robotron) null undefined',
                               '620(souwester) null undefined',
                               '630(ypsi) null undefined',
                               '640(killingsworth st) null undefined',
-                              '645(paz) null undefined',
                               '660(open signal) null undefined',
                               '695(hoyt) null undefined'
                             ]);
@@ -110,11 +110,11 @@ describe('main', function() {
         describe('given extension', function() {
             it('should match whatever was populated in the metrics db for given extensions', function(done) {
                 info.latest(
-                    '668',
+                    '655',
                     function(result) {
                         assert.deepEqual(
                             result,
-                            ['668(oskar curbside) November 16, 2016 5:10 PM macro-dial']);
+                            ['655(taylor st) November 16, 2016 9:41 PM 911-9']);
                         done();
                     });
             });
@@ -131,14 +131,14 @@ describe('main', function() {
                         assert.deepEqual(
                             result,
                             [ '655(taylor st) November 16, 2016 9:41 PM 911-9',
-                              '668(oskar curbside) November 16, 2016 5:10 PM macro-dial',
                               '670(r2d2) November 16, 2016 1:52 PM outgoing-dialtone-wrapper',
+                              '510(central st) null undefined',
                               '515(breckenridge st) null undefined',
+                              '530(oskar curbside) null undefined',
                               '615(robotron) null undefined',
                               '620(souwester) null undefined',
                               '630(ypsi) null undefined',
                               '640(killingsworth st) null undefined',
-                              '645(paz) null undefined',
                               '660(open signal) null undefined',
                               '695(hoyt) null undefined'
                             ]);
@@ -153,12 +153,13 @@ describe('main', function() {
                     function(result) {
                         assert.deepEqual(
                             result,
-                            ['515(breckenridge st) null undefined',
+                            ['510(central st) null undefined',
+                             '515(breckenridge st) null undefined',
+                             '530(oskar curbside) null undefined',
                              '615(robotron) null undefined',
                              '620(souwester) null undefined',
                              '630(ypsi) null undefined',
                              '640(killingsworth st) null undefined',
-                             '645(paz) null undefined',
                              '660(open signal) null undefined',
                              '695(hoyt) null undefined'
                             ]);
@@ -171,11 +172,11 @@ describe('main', function() {
                 // set clock to more than one day younger than db population timestamps
                 this.clock = sinon.useFakeTimers(new Date("2016-11-19T00:00:00.0000"));
                 info.recentBadHealth(
-                    '668',
+                    '655',
                     function(result) {
                         assert.deepEqual(
                             result,
-                            ['668(oskar curbside) November 16, 2016 5:10 PM macro-dial']);
+                            ['655(taylor st) November 16, 2016 9:41 PM 911-9']);
                         done();
                     });
             });
