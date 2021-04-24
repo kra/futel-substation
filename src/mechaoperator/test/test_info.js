@@ -225,10 +225,10 @@ describe('main', function() {
             });
         });
     });
-    describe('health', function() {
+    describe('recentStats', function() {
         describe('all extensions', function() {
             it('should match db population for all extensions', function(done) {
-                info.health(
+                info.recentStats(
                     many_days,
                     null,
                     function(result) {
@@ -252,7 +252,7 @@ describe('main', function() {
         });
         describe('given extension', function() {
             it('should match db population for given extension', function(done) {
-                info.health(
+                info.recentStats(
                     many_days,                    
                     '655',
                     function(result) {

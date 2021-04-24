@@ -203,7 +203,7 @@ Info.prototype.recentBadHealth = function(extension, callback) {
         });
 };
 
-Info.prototype.reportHealth = function(results) {
+Info.prototype.reportRecentStats = function(results) {
     // return array of human readable strings from array of result structures
     var self = this;
     results = results.map(
@@ -214,7 +214,7 @@ Info.prototype.reportHealth = function(results) {
     return results;
 }
 
-Info.prototype.health = function(days, extension, callback) {
+Info.prototype.recentStats = function(days, extension, callback) {
     var self = this;
 
     if (extension !== null) {
@@ -236,7 +236,7 @@ Info.prototype.health = function(days, extension, callback) {
                 return result;
             });
         // return arrays with human strings
-        results = self.reportHealth(results);
+        results = self.reportRecentStats(results);
         return results;
     }
 
