@@ -114,6 +114,7 @@ Client.prototype.help = function(self, from, to, text, message) {
                 'help get command help',
                 'latest [days] [extension] get latest events',
                 'stats [days] [extension] get event stats',
+                'recentstats [days] [extension] get recent event events',
                 'recentbad get recent events',
                 'peerstatus get recent peer status',
                 'peerstatusbad get recent bad peer status'
@@ -194,7 +195,21 @@ Client.prototype.recentBadHealth = function(self, from, to, text, message) {
             result.map(function (line) { self.sayOrSay(from, to, line); });
         });
 };
-   
+
+Client.prototype.recentStats = function(self, from, to, text, message) {
+
+    var args = self.textToArgs(self, text);
+    var days = args[0];
+    var extension = args[1];
+    self.sayOrSay(from, to, "recent stats");
+    self.info.recentStats(
+        days,
+        extension,
+        function(result) {
+            result.map(function (line) { self.sayOrSay(from, to, line); });
+        });
+};
+
 Client.prototype.errorMessage = function(self, from, to, text, message) {
     self.sayOrSay(from, to, 'Use "help" for help.');
 };

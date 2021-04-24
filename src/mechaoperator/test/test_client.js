@@ -96,6 +96,7 @@ describe('main', function() {
                     'help get command help',
                     'latest [days] [extension] get latest events',
                     'stats [days] [extension] get event stats',
+                    'recentstats [days] [extension] get recent event events',
                     'recentbad get recent events',
                     'peerstatus get recent peer status',
                     'peerstatusbad get recent bad peer status'], this.clock)
