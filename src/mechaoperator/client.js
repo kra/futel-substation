@@ -427,6 +427,7 @@ Client.prototype.wordToCommand = function(word) {
         'stats': this.stats,
         'latest': this.latest,
         'recentbad': this.recentBadHealth,
+        'recentstats': this.recentStats,
         'peerstatus': this.peerStatus,
         'peerstatusbad': this.peerStatusBad        
     };
