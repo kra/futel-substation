@@ -1,9 +1,8 @@
 var info_mod = require('./info');
 var util = require('util');
-// XXX
-var dbFileName = './metrics.db';
-var defaultStatsDays = 60;
 
+var config = require('./cmdlineclientconfig');
+var defaultStatsDays = 60;
 
 var say = function(message) {
     console.log(message);
@@ -67,7 +66,7 @@ var wordToCommand = function(word) {
 };
 
 
-var info = new info_mod.Info(dbFileName);
+var info = new info_mod.Info(config.config.dbFileName);
 
 var args = process.argv;
 args.shift();
