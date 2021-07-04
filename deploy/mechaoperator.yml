@@ -13,6 +13,8 @@
   with_items: 
     - client.js
     - config.js
+    - cmdlineclient.js
+    - cmdlineclientconfig.js
     - info.js
     - mechaoperator.js
     - metrics_util.js

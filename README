@@ -17,10 +17,14 @@ execute README.virtualbox
 ## Deploy mechaoperator to vpnbox-prod-foo
 note: update deploy/hosts if deploying to vpnbox-prod-bar
 
-# have /opt/futel owned by futel:futel
-# have deploy/packages.yml installed
+# have deploy/packages.yml, deploy/filesystem.yml done
 ansible-playbook -i deploy/hosts mechaoperator_playbook_vpnbox.yml --vault-password-file=conf/vault_pass.txt
 
-## Deploy backupbox to eurydice:
+## Deploy cmdlineclient to eurydice
+
+# have deploy/packages.yml, deploy/filesystem.yml done
+ansible-playbook -i deploy/hosts cmdlineclient_playbook_eurydice.yml --vault-password-file=conf/vault_pass.txt
+
+## Deploy backupbox to eurydice
 
 ansible-playbook -i hosts backupbox_playbook.yml --vault-password-file=conf/vault_pass.txt
