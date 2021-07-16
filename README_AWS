@@ -39,4 +39,4 @@ aws_secret_access_key = <value of AWS user access key>
 
 # Test AWS services
 
-view with curl or browser at http://logpublish.s3-website-us-west-2.amazonaws.com/metrics.json
+view with curl or browser at http://logpublish.s3-website-us-west-2.amazonaws.com/metrics-20210531 etc

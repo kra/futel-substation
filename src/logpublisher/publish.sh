@@ -1,3 +1,3 @@
 #!/bin/sh
-./clean.py >metrics.json
+./clean.py
 ./write.py
