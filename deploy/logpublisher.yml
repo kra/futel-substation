@@ -14,5 +14,5 @@
 - name: create cron job
   cron:
     name: "log publisher"
-    minute: "*/7"
+    minute: "*/30"
     job: /opt/futel/src/logpublisher/publish.sh
