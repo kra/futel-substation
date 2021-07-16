@@ -39,4 +39,5 @@ aws_secret_access_key = <value of AWS user access key>
 
 # Test AWS services
 
-view with curl or browser at http://logpublish.s3-website-us-west-2.amazonaws.com/metrics-20210531 etc
+Files are published to http://logpublish.s3-website-us-west-2.amazonaws.com
+Filenames are "metrics" and "metrics-DATE" eg metrics-20210531
