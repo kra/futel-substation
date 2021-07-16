@@ -1,0 +1,10 @@
+---
+- hosts: backupbox
+  become: false
+  vars:
+    ansible_user: futel
+    ansible_ssh_private_key_file: conf/id_rsa_eurydice
+  tasks:
+# assume filesystem is set up already
+#    - include: deploy/filesystem.yml
+    - include: deploy/logpublisher.yml    

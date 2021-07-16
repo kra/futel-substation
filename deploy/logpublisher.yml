@@ -1,0 +1,18 @@
+---
+- name: copy src
+  copy:
+    src: src/logpublisher
+    dest: /opt/futel/src
+- name: make scripts executable
+  file:
+    path: "{{ item }}"
+    mode: "u+x"
+  with_items:
+    - /opt/futel/src/logpublisher/clean.py
+    - /opt/futel/src/logpublisher/publish.sh
+    - /opt/futel/src/logpublisher/write.py
+- name: create cron job
+  cron:
+    name: "log publisher"
+    minute: "*/7"
+    job: /opt/futel/src/logpublisher/publish.sh

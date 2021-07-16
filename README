@@ -27,4 +27,10 @@ ansible-playbook -i deploy/hosts cmdlineclient_playbook_eurydice.yml --vault-pas
 
 ## Deploy backupbox to eurydice
 
-ansible-playbook -i hosts backupbox_playbook.yml --vault-password-file=conf/vault_pass.txt
+ansible-playbook -i deploy/hosts backupbox_playbook.yml --vault-password-file=conf/vault_pass.txt
+
+## Deploy logpublisher to eurydice
+
+XXX update src/logpublisher/config.py
+XXX have pip3 boto package installed
+ansible-playbook -i deploy/hosts logpublisher_playbook_eurydice.yml
