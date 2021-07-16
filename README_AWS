@@ -1,0 +1,42 @@
+## Deploy AWS services
+
+AWS management user is operator@futel.net
+
+# S3 bucket:
+create S3 bucket name logpublish region us-west-2
+turn off block all public access permission
+allow public objects with permissions - edit bucket policy
+"""
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::logpublish/*"
+            ]
+        }
+    ]
+}
+"""
+enable static website hosting with properties - static website hosting
+
+# User and policy:
+create AWS user "logwriter" in IAM ("Identity and Access Management")
+attach AmazonS3FullAccess policy to user
+create access key for AWS user
+(note id and secret)
+
+add credentials to credentials:
+[default]
+aws_access_key_id = <ID of AWS user access key>
+aws_secret_access_key = <value of AWS user access key>
+
+# Test AWS services
+
+view with curl or browser at http://logpublish.s3-website-us-west-2.amazonaws.com/metrics.json
