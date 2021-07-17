@@ -15,6 +15,11 @@ def find_files(directory):
         for filename in files:
             yield (r, filename)
 
-for (directory, filename) in find_files(input_directory):
+paths = find_files(input_directory)
+# Sort and discard all but the latest file.
+paths = sorted(paths)
+paths = [paths.pop()]
+
+for (directory, filename) in paths:
     path = os.path.join(directory, filename)
     _response = s3_client.upload_file(path, bucket, filename)
