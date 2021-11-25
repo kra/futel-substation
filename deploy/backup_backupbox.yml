@@ -20,8 +20,15 @@
     mode: "u+x"
   with_items:
     - /opt/futel/bin/backup_backupbox.sh
+    - /opt/futel/bin/stats-futel-prod.sh
+    - /opt/futel/bin/write_stats.py
+    - /opt/futel/bin/create_stats_table.py
+- name: set up sqlite schema
+  command: "/opt/futel/bin/create_stats_table.py /opt/futel/stats/prod/metrics.db"
+  args:
+    creates: "/opt/futel/stats/prod/metrics.db"
 - name: create cron job
   cron:
     name: "prod backup"
-    minute: "*/5"
+    minute: "5"
     job: /opt/futel/bin/backup_backupbox.sh

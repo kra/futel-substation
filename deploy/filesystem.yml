@@ -5,6 +5,8 @@
     state: directory
   with_items:
     - futel/src
+    - futel/stats
+    - futel/stats/prod    
     - futel/bin
     - futel/etc
     - futel/etc/ssh

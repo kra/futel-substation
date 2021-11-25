@@ -4,7 +4,7 @@ This project has several components. Some share hosts, sometimes by assuming tha
 
 Currently, we run backupbox and cmdlineclient on eurydice.
 
-Currently, we don't run mechaoperator and logpublisher.
+Currently, we don't run mechaoperator or logpublisher.
 
 ## Test mechaoperator from src/mechaoperator directory:
 
@@ -30,8 +30,7 @@ ansible-playbook -i deploy/hosts mechaoperator_playbook_vpnbox.yml --vault-passw
 
 ## Deploy cmdlineclient to eurydice
 
-# have deploy/packages.yml, deploy/filesystem.yml done
-ansible-playbook -i deploy/hosts cmdlineclient_playbook_eurydice.yml --vault-password-file=conf/vault_pass.txt
+ansible-playbook -i deploy/hosts cmdlineclient_playbook_eurydice.yml --vault-password-file=conf/vault_pass.txt -kK
 
 ## Deploy backupbox to eurydice
 

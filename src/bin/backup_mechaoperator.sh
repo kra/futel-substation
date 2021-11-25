@@ -7,7 +7,7 @@ HOST=futel-prod.phu73l.net
 DIRNAME=prod
 
 BINDIR=/opt/futel/bin
-REMOTEDIR=/opt/asterisk/var/log/asterisk
+REMOTEDIR=/var/log/asterisk
 KEYFILE=/opt/futel/etc/ssh/backup_id_rsa
 SSHCMD="ssh -o StrictHostKeyChecking=no -i $KEYFILE -p 42422"
 USER=backup

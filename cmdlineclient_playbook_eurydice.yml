@@ -1,15 +1,7 @@
 ---
 - hosts: backupbox
-  become: "{{ become|default(false) }}"
-  vars:
-    ansible_user: futel
-    ansible_ssh_private_key_file: conf/id_rsa_eurydice
+  become: true
   tasks:
-    # assume packages etc is done - we aren't root
-    # - include: deploy/packages.yml
-    - include: deploy/filesystem-cmdlineclient.yml
+    # assume backupbox has been done
     - include: deploy/npm.yml
-    # assume something is saving metrics.db
-    #- include: deploy/backup_mechaoperator.yml
     - include: deploy/mechaoperator.yml
-    #- include: deploy/helpers.yml

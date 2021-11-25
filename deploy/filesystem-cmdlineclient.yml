@@ -1,8 +1,0 @@
----
-- name: set up filesystem
-  file:
-    path: "/opt/{{ item }}"
-    state: directory
-  with_items:
-    - futel/src
-    
