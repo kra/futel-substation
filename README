@@ -1,3 +1,11 @@
+## futel-substation
+
+This project has several components. Some share hosts, sometimes by assuming that other components are running on the same host.
+
+Currently, we run backupbox and cmdlineclient on eurydice.
+
+Currently, we don't run mechaoperator and logpublisher.
+
 ## Test mechaoperator from src/mechaoperator directory:
 
 npm install mocha sinon
@@ -27,7 +35,7 @@ ansible-playbook -i deploy/hosts cmdlineclient_playbook_eurydice.yml --vault-pas
 
 ## Deploy backupbox to eurydice
 
-ansible-playbook -i deploy/hosts backupbox_playbook.yml --vault-password-file=conf/vault_pass.txt
+ansible-playbook -i deploy/hosts backupbox_playbook.yml --vault-password-file=conf/vault_pass.txt -kK
 
 ## Deploy logpublisher to eurydice
 
