@@ -7,7 +7,6 @@ var defaultExtensions = {
     '505': {'name': 'saratoga st', 'activityAge': 2},    
     '510': {'name': 'central st', 'activityAge': 2},
     '515': {'name': 'breckenridge st', 'activityAge': 2},
-    '530': {'name': 'oskar curbside', 'activityAge': 2},
     '615': {'name': 'robotron', 'activityAge': 2},
     '620': {'name': 'souwester', 'activityAge': 7},
     //'625': {'name': 'upright', 'activityAge': 2},
